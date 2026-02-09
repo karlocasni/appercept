@@ -162,40 +162,28 @@ export function ProductsGrid() {
       if (error && !data) console.warn("Supabase fetch error (expected if no creds):", error);
 
       grid.innerHTML = ''; // Clear loading state
-      productsToRender.forEach(item => {
-        grid.appendChild(ProductCard(item));
+      productsToRender.forEach((item, index) => {
+        const card = ProductCard(item);
+        grid.appendChild(card);
+
+        // Staggered fade-in animation without observer (more robust for dynamic content)
+        setTimeout(() => {
+          card.classList.add('is-visible');
+        }, 100 + (index * 150));
       });
-
-      // Trigger animation for new elements
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      grid.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
     } catch (err) {
       console.error("Error loading products:", err);
       // Fallback to mocks
       grid.innerHTML = '';
-      mockProducts.forEach(item => {
-        grid.appendChild(ProductCard(item));
+      mockProducts.forEach((item, index) => {
+        const card = ProductCard(item);
+        grid.appendChild(card);
+
+        // Staggered fade-in
+        setTimeout(() => {
+          card.classList.add('is-visible');
+        }, 100 + (index * 150));
       });
-
-      // Trigger animation for fallback elements
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      grid.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
     }
   };
 
