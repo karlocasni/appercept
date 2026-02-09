@@ -4,7 +4,7 @@ import { supabase, mockProducts } from '../lib/supabase.js';
 
 const ProductCard = (product) => {
   const card = document.createElement('div');
-  card.className = 'glass-card fade-in-up';
+  card.className = 'glass-card animate-on-scroll';
   card.style.cssText = `
     display: flex;
     flex-direction: column;
@@ -15,19 +15,35 @@ const ProductCard = (product) => {
     border-radius: 20px;
   `;
 
-  // Image Area
+  // Icon Area
   const imgContainer = document.createElement('div');
   imgContainer.style.height = '200px';
-  imgContainer.style.background = `url(${product.image}) center/cover no-repeat`;
-  imgContainer.style.position = 'relative';
+  imgContainer.style.display = 'flex';
+  imgContainer.style.alignItems = 'center';
+  imgContainer.style.justifyContent = 'center';
+  imgContainer.style.background = 'rgba(255,255,255,0.02)';
+  imgContainer.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
 
-  const overlay = document.createElement('div');
-  overlay.style.cssText = `
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  `;
-  imgContainer.appendChild(overlay);
+  if (product.icon) {
+    const iconWrapper = document.createElement('div');
+    iconWrapper.style.cssText = `
+        width: 100px;
+        height: 100px;
+        color: ${theme.colors.accentPrimary};
+        filter: drop-shadow(0 0 15px ${theme.colors.accentPrimary}60);
+        transition: transform 0.3s ease;
+      `;
+    iconWrapper.innerHTML = product.icon;
+    imgContainer.appendChild(iconWrapper);
+
+    // Hover effect for card to animate icon
+    card.onmouseenter = () => {
+      iconWrapper.style.transform = 'scale(1.1)';
+    };
+    card.onmouseleave = () => {
+      iconWrapper.style.transform = 'scale(1)';
+    };
+  }
 
   // Content
   const content = document.createElement('div');
@@ -111,6 +127,7 @@ export function ProductsGrid() {
   };
 
   const header = document.createElement('div');
+  header.className = 'animate-on-scroll';
   header.style.marginBottom = '60px';
   header.style.textAlign = 'center';
 
@@ -148,6 +165,18 @@ export function ProductsGrid() {
       productsToRender.forEach(item => {
         grid.appendChild(ProductCard(item));
       });
+
+      // Trigger animation for new elements
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      grid.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
     } catch (err) {
       console.error("Error loading products:", err);
       // Fallback to mocks
@@ -155,6 +184,18 @@ export function ProductsGrid() {
       mockProducts.forEach(item => {
         grid.appendChild(ProductCard(item));
       });
+
+      // Trigger animation for fallback elements
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      grid.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
     }
   };
 
