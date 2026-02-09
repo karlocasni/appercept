@@ -11,7 +11,7 @@ export function Offers() {
   container.style.cssText = theme.styles.container;
 
   const wrapper = document.createElement('div');
-  wrapper.className = 'glass-card';
+  wrapper.className = 'glass-card animate-on-scroll';
   wrapper.style.cssText = `
     ${theme.styles.glass}
     padding: 60px 40px;

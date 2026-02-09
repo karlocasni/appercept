@@ -11,6 +11,7 @@ export function OtherServices() {
 
   // Header Text
   const header = document.createElement('div');
+  header.className = 'animate-on-scroll';
   header.style.textAlign = 'center';
   header.style.marginBottom = '60px';
 
@@ -60,7 +61,7 @@ export function OtherServices() {
 
   services.forEach(service => {
     const card = document.createElement('div');
-    card.className = 'glass-service-card'; // We can add specific hover styles for this if needed, or inline
+    card.className = 'glass-service-card animate-on-scroll'; // We can add specific hover styles for this if needed, or inline
     card.style.cssText = `
       ${theme.styles.glass}
       padding: 24px 32px;
