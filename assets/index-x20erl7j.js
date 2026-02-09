@@ -444,7 +444,7 @@ ${v}`}class A extends Error{constructor({message:e,code:t,cause:s,name:n}){var i
     border-radius: 30px;
     text-align: center;
     background: linear-gradient(135deg, rgba(28, 117, 188, 0.05), rgba(43, 57, 144, 0.05));
-  `;const s=document.createElement("h2");s.textContent="Eskluzivna ponuda",s.style.cssText="font-size: 2.5rem; margin-bottom: 20px;";const n=document.createElement("div");n.style.cssText=`
+  `;const s=document.createElement("h2");s.textContent="Ekskluzivna ponuda",s.style.cssText="font-size: 2.5rem; margin-bottom: 20px;";const n=document.createElement("div");n.style.cssText=`
     width: 80px;
     height: 4px;
     background: ${_.colors.accentPrimary};
