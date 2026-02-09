@@ -138,19 +138,25 @@ export const injectGlobalStyles = () => {
       h1 { font-size: 3rem !important; }
       h2 { font-size: 2.2rem !important; }
       
-      section { padding: 60px 0 !important; }
-      
-      .responsive-grid {
-        grid-template-columns: 1fr !important;
-        gap: 40px !important;
+      section { 
+          padding: 60px 0 !important; 
+          overflow-x: hidden; /* Fix horizontal overflow */
       }
       
-      .mobile-stack {
-        flex-direction: column !important;
-        align-items: flex-start !important;
+      /* Mobile Stats Scaling */
+      .mobile-center .flex-row {
+          gap: 15px !important; /* Reduce gap */
+          justify-content: center !important;
+      }
+      /* Target the stat value and label inside the flex-row items */
+      .mobile-center .flex-row > div > div:nth-child(1) { /* Value */
+          font-size: 1.5rem !important;
+      }
+      .mobile-center .flex-row > div > div:nth-child(2) { /* Label */
+          font-size: 0.75rem !important;
+          letter-spacing: 0.5px !important;
       }
 
-      /* Mobile Center Utilities */
       .mobile-center {
         text-align: center !important;
         display: flex !important;
@@ -171,18 +177,19 @@ export const injectGlobalStyles = () => {
       .mobile-center .flex-row {
           justify-content: center !important;
           width: 100% !important;
-          flex-wrap: wrap !important;
+          flex-wrap: nowrap !important; /* Prevent wrapping for stats */
       }
-
+      
       /* Mobile Nav Overlay (Side Menu) */
       .header-nav {
-        display: flex !important; /* Ensure flex is active for layout */
+        display: flex !important;
         position: fixed;
         top: 0;
-        right: -100%; /* Hidden by default */
+        right: -100%;
         width: 75% !important;
         max-width: 300px;
         height: 100vh;
+        height: 100dvh; /* Mobile viewport height fix */
         background: rgba(17, 17, 17, 0.98);
         backdrop-filter: blur(20px);
         flex-direction: column;
@@ -191,6 +198,10 @@ export const injectGlobalStyles = () => {
         transition: right 0.4s ease;
         z-index: 999;
         box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+        
+        /* Safe Area Support */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
       }
       
       .header-nav.open {

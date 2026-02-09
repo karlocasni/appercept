@@ -20,7 +20,7 @@ export function Contact() {
 
   // Info
   const info = document.createElement('div');
-  info.className = 'mobile-center'; // Center on mobile
+  info.className = 'mobile-center animate-on-scroll'; // Center on mobile
 
   const h2 = document.createElement('h2');
   h2.textContent = "Gradimo budućnost zajedno";
@@ -50,7 +50,7 @@ export function Contact() {
     },
     {
       icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="${theme.colors.accentPrimary}" stroke="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>`,
-      text: 'Ul. Roberta Frangeša Mihanovića 9, Zagreb'
+      text: 'Ul. Roberta F. Mihanovića 9, Zagreb'
     },
     {
       icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="${theme.colors.accentPrimary}" stroke="none"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.26-.26.35-.63.24-1.01-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3.3 3 4.24 3 5.37c0 8.07 6.53 14.6 14.6 14.6 1.13 0 2.07-.65 2.07-1.19v-3.81c0-.55-.45-1-.99-1H20.01z"></path></svg>`,
@@ -94,7 +94,7 @@ export function Contact() {
 
   // Form
   const formCard = document.createElement('form');
-  formCard.className = 'glass-card';
+  formCard.className = 'glass-card animate-on-scroll';
   formCard.style.cssText = `
     ${theme.styles.glass}
     padding: 40px;
