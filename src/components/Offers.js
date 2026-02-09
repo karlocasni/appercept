@@ -21,7 +21,7 @@ export function Offers() {
   `;
 
   const h2 = document.createElement('h2');
-  h2.textContent = 'Eskluzivna ponuda';
+  h2.textContent = 'Ekskluzivna ponuda';
   h2.style.cssText = `font-size: 2.5rem; margin-bottom: 20px;`;
 
   const divider = document.createElement('div');
