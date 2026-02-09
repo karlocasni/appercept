@@ -9,7 +9,7 @@ export function Background() {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%; /* Changed from 100vw to prevent scrollbar overflow */
     height: 300vh; /* Extremely extended height for mobile scrolling safety */
     z-index: -1;
     overflow: hidden;

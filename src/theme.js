@@ -46,11 +46,17 @@ export const injectGlobalStyles = () => {
       padding: 0;
     }
 
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
     body {
       background-color: ${theme.colors.background};
       color: ${theme.colors.text};
       font-family: ${theme.fonts.primary};
       overflow-x: hidden;
+      width: 100%;
       -webkit-font-smoothing: antialiased;
     }
 
