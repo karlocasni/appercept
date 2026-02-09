@@ -168,41 +168,19 @@ export const injectGlobalStyles = () => {
           margin-right: auto !important;
       }
       
-      /* Center flex containers inside mobile-center */
       .mobile-center .flex-row {
           justify-content: center !important;
           width: 100% !important;
           flex-wrap: wrap !important;
       }
-      
-      /* Make hero buttons stack */
-      .hero-btn-row {
-        flex-direction: column;
-        width: 100%;
-      }
-      .hero-btn-row button {
-        width: 100%;
-      }
-      .hero-btn-row .social-icon {
-        width: 40px; height: 40px;
-      }
 
-      header .container {
-        padding: 10px 20px !important;
-        flex-direction: row !important; /* Keep row for logo + hamburger */
-        justify-content: space-between !important;
-      }
-
-      .hamburger-btn {
-        display: block !important;
-      }
-
-      /* Mobile Nav Overlay */
+      /* Mobile Nav Overlay (Side Menu) */
       .header-nav {
+        display: flex !important; /* Ensure flex is active for layout */
         position: fixed;
         top: 0;
         right: -100%; /* Hidden by default */
-        width: 75% !important; /* Side menu */
+        width: 75% !important;
         max-width: 300px;
         height: 100vh;
         background: rgba(17, 17, 17, 0.98);
@@ -212,7 +190,7 @@ export const injectGlobalStyles = () => {
         align-items: center;
         transition: right 0.4s ease;
         z-index: 999;
-        box-shadow: -5px 0 30px rgba(0,0,0,0.5); /* Shadow on left */
+        box-shadow: -5px 0 30px rgba(0,0,0,0.5);
       }
       
       .header-nav.open {
@@ -228,22 +206,29 @@ export const injectGlobalStyles = () => {
         font-size: 1.5rem !important;
       }
 
-      /* Smaller Hero Description but legible */
+      .hamburger-btn {
+        display: block !important;
+      }
+      
+      header .container {
+        padding: 10px 20px !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+      }
+
+      /* Smaller Hero Description */
       section h1 + p {
-          font-size: 1.25rem !important; /* Increased from 1rem */
+          font-size: 1.25rem !important;
           line-height: 1.6 !important;
           max-width: 100% !important;
       }
 
-      /* Adjust Header */
-      /* header nav styles moved to .header-nav block above */
-      
-  /* Make hero buttons inline and centered on mobile */
+      /* Make hero buttons inline and centered on mobile */
       .hero-btn-row {
-        flex-direction: row !important; /* Keep row */
-        justify-content: center !important; /* Center items */
+        flex-direction: row !important;
+        justify-content: center !important;
         width: 100%;
-        flex-wrap: wrap; /* Wrap if screen very small */
+        flex-wrap: wrap;
       }
       .hero-btn-row button {
         width: auto !important;
@@ -265,6 +250,17 @@ export const injectGlobalStyles = () => {
         width: 120% !important;
         right: -10% !important;
       }
+    }
+
+    /* Scroll Animations (Global) */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .animate-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .fade-in-up {

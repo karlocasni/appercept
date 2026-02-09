@@ -1,5 +1,24 @@
 
 import { App } from './src/App.js';
 
+const app = App();
 const root = document.querySelector('#app');
-root.appendChild(App());
+root.appendChild(app);
+
+// Scroll Animations
+const observerOpts = {
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOpts);
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+});
