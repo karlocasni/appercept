@@ -119,6 +119,18 @@
           overflow-x: hidden; /* Fix horizontal overflow */
       }
       
+      /* Force vertical stack for grids on mobile */
+      .responsive-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 40px !important;
+        align-items: center !important; /* Ensure content centered */
+      }
+      
+      .responsive-grid > div {
+        width: 100% !important;
+      }
+
       /* Mobile Stats Scaling */
       .mobile-center .flex-row {
           gap: 15px !important; /* Reduce gap */
