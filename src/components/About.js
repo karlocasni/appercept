@@ -42,7 +42,34 @@ export function About() {
   textCol.appendChild(divider);
   textCol.appendChild(p);
 
+  const imgContainer = document.createElement('div');
+  imgContainer.style.cssText = `
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  `;
+
+  const placeholder = document.createElement('div');
+  placeholder.className = 'fade-in-up glass-card';
+  placeholder.style.cssText = `
+    width: 500px; /* Smaller width */
+    max-width: 80%; /* Responsive limit */
+    height: 300px; /* Fixed height for placeholder */
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 1.2rem;
+    font-weight: 500;
+  `;
+  placeholder.textContent = 'Slika'; // Text saying "Image"
+
+  imgContainer.appendChild(placeholder);
+
   container.appendChild(textCol);
+  container.appendChild(imgContainer);
   section.appendChild(container);
 
   return section;

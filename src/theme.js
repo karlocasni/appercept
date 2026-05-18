@@ -46,10 +46,6 @@ export const injectGlobalStyles = () => {
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       background-color: ${theme.colors.background};
       color: ${theme.colors.text};

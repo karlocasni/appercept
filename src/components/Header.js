@@ -96,11 +96,45 @@ export function Header() {
     a.onmouseenter = () => { a.style.opacity = '1'; a.style.color = theme.colors.accentPrimary; };
     a.onmouseleave = () => { a.style.opacity = '0.8'; a.style.color = 'inherit'; };
 
-    // Close menu on click (mobile)
-    a.onclick = () => {
+    // Close menu on click (mobile) and smooth scroll
+    a.onclick = (e) => {
+      e.preventDefault();
+
       if (window.innerWidth <= 768) {
         nav.classList.remove('open');
         document.body.style.overflow = '';
+      }
+
+      const targetId = link.href.split('#')[1];
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const headerHeight = header.offsetHeight || 95; // Account for fixed header
+        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        const duration = 1200; // 1.2 seconds for slower scroll
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / duration, 1);
+          
+          // easeOutQuart: starts fast, strongly slows down at the end
+          const ease = 1 - Math.pow(1 - progress, 4);
+          
+          window.scrollTo(0, startPosition + distance * ease);
+          
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+          } else {
+            // Update URL hash without jumping
+            history.pushState(null, null, link.href);
+          }
+        }
+        
+        requestAnimationFrame(animation);
       }
     };
 
