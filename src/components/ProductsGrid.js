@@ -4,13 +4,14 @@ import { supabase, mockProducts } from '../lib/supabase.js';
 
 const ProductCard = (product) => {
   const card = document.createElement('div');
-  card.className = 'glass-card';
+  card.className = 'glass-card fade-in-up';
   card.style.cssText = `
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    height: 100%;
-    ${theme.styles.glass} /* Re-applying glass style here to ensure overrides work if needed */
+    width: 520px;
+    height: 380px;
+    ${theme.styles.glass}
     border-radius: 20px;
   `;
 
@@ -128,8 +129,9 @@ export function ProductsGrid() {
   const grid = document.createElement('div');
   grid.id = 'product-grid';
   grid.style.cssText = `
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 30px;
   `;
 
