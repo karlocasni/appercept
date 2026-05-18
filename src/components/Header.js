@@ -78,7 +78,6 @@ export function Header() {
   const links = [
     { name: 'O nama', href: '#about' },
     { name: 'Projekti', href: '#products' },
-    { name: 'Ponuda', href: '#offers' },
     { name: 'Kontakt', href: '#contact' }
   ];
 

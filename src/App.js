@@ -5,7 +5,6 @@ import { Header } from './components/Header.js';
 import { Hero } from './components/Hero.js';
 import { About } from './components/About.js';
 import { ProductsGrid } from './components/ProductsGrid.js';
-import { Offers } from './components/Offers.js';
 import { OtherServices } from './components/OtherServices.js';
 import { Contact, Footer } from './components/Contact.js';
 
@@ -23,7 +22,6 @@ export function App() {
     app.appendChild(Hero());
     app.appendChild(About());
     app.appendChild(ProductsGrid());
-    app.appendChild(Offers());
     app.appendChild(OtherServices());
     app.appendChild(Contact());
     app.appendChild(Footer());

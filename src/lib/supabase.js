@@ -15,20 +15,6 @@ export const mockProducts = [
         description: "Sveobuhvatna platforma koja redefinira ugostiteljski menadžment kroz AI analitiku i potpunu automatizaciju opskrbnog lanca — od preciznog praćenja zaliha u realnom vremenu do autonomnog naručivanja putem inteligentne integracije s fiskalnim sustavima.",
         price: "Na upit",
         image: "https://images.unsplash.com/photo-1570872626485-d8ffea69f463?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 2,
-        title: "Kashetta",
-        description: "Superiorna tehnološka infrastruktura za digitalnu dominaciju vašeg brenda, koja kroz besprijekornu ticketing integraciju korisnicima olakšava rezervacije, a vama apsolutnu kontrolu nad njima.",
-        price: "Na upit",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 3,
-        title: "GymBros",
-        description: "Sveobuhvatna društvena mreža posvećena razvoju fitness zajednice, dizajnirana za precizno praćenje performansi i kolektivnu motivaciju kroz interaktivno umrežavanje.",
-        price: "Besplatno",
-        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
 ];
 

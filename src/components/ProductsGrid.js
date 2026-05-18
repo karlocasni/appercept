@@ -65,9 +65,15 @@ const ProductCard = (product) => {
     padding: 8px 16px;
     border-radius: 20px;
     transition: all 0.3s ease;
+    cursor: pointer;
   `;
   btn.onmouseenter = () => { btn.style.background = 'rgba(255,255,255,0.1)'; };
   btn.onmouseleave = () => { btn.style.background = 'transparent'; };
+  btn.onclick = () => {
+    if (product.title === 'ClubCrowd') {
+      window.open('https://clubcrowd.app', '_blank');
+    }
+  };
 
   footer.appendChild(price);
   footer.appendChild(btn);
