@@ -1,10 +1,17 @@
 
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
-    base: '/', // Use root path for custom domain
+    base: '/',
     build: {
         outDir: 'dist',
         assetsDir: 'assets',
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                consulting: resolve(__dirname, 'consulting.html'),
+            }
+        }
     }
 });

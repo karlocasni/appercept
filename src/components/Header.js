@@ -149,6 +149,17 @@ export function Header() {
     { name: 'Kontakt', href: '#contact' }
   ];
 
+  // Consulting link (separate page)
+  const consultingLink = document.createElement('a');
+  consultingLink.textContent = 'Consulting';
+  consultingLink.href = '/consulting.html';
+  consultingLink.style.cssText = `
+    font-size: 0.9rem; font-weight: 600; opacity: 1;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  `;
+
   links.forEach(link => {
     const li = document.createElement('li');
     const a = document.createElement('a');
@@ -209,10 +220,15 @@ export function Header() {
     ul.appendChild(li);
   });
 
+  // Add consulting link as a list item
+  const consultingLi = document.createElement('li');
+  consultingLi.appendChild(consultingLink);
+  ul.appendChild(consultingLi);
+
   nav.appendChild(ul);
 
   container.appendChild(logo);
-  container.appendChild(hamburger); // Add hamburger
+  container.appendChild(hamburger);
   container.appendChild(nav);
   header.appendChild(container);
 
