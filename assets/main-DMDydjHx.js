@@ -188,7 +188,7 @@ ${w}`}class P extends Error{constructor({message:e,code:t,cause:s,name:n}){var i
     flex-direction: column;
     overflow: hidden;
     width: 520px;
-    height: 380px;
+    height: 440px;
     ${S.styles.glass}
     border-radius: 20px;
   `;const t=document.createElement("div");if(t.style.height="200px",t.style.display="flex",t.style.alignItems="center",t.style.justifyContent="center",t.style.background="rgba(255,255,255,0.02)",t.style.borderBottom="1px solid rgba(255,255,255,0.05)",r.image){const l=document.createElement("div");l.className="subtle-jump-animation",l.style.cssText=`
