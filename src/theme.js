@@ -311,7 +311,7 @@ export const injectGlobalStyles = () => {
       }
     }
     .subtle-jump-animation {
-      animation: subtle-jump 4s ease-in-out infinite;
+      animation: subtle-jump 2.5s ease-in-out infinite;
     }
   `;
     document.head.appendChild(style);
