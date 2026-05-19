@@ -423,9 +423,9 @@ function ConsultingContact() {
     form.appendChild(inp);
   });
 
-  const sel = mkEl('select', inpStyle + `cursor:pointer; background-color: rgba(28, 117, 188, 0.15); border: 1px solid rgba(28, 117, 188, 0.4); color: white;`);
-  sel.onfocus = () => { sel.style.borderColor = theme.colors.accentPrimary; sel.style.backgroundColor = 'rgba(28, 117, 188, 0.3)'; };
-  sel.onblur = () => { sel.style.borderColor = 'rgba(28, 117, 188, 0.4)'; sel.style.backgroundColor = 'rgba(28, 117, 188, 0.15)'; };
+  const sel = mkEl('select', inpStyle + `cursor:pointer; background-color: #1c75bc; border: 1px solid #1c75bc; color: white;`);
+  sel.onfocus = () => { sel.style.borderColor = '#1c75bc'; sel.style.backgroundColor = '#1c75bc'; };
+  sel.onblur = () => { sel.style.borderColor = '#1c75bc'; sel.style.backgroundColor = '#1c75bc'; };
   
   [
     { value: '', text: t('Što vas zanima...', 'What are you interested in...') },
@@ -436,7 +436,7 @@ function ConsultingContact() {
     { value: 'hourly', text: t('Hourly konzultacija', 'Hourly Consultation') },
     { value: 'other', text: t('Ostalo', 'Other') }
   ].forEach(opt => {
-    const o = mkEl('option', `background: #0d2b45; color: #fff; padding: 10px;`, opt.text);
+    const o = mkEl('option', `background: #1c75bc; color: #fff; padding: 10px;`, opt.text);
     o.value = opt.value;
     sel.appendChild(o);
   });
