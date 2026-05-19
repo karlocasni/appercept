@@ -1,4 +1,4 @@
-import{t as k,a as b,g as Xt,b as Zt,i as er,B as tr}from"./i18n-pjDgGiMY.js";function rr(){const r=document.createElement("header"),e=`
+import{t as k,a as b,g as Xt,b as Zt,i as er,B as tr}from"./i18n-DhcDtwHi.js";function rr(){const r=document.createElement("header"),e=`
     position: fixed;
     top: 0;
     left: 0;
