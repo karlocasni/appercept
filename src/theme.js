@@ -356,16 +356,16 @@ export const injectGlobalStyles = () => {
       transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.5s ease, border-color 0.5s ease !important;
     }
     
-    .card-3d-left {
-      transform: perspective(1500px) rotateY(22deg) rotateX(2deg) translateZ(0);
+    .card-3d-left, .card-3d-left.is-visible {
+      transform: perspective(1500px) rotateY(22deg) rotateX(2deg) translateZ(0) !important;
     }
     
-    .card-3d-center {
-      transform: perspective(1500px) rotateX(4deg) translateZ(0);
+    .card-3d-center, .card-3d-center.is-visible {
+      transform: perspective(1500px) rotateX(4deg) translateZ(0) !important;
     }
     
-    .card-3d-right {
-      transform: perspective(1500px) rotateY(-22deg) rotateX(2deg) translateZ(0);
+    .card-3d-right, .card-3d-right.is-visible {
+      transform: perspective(1500px) rotateY(-22deg) rotateX(2deg) translateZ(0) !important;
     }
     
     /* 3D translation on hover */
