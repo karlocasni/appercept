@@ -97,7 +97,7 @@ export function Founders() {
   const foundersData = [
     {
       name: 'Karlo Časni',
-      role: t('Suosnivač & CEO', 'Co-Founder & CEO'),
+      role: t('Suosnivač', 'Co-Founder'),
       initials: 'KČ',
       bio: t(
         'Specijaliziran za razvoj poslovanja, AI strategiju i vođenje kompleksnih softverskih projekata od ideje do realizacije.',
@@ -106,7 +106,7 @@ export function Founders() {
     },
     {
       name: 'Gašpar Bodulica',
-      role: t('Suosnivač & COO', 'Co-Founder & COO'),
+      role: t('Suosnivač', 'Co-Founder'),
       initials: 'GB',
       bio: t(
         'Fokusiran na operativnu izvrsnost, optimizaciju procesa i besprijekornu isporuku rješenja za naše klijente.',
@@ -114,12 +114,12 @@ export function Founders() {
       )
     },
     {
-      name: 'Luka Horvat',
-      role: t('Suosnivač & CTO', 'Co-Founder & CTO'),
-      initials: 'LH',
+      name: 'Bruno Vujčec',
+      role: t('Suosnivač', 'Co-Founder'),
+      initials: 'BV',
       bio: t(
-        'Stručnjak za AI arhitekturu, strojno učenje i integraciju velikih jezičnih modela u enterprise sustave.',
-        'Expert in AI architecture, machine learning, and integrating large language models into enterprise systems.'
+        'Usmjeren na tehnički razvoj, arhitekturu sustava i primjenu AI tehnologija za rješavanje stvarnih poslovnih izazova.',
+        'Focused on technical development, system architecture, and applying AI technologies to solve real-world business challenges.'
       )
     }
   ];
