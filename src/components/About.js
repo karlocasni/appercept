@@ -119,12 +119,12 @@ export function About() {
     card.onmouseenter = () => {
       card.style.transform = 'translateY(-5px)';
       card.style.borderColor = theme.colors.accentPrimary;
-      card.style.boxShadow = '0 12px 30px rgba(28, 117, 188, 0.12)';
+      card.style.boxShadow = '0 35px 60px -10px rgba(0, 0, 0, 0.8), 0 0 60px 0 rgba(28, 117, 188, 0.15)';
     };
     card.onmouseleave = () => {
       card.style.transform = 'translateY(0)';
       card.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-      card.style.boxShadow = 'none';
+      card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 50px 0 rgba(28, 117, 188, 0.05)';
     };
 
     // Icon Circle

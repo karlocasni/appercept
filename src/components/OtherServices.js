@@ -76,6 +76,7 @@ export function OtherServices() {
       cursor: default;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 25px rgba(28, 117, 188, 0.02);
     `;
 
     card.textContent = service;
@@ -83,14 +84,14 @@ export function OtherServices() {
     card.onmouseenter = () => {
       card.style.background = `linear-gradient(90deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary})`;
       card.style.transform = 'translateY(-3px)';
-      card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+      card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(28, 117, 188, 0.12)';
       card.style.border = '1px solid transparent';
     };
 
     card.onmouseleave = () => {
       card.style.background = 'rgba(255, 255, 255, 0.02)';
       card.style.transform = 'translateY(0)';
-      card.style.boxShadow = 'none';
+      card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.4), 0 0 25px rgba(28, 117, 188, 0.02)';
       card.style.border = '1px solid rgba(255, 255, 255, 0.05)';
     };
 

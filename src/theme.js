@@ -18,7 +18,7 @@ export const theme = {
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 50px 0 rgba(28, 117, 188, 0.05);
     `,
         container: `
       max-width: 1200px;
@@ -109,7 +109,7 @@ export const injectGlobalStyles = () => {
     
     .glass-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: 0 35px 60px -10px rgba(0, 0, 0, 0.8), 0 0 60px 0 rgba(28, 117, 188, 0.15);
       border-color: rgba(255, 255, 255, 0.2);
     }
 
