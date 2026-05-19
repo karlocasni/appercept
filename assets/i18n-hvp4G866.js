@@ -9,7 +9,7 @@
       margin: 0 auto;
       padding: 0 20px;
       width: 100%;
-    `}},p=()=>{const r=document.createElement("style");r.innerHTML=`
+    `}},d=()=>{const r=document.createElement("style");r.innerHTML=`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;900&display=swap');
 
     * {
@@ -69,6 +69,14 @@
       ${o.styles.glass}
       border-radius: 24px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #1c75bc, #56b3fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline;
+      font-weight: 600;
     }
     
     .glass-card:hover {
@@ -309,7 +317,7 @@
     .marquee-track:hover {
       animation-play-state: paused;
     }
-  `,document.head.appendChild(r)};function d(){const r=document.createElement("div");r.id="background-blobs";const a=`
+  `,document.head.appendChild(r)};function p(){const r=document.createElement("div");r.id="background-blobs";const a=`
     position: fixed;
     top: 0;
     left: 0;
@@ -331,4 +339,4 @@
       left: ${t.left};
       animation: float 25s infinite ease-in-out; /* Slower float for larger mass */
       animation-delay: ${t.delay};
-    `,i%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let n=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,n=!1};return window.addEventListener("scroll",()=>{n||(window.requestAnimationFrame(e),n=!0)}),r}const c=()=>localStorage.getItem("language")||"en",m=()=>{const r=c()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},f=(r,a)=>c()==="hr"?r:a;export{d as B,f as a,m as b,c as g,p as i,o as t};
+    `,i%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let n=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,n=!1};return window.addEventListener("scroll",()=>{n||(window.requestAnimationFrame(e),n=!0)}),r}const c=()=>localStorage.getItem("language")||"en",m=()=>{const r=c()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},f=(r,a)=>c()==="hr"?r:a;export{p as B,f as a,m as b,c as g,d as i,o as t};
