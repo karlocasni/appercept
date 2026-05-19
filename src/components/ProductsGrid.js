@@ -24,7 +24,24 @@ const ProductCard = (product) => {
   imgContainer.style.background = 'rgba(255,255,255,0.02)';
   imgContainer.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
 
-  if (product.icon) {
+  if (product.image) {
+    const img = document.createElement('img');
+    img.src = product.image;
+    img.style.cssText = `
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+      `;
+    imgContainer.appendChild(img);
+
+    card.onmouseenter = () => {
+      img.style.transform = 'scale(1.05)';
+    };
+    card.onmouseleave = () => {
+      img.style.transform = 'scale(1)';
+    };
+  } else if (product.icon) {
     const iconWrapper = document.createElement('div');
     iconWrapper.style.cssText = `
         width: 100px;
