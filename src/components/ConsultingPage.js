@@ -189,11 +189,14 @@ function ConsultingServices() {
     }
   ];
 
+  const drawer = mkEl('div');
+  drawer.className = 'cabinet-drawer animate-on-scroll';
+
   const grid = mkEl('div', `display:flex;justify-content:center;flex-wrap:wrap;`);
   grid.className = 'file-stack';
   items.forEach((s, index) => {
     const card = mkEl('div');
-    card.className = `file-folder file-folder-${index} animate-on-scroll`;
+    card.className = `file-folder file-folder-${index}`;
     card.setAttribute('data-index', `0${index + 1}`);
     
     const iconContainer = mkEl('div', `margin-bottom:20px; display:flex; align-items:center; height:36px;`, s.icon);
@@ -210,7 +213,13 @@ function ConsultingServices() {
     card.appendChild(pDesc);
     grid.appendChild(card);
   });
-  ctr.appendChild(grid);
+
+  const handle = mkEl('div');
+  handle.className = 'cabinet-handle';
+
+  drawer.appendChild(grid);
+  drawer.appendChild(handle);
+  ctr.appendChild(drawer);
   sec.appendChild(ctr);
   return sec;
 }
