@@ -17,7 +17,7 @@ export function OtherServices() {
   header.style.marginBottom = '60px';
 
   const h2 = document.createElement('h2');
-  h2.textContent = t('Egzosfera Ekosustav', 'Exosphere Ecosystem');
+  h2.innerHTML = t('<span class="text-gradient">Egzosfera</span> Ekosustav', '<span class="text-gradient">Egzosfera</span> Ecosystem');
   h2.style.cssText = `font-size: 3rem; margin-bottom: 0px;`;
 
   const divider = document.createElement('div');
@@ -103,7 +103,7 @@ export function OtherServices() {
 
   const linkBtn = document.createElement('a');
   linkBtn.href = 'https://egzosfera.com'; // Replace with actual URL
-  linkBtn.textContent = t('Posjetite Egzosferu →', 'Visit Exosphere →');
+  linkBtn.textContent = t('Posjetite Egzosferu →', 'Visit Egzosfera →');
   linkBtn.style.cssText = `
     font-size: 1rem;
     color: ${theme.colors.accentPrimary};
