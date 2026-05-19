@@ -397,95 +397,108 @@ export const injectGlobalStyles = () => {
         transform: none !important;
       }
     /* 3D Book Card Design */
-    .book-shelf {
-      perspective: 2000px;
+    /* 3D Stacked File Folders Design */
+    .file-stack {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      perspective: 1500px;
       transform-style: preserve-3d;
+      padding: 60px 0;
     }
     
-    .book-card {
+    .file-folder {
       position: relative;
+      flex: 1;
+      min-width: 250px;
+      max-width: 280px;
+      height: 390px;
+      margin-left: -50px;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px 20px 20px 12px; /* Curved book cover right corners */
-      padding: 40px 30px 40px 48px; /* Left padding is larger to clear the spine */
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0 20px 20px 20px; /* Top left sharp for the tab */
+      padding: 40px 24px 24px 24px;
       transform-style: preserve-3d;
-      transform: perspective(1500px) rotateY(20deg) translateZ(0);
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.6s ease, border-color 0.6s ease;
-      box-shadow: -10px 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 40px 0 rgba(28, 117, 188, 0.03);
-      overflow: visible;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 50px 0 rgba(28, 117, 188, 0.05);
+      z-index: 1;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
     }
     
-    /* Spine */
-    .book-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 14px;
-      background: linear-gradient(180deg, #1c75bc, #2b3990);
-      border-top-left-radius: 12px;
-      border-bottom-left-radius: 12px;
-      box-shadow: inset -3px 0 5px rgba(0, 0, 0, 0.3);
+    .file-folder:first-child {
+      margin-left: 0;
     }
     
-    /* Cover Crease */
-    .book-card::after {
-      content: '';
+    /* Slight natural cabinet rotations */
+    .file-folder-0 { transform: perspective(1500px) rotateZ(-3deg) translateY(0); }
+    .file-folder-1 { transform: perspective(1500px) rotateZ(2deg) translateY(12px); }
+    .file-folder-2 { transform: perspective(1500px) rotateZ(-1deg) translateY(-8px); }
+    .file-folder-3 { transform: perspective(1500px) rotateZ(3deg) translateY(8px); }
+    
+    /* Folder Index Tab */
+    .file-folder::before {
+      content: attr(data-index);
       position: absolute;
-      left: 14px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: 1px 0 2px rgba(255, 255, 255, 0.05);
+      top: -26px;
+      left: -1px;
+      height: 26px;
+      width: 90px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: none;
+      border-radius: 8px 12px 0 0;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 1px;
+      font-family: monospace;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     
-    /* Book Page layers on the right edge */
-    .book-card-pages {
-      position: absolute;
-      right: 4px;
-      top: 6px;
-      bottom: 6px;
-      width: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border-left: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0 4px 4px 0;
-      box-shadow: 2px 0 0 rgba(255, 255, 255, 0.02), 4px 0 0 rgba(255, 255, 255, 0.01);
-      pointer-events: none;
+    /* Hover state: pop out of stack and scale up to read */
+    .file-folder:hover {
+      transform: perspective(1500px) translateY(-60px) scale(1.18) rotate(0deg) !important;
+      z-index: 100 !important;
+      box-shadow: 0 45px 85px -10px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
     }
-
-    /* Book hover state - POP OUT */
-    .book-card:hover {
-      transform: perspective(1500px) rotateY(4deg) translateZ(80px) translateY(-18px) !important;
-      box-shadow: -20px 30px 60px -10px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
-      border-color: rgba(255, 255, 255, 0.2) !important;
+    
+    .file-folder:hover::before {
+      background: linear-gradient(135deg, #1c75bc, #2b3990);
+      color: white;
+      border-color: transparent;
     }
-
-    /* Pop out inner book elements even more dramatically */
-    .book-card:hover .pop-3d-icon {
-      transform: translateZ(55px) scale(1.1);
+    
+    /* Pop inner parts */
+    .file-folder:hover .pop-3d-icon {
+      transform: translateZ(40px) scale(1.05);
     }
-    .book-card:hover .pop-3d-text {
-      transform: translateZ(35px);
+    .file-folder:hover .pop-3d-text {
+      transform: translateZ(25px);
     }
 
     @media (max-width: 968px) {
-      .book-card {
+      .file-stack {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+      }
+      .file-folder {
+        margin-left: 0 !important;
+        max-width: 100%;
+        width: 100%;
         transform: none !important;
-        padding-left: 36px;
       }
-      .book-card:hover {
-        transform: translateY(-5px) !important;
-      }
-      .book-card::before {
-        width: 8px;
-      }
-      .book-card::after {
-        left: 8px;
-      }
-      .book-card-pages {
-        display: none;
+      .file-folder:hover {
+        transform: translateY(-10px) scale(1.05) !important;
       }
     }
   `;
