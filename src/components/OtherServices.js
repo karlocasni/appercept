@@ -1,5 +1,6 @@
 
 import { theme } from '../theme.js';
+import { t } from '../lib/i18n.js';
 
 export function OtherServices() {
   const section = document.createElement('section');
@@ -16,7 +17,7 @@ export function OtherServices() {
   header.style.marginBottom = '60px';
 
   const h2 = document.createElement('h2');
-  h2.textContent = 'Egzosfera Ekosustav';
+  h2.textContent = t('Egzosfera Ekosustav', 'Exosphere Ecosystem');
   h2.style.cssText = `font-size: 3rem; margin-bottom: 0px;`;
 
   const divider = document.createElement('div');
@@ -29,7 +30,10 @@ export function OtherServices() {
   `;
 
   const p = document.createElement('p');
-  p.textContent = "Kako bismo vam pomogli unaprijediti ostale aspekte poslovanja, nudimo i specijalizirane module koji se mogu besprijekorno integrirati u svaki Appercept paket.";
+  p.textContent = t(
+    "Kako bismo vam pomogli unaprijediti ostale aspekte poslovanja, nudimo i specijalizirane module koji se mogu besprijekorno integrirati u svaki Appercept paket.",
+    "To help you improve other aspects of your business, we also offer specialized modules that can be seamlessly integrated into any Appercept package."
+  );
   p.style.cssText = `
     font-size: 1.1rem; 
     line-height: 1.8; 
@@ -52,11 +56,11 @@ export function OtherServices() {
   `;
 
   const services = [
-    "AI Asistent",
-    "Glasovni Asistent",
-    "Web Aplikacija",
-    "Foto i Video",
-    "Društvene Mreže"
+    t("AI Asistent", "AI Assistant"),
+    t("Glasovni Asistent", "Voice Assistant"),
+    t("Web Aplikacija", "Web Application"),
+    t("Foto i Video", "Photo & Video"),
+    t("Društvene Mreže", "Social Media")
   ];
 
   services.forEach(service => {
@@ -99,7 +103,7 @@ export function OtherServices() {
 
   const linkBtn = document.createElement('a');
   linkBtn.href = 'https://egzosfera.com'; // Replace with actual URL
-  linkBtn.textContent = 'Posjetite Egzosferu →';
+  linkBtn.textContent = t('Posjetite Egzosferu →', 'Visit Exosphere →');
   linkBtn.style.cssText = `
     font-size: 1rem;
     color: ${theme.colors.accentPrimary};

@@ -138,17 +138,17 @@ export function ConsultingIntro() {
     {
       title: t('AI Audit & Strategija', 'AI Audit & Strategy'),
       desc: t('Dubinska analiza vaših procesa i izrada jasnog plana za AI integraciju.', 'In-depth analysis of your processes and building a clear roadmap for AI integration.'),
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`
     },
     {
       title: t('Prilagođeni AI Agenti', 'Custom AI Agents'),
       desc: t('Dizajn i razvoj inteligentnih voice i chat botova treniranih na vašim podacima.', 'Design and development of intelligent voice and chat bots trained on your data.'),
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M12 2v9M8 5h8"/></svg>`
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`
     },
     {
       title: t('Automatizacija procesa', 'Process Automation'),
       desc: t('Integracija alata i sustava za eliminaciju ručnih i ponavljajućih zadataka.', 'Integration of tools and systems to eliminate manual and repetitive workflows.'),
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
     }
   ];
 
