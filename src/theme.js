@@ -399,22 +399,21 @@ export const injectGlobalStyles = () => {
     /* 3D Book Card Design */
     /* 3D Stacked File Folders & Cabinet Design */
     /* 3D Stacked File Folders & Cabinet Design */
+    /* 3D Stacked File Folders & Cabinet Design */
     .cabinet-drawer {
       position: relative;
-      background: rgba(10, 15, 30, 0.35);
-      border: 2px solid rgba(255, 255, 255, 0.05);
-      border-radius: 28px;
-      padding: 30px;
+      background: rgba(10, 15, 30, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 32px;
+      padding: 60px 40px 40px 40px;
       margin: 60px auto 40px auto;
       width: 100%;
-      max-width: 580px;
-      height: 480px;
-      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.95), 0 30px 60px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      max-width: 900px;
+      height: 520px;
+      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.8), 0 20px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       overflow: visible;
-      perspective: 2000px;
-      transform-style: preserve-3d;
     }
     
     .cabinet-handle {
@@ -442,23 +441,22 @@ export const injectGlobalStyles = () => {
     
     .file-stack {
       position: relative;
-      width: 100%;
-      height: 380px;
-      transform-style: preserve-3d;
+      width: 820px;
+      height: 400px;
+      margin: 0 auto;
     }
     
     .file-folder {
       position: absolute;
-      left: 20px;
-      right: 20px;
-      height: 310px;
-      background: rgba(20, 25, 45, 0.6);
+      width: 280px;
+      height: 370px;
+      top: 30px;
+      background: rgba(20, 25, 45, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0 24px 24px 24px;
-      padding: 35px 28px 24px 28px;
-      transform-style: preserve-3d;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), opacity 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+      border-radius: 0 20px 20px 20px;
+      padding: 35px 24px 24px 24px;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease, z-index 0s;
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
       cursor: default;
       display: flex;
       flex-direction: column;
@@ -466,26 +464,22 @@ export const injectGlobalStyles = () => {
       -webkit-backdrop-filter: blur(16px);
     }
     
-    /* 3D Stack positioning (Front to Back inside the drawer) */
+    /* Horizontal overlapping positions */
     .file-folder-0 {
-      transform: translate3d(0, 100px, 0px) rotateX(10deg);
-      z-index: 4;
-      opacity: 1;
+      left: 0px;
+      z-index: 1;
     }
     .file-folder-1 {
-      transform: translate3d(0, 50px, -50px) rotateX(10deg);
-      z-index: 3;
-      opacity: 0.92;
+      left: 180px;
+      z-index: 2;
     }
     .file-folder-2 {
-      transform: translate3d(0, 0px, -100px) rotateX(10deg);
-      z-index: 2;
-      opacity: 0.84;
+      left: 360px;
+      z-index: 3;
     }
     .file-folder-3 {
-      transform: translate3d(0, -50px, -150px) rotateX(10deg);
-      z-index: 1;
-      opacity: 0.75;
+      left: 540px;
+      z-index: 4;
     }
     
     /* Folder Index Tab */
@@ -513,12 +507,11 @@ export const injectGlobalStyles = () => {
       transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     
-    /* Hover slot trigger: pop file out of slot box and enlarge to read */
+    /* Hover state: pop file up out of stack and scale up to read */
     .file-folder:hover {
-      transform: translate3d(0, -90px, 60px) scale(1.16) rotateX(0deg) !important;
+      transform: translateY(-70px) scale(1.12) !important;
       z-index: 100 !important;
-      opacity: 1 !important;
-      box-shadow: 0 50px 100px -10px rgba(0, 0, 0, 0.95), 0 0 50px rgba(28, 117, 188, 0.3) !important;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(28, 117, 188, 0.25) !important;
       border-color: rgba(255, 255, 255, 0.3) !important;
       background: rgba(25, 32, 58, 0.85) !important;
     }
@@ -544,6 +537,7 @@ export const injectGlobalStyles = () => {
         padding: 40px 15px 20px 15px;
       }
       .file-stack {
+        width: 100%;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -551,10 +545,11 @@ export const injectGlobalStyles = () => {
       }
       .file-folder {
         position: relative;
-        left: 0;
-        right: 0;
+        left: 0 !important;
+        right: 0 !important;
         top: auto;
         bottom: auto;
+        width: 100% !important;
         height: auto;
         transform: none !important;
         opacity: 1 !important;
