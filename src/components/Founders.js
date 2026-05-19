@@ -146,7 +146,7 @@ export function Founders() {
   foundersData.forEach((founder, index) => {
     const cardWrapper = document.createElement('div');
     cardWrapper.className = index % 2 === 0 ? 'founder-float-up' : 'founder-float-down';
-    cardWrapper.style.cssText = `transition: all 0.3s ease;`;
+    cardWrapper.style.cssText = `transition: all 0.3s ease; transform-style: preserve-3d;`;
 
     const card = document.createElement('div');
     const tiltClass = index === 0 ? 'card-3d-left' : index === 1 ? 'card-3d-center' : 'card-3d-right';
