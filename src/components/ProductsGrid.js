@@ -25,6 +25,16 @@ const ProductCard = (product) => {
   imgContainer.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
 
   if (product.image) {
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'subtle-jump-animation';
+    imgWrapper.style.cssText = `
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+
     const img = document.createElement('img');
     img.src = product.image;
     img.style.cssText = `
@@ -33,7 +43,8 @@ const ProductCard = (product) => {
         object-fit: contain;
         transition: transform 0.3s ease;
       `;
-    imgContainer.appendChild(img);
+    imgWrapper.appendChild(img);
+    imgContainer.appendChild(imgWrapper);
 
     card.onmouseenter = () => {
       img.style.transform = 'scale(1.05)';

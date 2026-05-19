@@ -301,6 +301,18 @@ export const injectGlobalStyles = () => {
     .fade-in-up {
       animation: fadeIn 0.8s ease-out forwards;
     }
+
+    @keyframes subtle-jump {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+    .subtle-jump-animation {
+      animation: subtle-jump 4s ease-in-out infinite;
+    }
   `;
     document.head.appendChild(style);
 };
