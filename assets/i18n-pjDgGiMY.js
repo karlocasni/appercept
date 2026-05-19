@@ -3,7 +3,7 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 50px 0 rgba(28, 117, 188, 0.05);
     `,container:`
       max-width: 1200px;
       margin: 0 auto;
@@ -81,7 +81,7 @@
     
     .glass-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: 0 35px 60px -10px rgba(0, 0, 0, 0.8), 0 0 60px 0 rgba(28, 117, 188, 0.15);
       border-color: rgba(255, 255, 255, 0.2);
     }
 
@@ -316,6 +316,58 @@
     }
     .marquee-track:hover {
       animation-play-state: paused;
+    }
+    /* 3D Floating & Perspective Utility System */
+    .perspective-group {
+      perspective: 1500px;
+      transform-style: preserve-3d;
+    }
+    
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.5s ease, border-color 0.5s ease !important;
+    }
+    
+    .card-3d-left, .card-3d-left.is-visible {
+      transform: perspective(1500px) rotateY(22deg) rotateX(2deg) translateZ(0) !important;
+    }
+    
+    .card-3d-center, .card-3d-center.is-visible {
+      transform: perspective(1500px) rotateX(4deg) translateZ(0) !important;
+    }
+    
+    .card-3d-right, .card-3d-right.is-visible {
+      transform: perspective(1500px) rotateY(-22deg) rotateX(2deg) translateZ(0) !important;
+    }
+    
+    /* 3D translation on hover */
+    .card-3d:hover {
+      transform: perspective(1500px) rotateY(0deg) rotateX(0deg) translateZ(50px) translateY(-12px) !important;
+      box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    /* Pop out inner elements */
+    .card-3d .pop-3d-icon {
+      transform: translateZ(50px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1);
+    }
+    .card-3d .pop-3d-text {
+      transform: translateZ(30px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1);
+    }
+
+    @media (max-width: 968px) {
+      /* Flatten 3D effects on tablet/mobile for readability and touch interaction */
+      .card-3d-left, .card-3d-center, .card-3d-right {
+        transform: none !important;
+      }
+      .card-3d:hover {
+        transform: translateY(-5px) !important;
+      }
+      .card-3d .pop-3d-icon, .card-3d .pop-3d-text {
+        transform: none !important;
+      }
     }
   `,document.head.appendChild(r)};function p(){const r=document.createElement("div");r.id="background-blobs";const a=`
     position: fixed;
