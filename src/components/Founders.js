@@ -82,13 +82,32 @@ export function Founders() {
     gap: 30px;
   `;
 
-  // Responsive Styles
+  // Responsive & Animation Styles
   const styleTag = document.createElement('style');
   styleTag.innerHTML = `
+    @keyframes founderFloatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes founderFloatDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+    }
+    
+    .founder-float-up {
+      animation: founderFloatUp 6s ease-in-out infinite;
+    }
+    .founder-float-down {
+      animation: founderFloatDown 6s ease-in-out infinite;
+    }
+    
     @media (max-width: 968px) {
       .founders-grid {
         grid-template-columns: 1fr !important;
         gap: 40px !important;
+      }
+      .founder-float-up, .founder-float-down {
+        animation: none !important; /* Disable continuous floating on mobile for better usability */
       }
     }
   `;
@@ -124,7 +143,11 @@ export function Founders() {
     }
   ];
 
-  foundersData.forEach(founder => {
+  foundersData.forEach((founder, index) => {
+    const cardWrapper = document.createElement('div');
+    cardWrapper.className = index % 2 === 0 ? 'founder-float-up' : 'founder-float-down';
+    cardWrapper.style.cssText = `transition: all 0.3s ease;`;
+
     const card = document.createElement('div');
     card.className = 'glass-card animate-on-scroll';
     card.style.cssText = `
@@ -135,6 +158,7 @@ export function Founders() {
       flex-direction: column;
       align-items: center;
       transition: all 0.3s ease;
+      height: 100%;
     `;
     card.onmouseenter = () => {
       card.style.transform = 'translateY(-6px)';
@@ -211,7 +235,8 @@ export function Founders() {
     card.appendChild(nameEl);
     card.appendChild(roleEl);
     card.appendChild(bioEl);
-    grid.appendChild(card);
+    cardWrapper.appendChild(card);
+    grid.appendChild(cardWrapper);
   });
 
   container.appendChild(grid);
