@@ -273,7 +273,19 @@
     .fade-in-up {
       animation: fadeIn 0.8s ease-out forwards;
     }
-  `,document.head.appendChild(o)};function d(){const o=document.createElement("div");o.id="background-blobs";const a=`
+
+    @keyframes subtle-jump {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+    .subtle-jump-animation {
+      animation: subtle-jump 4s ease-in-out infinite;
+    }
+  `,document.head.appendChild(o)};function p(){const o=document.createElement("div");o.id="background-blobs";const a=`
     position: fixed;
     top: 0;
     left: 0;
@@ -295,4 +307,4 @@
       left: ${t.left};
       animation: float 25s infinite ease-in-out; /* Slower float for larger mass */
       animation-delay: ${t.delay};
-    `,n%2===0&&(s.style.animationDuration="25s"),o.appendChild(s)});let i=!1;const e=()=>{const s=-(window.scrollY*.15);o.style.transform=`translate3d(0, ${s}px, 0)`,i=!1};return window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(e),i=!0)}),o}export{d as B,c as i,r as t};
+    `,n%2===0&&(s.style.animationDuration="25s"),o.appendChild(s)});let i=!1;const e=()=>{const s=-(window.scrollY*.15);o.style.transform=`translate3d(0, ${s}px, 0)`,i=!1};return window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(e),i=!0)}),o}export{p as B,c as i,r as t};
