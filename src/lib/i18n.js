@@ -1,4 +1,4 @@
-export const getLanguage = () => localStorage.getItem('language') || 'hr';
+export const getLanguage = () => localStorage.getItem('language') || 'en';
 
 export const toggleLanguage = () => {
   const nextLang = getLanguage() === 'hr' ? 'en' : 'hr';
