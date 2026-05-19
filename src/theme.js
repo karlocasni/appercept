@@ -357,7 +357,7 @@ export const injectGlobalStyles = () => {
     }
     
     .card-3d-left {
-      transform: rotateY(7deg) rotateX(2deg) translateZ(0);
+      transform: rotateY(16deg) rotateX(2deg) translateZ(0);
     }
     
     .card-3d-center {
@@ -365,23 +365,23 @@ export const injectGlobalStyles = () => {
     }
     
     .card-3d-right {
-      transform: rotateY(-7deg) rotateX(2deg) translateZ(0);
+      transform: rotateY(-16deg) rotateX(2deg) translateZ(0);
     }
     
     /* 3D translation on hover */
     .card-3d:hover {
-      transform: rotateY(0deg) rotateX(0deg) translateZ(30px) translateY(-10px) !important;
+      transform: rotateY(0deg) rotateX(0deg) translateZ(35px) translateY(-10px) !important;
       box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
       border-color: rgba(255, 255, 255, 0.25) !important;
     }
 
     /* Pop out inner elements */
     .card-3d .pop-3d-icon {
-      transform: translateZ(35px);
+      transform: translateZ(50px);
       transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1);
     }
     .card-3d .pop-3d-text {
-      transform: translateZ(20px);
+      transform: translateZ(30px);
       transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1);
     }
 
