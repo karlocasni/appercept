@@ -96,11 +96,7 @@ const ProductCard = (product) => {
   `;
 
   const footer = document.createElement('div');
-  footer.style.cssText = `display: flex; justify-content: space-between; align-items: center; margin-top: auto;`;
-
-  const price = document.createElement('span');
-  price.textContent = product.price;
-  price.style.cssText = `font-size: 1.2rem; font-weight: 700; color: ${theme.colors.accentPrimary};`;
+  footer.style.cssText = `display: flex; justify-content: center; align-items: center; margin-top: auto;`;
 
   const btn = document.createElement('button');
   btn.textContent = t('Detalji →', 'Details →');
@@ -108,10 +104,10 @@ const ProductCard = (product) => {
     background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
     border: none;
     color: white;
-    padding: 10px 24px;
+    padding: 12px 48px;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(28, 117, 188, 0.4);
@@ -132,7 +128,6 @@ const ProductCard = (product) => {
     }
   };
 
-  footer.appendChild(price);
   footer.appendChild(btn);
 
   content.appendChild(title);
