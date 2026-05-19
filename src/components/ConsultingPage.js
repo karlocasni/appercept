@@ -192,14 +192,11 @@ function ConsultingServices() {
   const drawer = mkEl('div');
   drawer.className = 'cabinet-drawer animate-on-scroll';
 
-  const grid = mkEl('div', `display:flex;justify-content:center;flex-wrap:wrap;`);
+  const grid = mkEl('div');
   grid.className = 'file-stack';
   items.forEach((s, index) => {
-    const slot = mkEl('div');
-    slot.className = 'cabinet-slot';
-
     const card = mkEl('div');
-    card.className = `file-folder`;
+    card.className = `file-folder file-folder-${index}`;
     card.setAttribute('data-index', `0${index + 1}`);
     
     const iconContainer = mkEl('div', `margin-bottom:20px; display:flex; align-items:center; height:36px;`, s.icon);
@@ -214,8 +211,7 @@ function ConsultingServices() {
     card.appendChild(iconContainer);
     card.appendChild(h3Title);
     card.appendChild(pDesc);
-    slot.appendChild(card);
-    grid.appendChild(slot);
+    grid.appendChild(card);
   });
 
   const handle = mkEl('div');

@@ -398,17 +398,23 @@ export const injectGlobalStyles = () => {
       }
     /* 3D Book Card Design */
     /* 3D Stacked File Folders & Cabinet Design */
+    /* 3D Stacked File Folders & Cabinet Design */
     .cabinet-drawer {
       position: relative;
-      background: rgba(10, 15, 30, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      border-radius: 32px;
-      padding: 60px 40px 30px 40px;
-      margin-top: 50px;
-      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.8), 0 20px 40px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(10, 15, 30, 0.35);
+      border: 2px solid rgba(255, 255, 255, 0.05);
+      border-radius: 28px;
+      padding: 30px;
+      margin: 60px auto 40px auto;
+      width: 100%;
+      max-width: 580px;
+      height: 480px;
+      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.95), 0 30px 60px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       overflow: visible;
+      perspective: 2000px;
+      transform-style: preserve-3d;
     }
     
     .cabinet-handle {
@@ -420,6 +426,7 @@ export const injectGlobalStyles = () => {
       margin: 30px auto 10px auto;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
       position: relative;
+      z-index: 10;
     }
     .cabinet-handle::after {
       content: '';
@@ -434,50 +441,51 @@ export const injectGlobalStyles = () => {
     }
     
     .file-stack {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      perspective: 1500px;
-      transform-style: preserve-3d;
-      gap: 24px;
-      padding: 20px 0;
-    }
-    
-    /* Cabinet compartments / box frame around each card */
-    .cabinet-slot {
       position: relative;
-      flex: 1;
-      min-width: 250px;
-      max-width: 280px;
-      height: 410px;
-      background: rgba(5, 8, 18, 0.7);
-      border: 2px solid rgba(255, 255, 255, 0.04);
-      border-radius: 20px;
-      box-shadow: inset 0 15px 35px rgba(0, 0, 0, 0.95), 0 5px 15px rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: flex-end;
-      overflow: visible;
-      perspective: 1500px;
+      width: 100%;
+      height: 380px;
       transform-style: preserve-3d;
     }
     
     .file-folder {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      top: 40px; /* Sinks folder inside slot leaving tab exposed */
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 0 16px 16px 16px;
-      padding: 28px 20px 20px 20px;
+      left: 20px;
+      right: 20px;
+      height: 310px;
+      background: rgba(20, 25, 45, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0 24px 24px 24px;
+      padding: 35px 28px 24px 28px;
       transform-style: preserve-3d;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), opacity 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
       cursor: default;
       display: flex;
       flex-direction: column;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    
+    /* 3D Stack positioning (Front to Back inside the drawer) */
+    .file-folder-0 {
+      transform: translate3d(0, 100px, 0px) rotateX(10deg);
+      z-index: 4;
+      opacity: 1;
+    }
+    .file-folder-1 {
+      transform: translate3d(0, 50px, -50px) rotateX(10deg);
+      z-index: 3;
+      opacity: 0.92;
+    }
+    .file-folder-2 {
+      transform: translate3d(0, 0px, -100px) rotateX(10deg);
       z-index: 2;
+      opacity: 0.84;
+    }
+    .file-folder-3 {
+      transform: translate3d(0, -50px, -150px) rotateX(10deg);
+      z-index: 1;
+      opacity: 0.75;
     }
     
     /* Folder Index Tab */
@@ -506,57 +514,56 @@ export const injectGlobalStyles = () => {
     }
     
     /* Hover slot trigger: pop file out of slot box and enlarge to read */
-    .cabinet-slot:hover .file-folder {
-      transform: translateY(-90px) scale(1.15) translateZ(50px) !important;
+    .file-folder:hover {
+      transform: translate3d(0, -90px, 60px) scale(1.16) rotateX(0deg) !important;
       z-index: 100 !important;
-      box-shadow: 0 40px 80px -10px rgba(0, 0, 0, 0.95), 0 0 50px 0 rgba(28, 117, 188, 0.25) !important;
-      border-color: rgba(255, 255, 255, 0.25) !important;
-      background: rgba(255, 255, 255, 0.065) !important;
+      opacity: 1 !important;
+      box-shadow: 0 50px 100px -10px rgba(0, 0, 0, 0.95), 0 0 50px rgba(28, 117, 188, 0.3) !important;
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      background: rgba(25, 32, 58, 0.85) !important;
     }
     
-    .cabinet-slot:hover .file-folder::before {
+    .file-folder:hover::before {
       background: linear-gradient(135deg, #1c75bc, #2b3990);
       color: white;
       border-color: transparent;
     }
     
     /* Pop inner parts */
-    .cabinet-slot:hover .pop-3d-icon {
+    .file-folder:hover .pop-3d-icon {
       transform: translateZ(35px) scale(1.05);
     }
-    .cabinet-slot:hover .pop-3d-text {
+    .file-folder:hover .pop-3d-text {
       transform: translateZ(20px);
     }
 
     @media (max-width: 968px) {
       .cabinet-drawer {
-        padding: 40px 20px 20px 20px;
+        height: auto;
+        max-width: 100%;
+        padding: 40px 15px 20px 15px;
       }
       .file-stack {
-        flex-direction: column;
-        align-items: center;
-        gap: 50px;
-      }
-      .cabinet-slot {
-        max-width: 100%;
-        width: 100%;
         height: auto;
-        min-height: 380px;
-        display: block;
-        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
       }
       .file-folder {
         position: relative;
+        left: 0;
+        right: 0;
         top: auto;
         bottom: auto;
-        left: auto;
-        right: auto;
-        margin-top: 35px;
         height: auto;
+        transform: none !important;
+        opacity: 1 !important;
+        margin-top: 35px;
       }
-      .cabinet-slot:hover .file-folder {
-        transform: translateY(-15px) scale(1.05) !important;
+      .file-folder:hover {
+        transform: translateY(-10px) scale(1.04) !important;
       }
+    }
     }
     }
   `;
