@@ -11,7 +11,7 @@ const ProductCard = (product) => {
     flex-direction: column;
     overflow: hidden;
     width: 520px;
-    height: 380px;
+    height: 440px;
     ${theme.styles.glass}
     border-radius: 20px;
   `;
