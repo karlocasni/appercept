@@ -430,11 +430,11 @@ ${w}`}class j extends Error{constructor({message:e,code:t,cause:s,name:n}){var i
       margin-bottom: 24px;
       border: 2px solid rgba(255, 255, 255, 0.15);
       box-shadow: 0 8px 24px rgba(28, 117, 188, 0.3);
-    `;const f=document.createElement("span");f.textContent=u.initials,f.style.cssText=`
-      font-size: 2rem;
-      font-weight: 700;
-      color: white;
-      letter-spacing: 1px;
+    `;const f=document.createElement("div");f.style.cssText="display: flex; align-items: center; justify-content: center;",f.innerHTML=`
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.9;">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
     `,p.appendChild(f);const h=document.createElement("h3");h.textContent=u.name,h.style.cssText=`
       font-size: 1.4rem;
       font-weight: 700;
