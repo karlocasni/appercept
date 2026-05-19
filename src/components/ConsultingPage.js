@@ -423,9 +423,7 @@ function ConsultingContact() {
     form.appendChild(inp);
   });
 
-  const sel = mkEl('select', inpStyle + `cursor:pointer; background-color: #1c75bc; border: 1px solid #1c75bc; color: white;`);
-  sel.onfocus = () => { sel.style.borderColor = '#1c75bc'; sel.style.backgroundColor = '#1c75bc'; };
-  sel.onblur = () => { sel.style.borderColor = '#1c75bc'; sel.style.backgroundColor = '#1c75bc'; };
+  const sel = mkEl('select', `width:100%;padding:14px;background:#1c75bc url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat calc(100% - 14px) center;border:1px solid #1c75bc;border-radius:8px;color:white;font-size:.97rem;font-family:${theme.fonts.primary};outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;padding-right:40px;`);
   
   [
     { value: '', text: t('Što vas zanima...', 'What are you interested in...') },
