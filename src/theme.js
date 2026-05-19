@@ -332,7 +332,7 @@ export const injectGlobalStyles = () => {
       display: flex;
       gap: 20px;
       width: max-content;
-      animation: marquee 30s linear infinite;
+      animation: marquee 45s linear infinite;
     }
     .marquee-track:hover {
       animation-play-state: paused;
