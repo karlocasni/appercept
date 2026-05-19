@@ -7,6 +7,7 @@ import { About } from './components/About.js';
 import { ConsultingIntro } from './components/ConsultingIntro.js';
 import { ProductsGrid } from './components/ProductsGrid.js';
 import { OtherServices } from './components/OtherServices.js';
+import { Founders } from './components/Founders.js';
 import { Contact, Footer } from './components/Contact.js';
 
 export function App() {
@@ -21,10 +22,11 @@ export function App() {
     app.appendChild(Background());
     app.appendChild(Header());
     app.appendChild(Hero());
+    app.appendChild(About());
     app.appendChild(ConsultingIntro());
     app.appendChild(ProductsGrid());
     app.appendChild(OtherServices());
-    app.appendChild(About());
+    app.appendChild(Founders());
     app.appendChild(Contact());
     app.appendChild(Footer());
 
