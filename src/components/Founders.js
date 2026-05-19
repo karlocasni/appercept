@@ -75,7 +75,7 @@ export function Founders() {
 
   // Founders Grid
   const grid = document.createElement('div');
-  grid.className = 'founders-grid';
+  grid.className = 'founders-grid perspective-group';
   grid.style.cssText = `
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -149,7 +149,8 @@ export function Founders() {
     cardWrapper.style.cssText = `transition: all 0.3s ease;`;
 
     const card = document.createElement('div');
-    card.className = 'glass-card animate-on-scroll';
+    const tiltClass = index === 0 ? 'card-3d-left' : index === 1 ? 'card-3d-center' : 'card-3d-right';
+    card.className = `glass-card card-3d ${tiltClass} animate-on-scroll`;
     card.style.cssText = `
       ${theme.styles.glass}
       border-radius: 20px;
@@ -157,22 +158,12 @@ export function Founders() {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: all 0.3s ease;
       height: 100%;
     `;
-    card.onmouseenter = () => {
-      card.style.transform = 'translateY(-6px)';
-      card.style.borderColor = theme.colors.accentPrimary;
-      card.style.boxShadow = '0 35px 60px -10px rgba(0, 0, 0, 0.8), 0 0 60px 0 rgba(28, 117, 188, 0.15)';
-    };
-    card.onmouseleave = () => {
-      card.style.transform = 'translateY(0)';
-      card.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-      card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 50px 0 rgba(28, 117, 188, 0.05)';
-    };
 
     // Avatar Circle
     const avatar = document.createElement('div');
+    avatar.className = 'pop-3d-icon';
     avatar.style.cssText = `
       width: 100px;
       height: 100px;
@@ -198,6 +189,7 @@ export function Founders() {
 
     // Name
     const nameEl = document.createElement('h3');
+    nameEl.className = 'pop-3d-text';
     nameEl.textContent = founder.name;
     nameEl.style.cssText = `
       font-size: 1.4rem;
@@ -209,6 +201,7 @@ export function Founders() {
 
     // Role
     const roleEl = document.createElement('span');
+    roleEl.className = 'pop-3d-text';
     roleEl.textContent = founder.role;
     roleEl.style.cssText = `
       font-size: 0.9rem;
@@ -222,6 +215,7 @@ export function Founders() {
 
     // Bio
     const bioEl = document.createElement('p');
+    bioEl.className = 'pop-3d-text';
     bioEl.textContent = founder.bio;
     bioEl.style.cssText = `
       font-size: 0.95rem;

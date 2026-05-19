@@ -58,7 +58,7 @@ export function About() {
 
   // Pillars Grid (Mission, Goal, Motto)
   const grid = document.createElement('div');
-  grid.className = 'about-grid';
+  grid.className = 'about-grid perspective-group';
   grid.style.cssText = `
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -103,9 +103,10 @@ export function About() {
     }
   ];
 
-  pillars.forEach(pillar => {
+  pillars.forEach((pillar, index) => {
     const card = document.createElement('div');
-    card.className = 'glass-card animate-on-scroll';
+    const tiltClass = index === 0 ? 'card-3d-left' : index === 1 ? 'card-3d-center' : 'card-3d-right';
+    card.className = `glass-card card-3d ${tiltClass} animate-on-scroll`;
     card.style.cssText = `
       ${theme.styles.glass}
       border-radius: 20px;
@@ -114,21 +115,11 @@ export function About() {
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: all 0.3s ease;
     `;
-    card.onmouseenter = () => {
-      card.style.transform = 'translateY(-5px)';
-      card.style.borderColor = theme.colors.accentPrimary;
-      card.style.boxShadow = '0 35px 60px -10px rgba(0, 0, 0, 0.8), 0 0 60px 0 rgba(28, 117, 188, 0.15)';
-    };
-    card.onmouseleave = () => {
-      card.style.transform = 'translateY(0)';
-      card.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-      card.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 50px 0 rgba(28, 117, 188, 0.05)';
-    };
 
     // Icon Circle
     const iconBox = document.createElement('div');
+    iconBox.className = 'pop-3d-icon';
     iconBox.style.cssText = `
       width: 60px;
       height: 60px;
@@ -144,6 +135,7 @@ export function About() {
     iconBox.innerHTML = pillar.icon;
 
     const pTitle = document.createElement('h3');
+    pTitle.className = 'pop-3d-text';
     pTitle.textContent = pillar.title;
     pTitle.style.cssText = `
       font-size: 1.3rem;
@@ -153,6 +145,7 @@ export function About() {
     `;
 
     const pDesc = document.createElement('p');
+    pDesc.className = 'pop-3d-text';
     pDesc.textContent = pillar.desc;
     pDesc.style.cssText = `
       font-size: 0.95rem;

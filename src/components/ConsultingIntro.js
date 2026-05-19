@@ -128,6 +128,7 @@ export function ConsultingIntro() {
 
   // Right Column - Highlight Cards
   const rightCol = document.createElement('div');
+  rightCol.className = 'perspective-group';
   rightCol.style.cssText = `
     display: flex;
     flex-direction: column;
@@ -154,7 +155,8 @@ export function ConsultingIntro() {
 
   highlights.forEach((h, index) => {
     const card = document.createElement('div');
-    card.className = 'glass-card animate-on-scroll';
+    const tiltClass = index === 0 ? 'card-3d-left' : index === 1 ? 'card-3d-center' : 'card-3d-right';
+    card.className = `glass-card card-3d ${tiltClass} animate-on-scroll`;
     card.style.cssText = `
       ${theme.styles.glass}
       border-radius: 16px;
@@ -162,20 +164,10 @@ export function ConsultingIntro() {
       display: flex;
       gap: 20px;
       align-items: flex-start;
-      transition: all 0.3s ease;
     `;
-    card.onmouseenter = () => {
-      card.style.transform = 'translateX(6px)';
-      card.style.borderColor = theme.colors.accentPrimary;
-      card.style.background = 'rgba(255, 255, 255, 0.05)';
-    };
-    card.onmouseleave = () => {
-      card.style.transform = 'translateX(0)';
-      card.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-      card.style.background = 'rgba(255, 255, 255, 0.03)';
-    };
 
     const iconBox = document.createElement('div');
+    iconBox.className = 'pop-3d-icon';
     iconBox.style.cssText = `
       background: rgba(28, 117, 188, 0.1);
       border: 1px solid rgba(28, 117, 188, 0.25);
@@ -189,6 +181,7 @@ export function ConsultingIntro() {
     iconBox.innerHTML = h.icon;
 
     const info = document.createElement('div');
+    info.className = 'pop-3d-text';
     
     const hTitle = document.createElement('h3');
     hTitle.textContent = h.title;

@@ -345,6 +345,58 @@ export const injectGlobalStyles = () => {
     .marquee-track:hover {
       animation-play-state: paused;
     }
+    /* 3D Floating & Perspective Utility System */
+    .perspective-group {
+      perspective: 1500px;
+      transform-style: preserve-3d;
+    }
+    
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.5s ease, border-color 0.5s ease !important;
+    }
+    
+    .card-3d-left {
+      transform: rotateY(7deg) rotateX(2deg) translateZ(0);
+    }
+    
+    .card-3d-center {
+      transform: rotateX(4deg) translateZ(0);
+    }
+    
+    .card-3d-right {
+      transform: rotateY(-7deg) rotateX(2deg) translateZ(0);
+    }
+    
+    /* 3D translation on hover */
+    .card-3d:hover {
+      transform: rotateY(0deg) rotateX(0deg) translateZ(30px) translateY(-10px) !important;
+      box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    /* Pop out inner elements */
+    .card-3d .pop-3d-icon {
+      transform: translateZ(35px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1);
+    }
+    .card-3d .pop-3d-text {
+      transform: translateZ(20px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.33, 1);
+    }
+
+    @media (max-width: 968px) {
+      /* Flatten 3D effects on tablet/mobile for readability and touch interaction */
+      .card-3d-left, .card-3d-center, .card-3d-right {
+        transform: none !important;
+      }
+      .card-3d:hover {
+        transform: translateY(-5px) !important;
+      }
+      .card-3d .pop-3d-icon, .card-3d .pop-3d-text {
+        transform: none !important;
+      }
+    }
   `;
     document.head.appendChild(style);
 };
