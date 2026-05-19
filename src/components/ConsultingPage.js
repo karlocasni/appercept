@@ -7,6 +7,20 @@ function mkEl(tag, css = '', inner = '') {
   return el;
 }
 
+function animateValue(obj, start, end, duration, prefix = '', suffix = '') {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    obj.innerHTML = prefix + Math.floor(ease * (end - start) + start) + suffix;
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}
+
 function Divider(align = 'center') {
   return mkEl('div', `width:80px;height:4px;background:${theme.colors.accentPrimary};border-radius:2px;margin:20px ${align === 'left' ? '0' : 'auto'} 30px ${align === 'left' ? '0' : 'auto'};`);
 }
@@ -71,8 +85,6 @@ function ConsultingHero() {
   const col = mkEl('div', `max-width:820px;`);
   col.className = 'fade-in-up';
 
-  col.appendChild(mkEl('div', `display:inline-flex;align-items:center;gap:8px;background:rgba(28,117,188,.15);border:1px solid rgba(28,117,188,.3);padding:8px 18px;border-radius:50px;font-size:.82rem;color:${theme.colors.accentPrimary};margin-bottom:26px;letter-spacing:.5px;`, `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px; vertical-align: middle;"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg> Appercept AI Consulting`));
-
   const h1 = mkEl('h1', `font-size:4.2rem;line-height:1.1;font-weight:900;margin-bottom:22px;`);
   h1.innerHTML = `AI koji radi <span style="background:linear-gradient(90deg,${theme.colors.accentPrimary},#00d2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">za vaše poslovanje</span>`;
   col.appendChild(h1);
@@ -90,15 +102,40 @@ function ConsultingHero() {
   col.appendChild(row);
 
   // Market stats from PDF
-  const stats = mkEl('div', `display:flex;gap:40px;margin-top:64px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);`);
-  [['$11B','AI consulting tržište 2025'],['$91B','Projekcija do 2035'],['26%','Godišnji CAGR rast'],['88%','Tvrtki koristi AI']].forEach(([v,l]) => {
-    const item = mkEl('div');
-    item.appendChild(mkEl('div', `font-size:2rem;font-weight:800;color:${theme.colors.accentPrimary};`, v));
-    item.appendChild(mkEl('div', `font-size:.78rem;opacity:.45;letter-spacing:1px;text-transform:uppercase;margin-top:4px;`, l));
-    stats.appendChild(item);
-  });
-  col.appendChild(stats);
+  const statsData = [
+    { target: 11, prefix: '$', suffix: 'B', label: 'AI consulting tržište 2025' },
+    { target: 91, prefix: '$', suffix: 'B', label: 'Projekcija do 2035' },
+    { target: 26, prefix: '', suffix: '%', label: 'Godišnji CAGR rast' },
+    { target: 88, prefix: '', suffix: '%', label: 'Tvrtki koristi AI' }
+  ];
 
+  const stats = mkEl('div', `display:flex;gap:40px;margin-top:64px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);`);
+  
+  statsData.forEach(itemData => {
+    const item = mkEl('div');
+    const valEl = mkEl('div', `font-size:2rem;font-weight:800;color:${theme.colors.accentPrimary};`, itemData.prefix + '0' + itemData.suffix);
+    item.appendChild(valEl);
+    item.appendChild(mkEl('div', `font-size:.78rem;opacity:.45;letter-spacing:1px;text-transform:uppercase;margin-top:4px;`, itemData.label));
+    stats.appendChild(item);
+
+    // Trigger count-up animation when stats element intersects viewport
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateValue(valEl, 0, itemData.target, 1000, itemData.prefix, itemData.suffix);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(stats);
+    } else {
+      // Fallback
+      animateValue(valEl, 0, itemData.target, 1000, itemData.prefix, itemData.suffix);
+    }
+  });
+
+  col.appendChild(stats);
   ctr.appendChild(col);
   sec.appendChild(ctr);
   return sec;
