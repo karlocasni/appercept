@@ -214,7 +214,7 @@ ${w}`}class P extends Error{constructor({message:e,code:t,cause:s,name:n}){var i
     line-height: 1.6; 
     margin-bottom: 20px;
     flex: 1;
-  `;const a=document.createElement("div");a.style.cssText="display: flex; justify-content: center; align-items: center; margin-top: auto;";const o=document.createElement("button");return o.textContent=T("Detalji →","Details →"),o.style.cssText=`
+  `;const a=document.createElement("div");a.style.cssText="display: flex; justify-content: center; align-items: center; margin-top: auto;";const o=document.createElement("button");return o.textContent=T("Više informacija →","More Information →"),o.style.cssText=`
     background: linear-gradient(135deg, ${S.colors.accentPrimary}, ${S.colors.accentSecondary});
     border: none;
     color: white;
