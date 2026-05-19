@@ -1,5 +1,6 @@
 
 import { theme } from '../theme.js';
+import { t } from '../lib/i18n.js';
 
 export function Contact() {
   const section = document.createElement('section');
@@ -23,7 +24,7 @@ export function Contact() {
   info.className = 'mobile-center animate-on-scroll'; // Center on mobile
 
   const h2 = document.createElement('h2');
-  h2.textContent = "Gradimo budućnost zajedno";
+  h2.textContent = t("Gradimo budućnost zajedno", "Building the Future Together");
   h2.style.cssText = `font-size: 3rem; margin-bottom: 0px;`;
 
   const divider = document.createElement('div');
@@ -36,7 +37,7 @@ export function Contact() {
   `;
 
   const p = document.createElement('p');
-  p.textContent = "Spremni za nadogradnju vaše infrastrukture? Kontaktirajte naš tim stručnjaka.";
+  p.textContent = t("Spremni za nadogradnju vaše infrastrukture? Kontaktirajte naš tim stručnjaka.", "Ready to upgrade your infrastructure? Contact our team of experts.");
   p.style.cssText = `font-size: 1.1rem; opacity: 0.7; margin-bottom: 40px;`;
 
   // Contact Details
@@ -116,10 +117,13 @@ export function Contact() {
     transition: border-color 0.3s;
   `;
 
-  ['Ime', 'Email'].forEach(placeholder => {
+  [
+    { raw: 'Ime', translated: t('Ime i prezime', 'Full Name') },
+    { raw: 'Email', translated: t('Email', 'Email') }
+  ].forEach(field => {
     const input = document.createElement('input');
-    input.type = placeholder === 'Email' ? 'email' : 'text';
-    input.placeholder = placeholder;
+    input.type = field.raw === 'Email' ? 'email' : 'text';
+    input.placeholder = field.translated;
     input.style.cssText = inputStyle;
     input.onfocus = () => { input.style.borderColor = theme.colors.accentPrimary; };
     input.onblur = () => { input.style.borderColor = 'rgba(255,255,255,0.1)'; };
@@ -127,7 +131,7 @@ export function Contact() {
   });
 
   const textarea = document.createElement('textarea');
-  textarea.placeholder = "Recite nam više o vašem projektu...";
+  textarea.placeholder = t("Recite nam više o vašem projektu...", "Tell us more about your project...");
   textarea.rows = 5;
   textarea.style.cssText = inputStyle;
   textarea.onfocus = () => { textarea.style.borderColor = theme.colors.accentPrimary; };
@@ -135,17 +139,17 @@ export function Contact() {
   formCard.appendChild(textarea);
 
   const btn = document.createElement('button');
-  btn.textContent = 'Pošalji poruku';
+  btn.textContent = t('Pošalji poruku', 'Send Message');
   btn.className = 'btn-primary';
   btn.style.marginTop = '10px';
   btn.type = 'submit';
 
   formCard.onsubmit = (e) => {
     e.preventDefault();
-    btn.textContent = 'Poslano!';
+    btn.textContent = t('Poslano!', 'Sent!');
     btn.style.background = '#4CAF50';
     setTimeout(() => {
-      btn.textContent = 'Pošalji poruku';
+      btn.textContent = t('Pošalji poruku', 'Send Message');
       btn.style.background = ''; // reset to default class style
       formCard.reset();
     }, 3000);
@@ -187,15 +191,15 @@ export function Footer() {
   const navCol = document.createElement('div');
   navCol.style.cssText = `display: flex; flex-direction: column; align-items: center;`; // Center items
   const navTitle = document.createElement('h4');
-  navTitle.textContent = 'Navigacija';
+  navTitle.textContent = t('Navigacija', 'Navigation');
   navTitle.style.cssText = `color: white; margin-bottom: 20px; font-size: 1.1rem;`;
   const navUl = document.createElement('ul');
   navUl.style.cssText = `list-style: none; padding: 0; text-align: center;`; // Text align center for list
 
   [
-    { name: 'O nama', href: '#about' },
-    { name: 'Projekti', href: '#products' },
-    { name: 'Kontakt', href: '#contact' }
+    { name: t('O nama', 'About us'), href: '#about' },
+    { name: t('Projekti', 'Projects'), href: '#products' },
+    { name: t('Kontakt', 'Contact'), href: '#contact' }
   ].forEach(link => {
     const li = document.createElement('li');
     li.style.marginBottom = '10px';
@@ -215,7 +219,7 @@ export function Footer() {
   const contactsCol = document.createElement('div');
   contactsCol.style.cssText = `display: flex; flex-direction: column; align-items: center;`; // Center items
   const contactsTitle = document.createElement('h4');
-  contactsTitle.textContent = 'Naš tim';
+  contactsTitle.textContent = t('Naš tim', 'Our Team');
   contactsTitle.style.cssText = `color: white; margin-bottom: 20px; font-size: 1.1rem;`;
 
   const contacts = [
@@ -313,7 +317,7 @@ export function Footer() {
         color: rgba(255,255,255,0.4);
         font-size: 0.85rem;
     `;
-  copy.innerHTML = `&copy; ${new Date().getFullYear()} Appercept. Sva prava pridržana.`;
+  copy.innerHTML = t(`&copy; ${new Date().getFullYear()} Appercept. Sva prava pridržana.`, `&copy; ${new Date().getFullYear()} Appercept. All rights reserved.`);
 
   container.appendChild(grid);
   container.appendChild(copy);

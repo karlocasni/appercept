@@ -1,5 +1,5 @@
-
 import { theme } from '../theme.js';
+import { t } from '../lib/i18n.js';
 
 export function Hero() {
   const section = document.createElement('section');
@@ -19,7 +19,7 @@ export function Hero() {
   content.style.maxWidth = '800px';
 
   const title = document.createElement('h1');
-  title.innerHTML = `Nadmaši <span style="background: linear-gradient(90deg, #1c75bc, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">granice spoznaje.</span>`;
+  title.innerHTML = t(`Nadmaši <span style="background: linear-gradient(90deg, #1c75bc, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">granice spoznaje.</span>`, `Perceive <span style="background: linear-gradient(90deg, #1c75bc, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Beyond.</span>`);
   title.style.cssText = `
     font-size: 5rem;
     line-height: 1.1;
@@ -28,7 +28,7 @@ export function Hero() {
   `;
 
   const slogan = document.createElement('p');
-  slogan.textContent = "Vrhunska digitalna arhitektura za lidere suvremenog poslovanja. Besprijekorna, skalabilna i beskompromisno učinkovita.";
+  slogan.textContent = t("Vrhunska digitalna arhitektura za lidere suvremenog poslovanja. Besprijekorna, skalabilna i beskompromisno učinkovita.", "Premium digital architecture for leaders of modern business. Flawless, scalable, and uncompromisingly efficient.");
   slogan.style.cssText = `
     font-size: 1.5rem;
     color: rgba(255,255,255,0.7);
@@ -42,7 +42,7 @@ export function Hero() {
   buttonRow.style.cssText = `display: flex; gap: 20px; align-items: center;`;
 
   const cta = document.createElement('button');
-  cta.textContent = 'Istraži projekte';
+  cta.textContent = t('Istraži projekte', 'Explore Projects');
   cta.className = 'btn-primary';
   cta.onclick = () => document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
 

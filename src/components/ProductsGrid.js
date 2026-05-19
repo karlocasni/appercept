@@ -1,6 +1,7 @@
 
 import { theme } from '../theme.js';
 import { supabase, mockProducts } from '../lib/supabase.js';
+import { t } from '../lib/i18n.js';
 
 const ProductCard = (product) => {
   const card = document.createElement('div');
@@ -102,7 +103,7 @@ const ProductCard = (product) => {
   price.style.cssText = `font-size: 1.2rem; font-weight: 700; color: ${theme.colors.accentPrimary};`;
 
   const btn = document.createElement('button');
-  btn.textContent = 'Detalji';
+  btn.textContent = t('Detalji', 'Details');
   btn.style.cssText = `
     background: transparent;
     border: 1px solid rgba(255,255,255,0.2);
@@ -160,11 +161,11 @@ export function ProductsGrid() {
   header.style.textAlign = 'center';
 
   const h2 = document.createElement('h2');
-  h2.textContent = 'Naši projekti';
+  h2.textContent = t('Naši projekti', 'Our Projects');
   h2.style.cssText = `font-size: 3rem; margin-bottom: 0;`; // Remove bottom margin to fit divider
 
   const p = document.createElement('p');
-  p.textContent = 'Neograničena mreža sustava i platformi, iskrojenih za maksimalnu učinkovitost, neovisno o opsegu vaših ciljeva.';
+  p.textContent = t('Neograničena mreža sustava i platformi, iskrojenih za maksimalnu učinkovitost, neovisno o opsegu vaših ciljeva.', 'An unlimited network of systems and platforms, tailored for maximum efficiency, regardless of the scope of your goals.');
   p.style.cssText = `color: rgba(255,255,255,0.6); font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.6;`;
 
   header.appendChild(h2);
@@ -216,7 +217,7 @@ export function ProductsGrid() {
   };
 
   // Initial loading state
-  grid.innerHTML = '<p style="text-align:center; color: #666;">Loading products...</p>';
+  grid.innerHTML = `<p style="text-align:center; color: #666;">${t('Učitavanje projekata...', 'Loading projects...')}</p>`;
 
   // Trigger load
   loadProducts();

@@ -1,5 +1,6 @@
 
 import { theme } from '../theme.js';
+import { t, toggleLanguage, getLanguage } from '../lib/i18n.js';
 
 export function Header() {
   const header = document.createElement('header');
@@ -144,9 +145,9 @@ export function Header() {
   backdrop.onclick = () => toggleMenu(true); // Close menu when backdrop is clicked
 
   const links = [
-    { name: 'O nama', href: '#about' },
-    { name: 'Projekti', href: '#products' },
-    { name: 'Kontakt', href: '#contact' }
+    { name: t('O nama', 'About us'), href: '#about' },
+    { name: t('Projekti', 'Projects'), href: '#products' },
+    { name: t('Kontakt', 'Contact'), href: '#contact' }
   ];
 
   // Consulting link (separate page)
@@ -224,6 +225,40 @@ export function Header() {
   const consultingLi = document.createElement('li');
   consultingLi.appendChild(consultingLink);
   ul.appendChild(consultingLi);
+
+  // Language button
+  const langBtn = document.createElement('button');
+  langBtn.textContent = getLanguage() === 'hr' ? 'EN' : 'HR';
+  langBtn.style.cssText = `
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+  `;
+  langBtn.onmouseenter = () => {
+    langBtn.style.background = 'rgba(255,255,255,0.15)';
+    langBtn.style.borderColor = theme.colors.accentPrimary;
+  };
+  langBtn.onmouseleave = () => {
+    langBtn.style.background = 'rgba(255,255,255,0.06)';
+    langBtn.style.borderColor = 'rgba(255,255,255,0.18)';
+  };
+  langBtn.onclick = () => {
+    toggleLanguage();
+  };
+
+  const langLi = document.createElement('li');
+  langLi.style.cssText = `display: flex; align-items: center; justify-content: center;`;
+  langLi.appendChild(langBtn);
+  ul.appendChild(langLi);
 
   nav.appendChild(ul);
 

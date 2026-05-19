@@ -1,5 +1,5 @@
-
 import { createClient } from '@supabase/supabase-js'
+import { t } from './i18n.js'
 
 // Placeholder credentials - User must update these!
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co'
@@ -12,8 +12,8 @@ export const mockProducts = [
     {
         id: 1,
         title: "ClubCrowd",
-        description: "Sveobuhvatna platforma koja redefinira ugostiteljski menadžment kroz AI analitiku i potpunu automatizaciju opskrbnog lanca — od preciznog praćenja zaliha u realnom vremenu do autonomnog naručivanja putem inteligentne integracije s fiskalnim sustavima.",
-        price: "Na upit",
+        description: t("Sveobuhvatna platforma koja redefinira ugostiteljski menadžment kroz AI analitiku i potpunu automatizaciju opskrbnog lanca — od preciznog praćenja zaliha u realnom vremenu do autonomnog naručivanja putem inteligentne integracije s fiskalnim sustavima.", "A comprehensive platform that redefines hospitality management through AI analytics and complete supply chain automation — from precise real-time inventory tracking to autonomous ordering via intelligent integration with fiscal systems."),
+        price: t("Na upit", "On Request"),
         image: "/clubcrowd_logo.png",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`
     }

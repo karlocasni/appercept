@@ -1,4 +1,5 @@
 import { theme } from '../theme.js';
+import { t } from '../lib/i18n.js';
 
 export function About() {
   const section = document.createElement('section');
@@ -21,7 +22,7 @@ export function About() {
   `;
 
   const h2 = document.createElement('h2');
-  h2.textContent = 'O nama';
+  h2.textContent = t('O nama', 'About Us');
   h2.style.cssText = `font-size: 3rem; margin-bottom: 20px;`;
 
   const divider = document.createElement('div');
@@ -35,7 +36,7 @@ export function About() {
   `;
 
   const p = document.createElement('p');
-  p.textContent = "Gradimo digitalnu infrastrukturu nevidljive prisutnosti i apsolutne moći. Vizija u oblaku, rezultati u stvarnosti. Naša je misija pretvoriti kompleksnost podataka u besprijekornu ljudsku intuiciju.";
+  p.textContent = t("Gradimo digitalnu infrastrukturu nevidljive prisutnosti i apsolutne moći. Vizija u oblaku, rezultati u stvarnosti. Naša je misija pretvoriti kompleksnost podataka u besprijekornu ljudsku intuiciju.", "We build digital infrastructure of invisible presence and absolute power. Vision in the cloud, results in reality. Our mission is to turn data complexity into seamless human intuition.");
   p.style.cssText = `font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;`;
 
   textCol.appendChild(h2);
@@ -63,7 +64,7 @@ export function About() {
     font-size: 1.2rem;
     font-weight: 500;
   `;
-  placeholder.textContent = 'Slika'; // Text saying "Image"
+  placeholder.textContent = t('Slika', 'Image'); // Text saying "Image"
 
   imgContainer.appendChild(placeholder);
 
