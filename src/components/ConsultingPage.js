@@ -305,29 +305,32 @@ function ConsultingContact() {
   });
   grid.appendChild(info);
 
-  const inpStyle = `width:100%;padding:14px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:white;font-size:.97rem;font-family:${theme.fonts.primary};transition:border-color .3s;outline:none;`;
+  const inpStyle = `width:100%;padding:14px;background:rgba(30,30,30,0.85);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:white;font-size:.97rem;font-family:${theme.fonts.primary};transition:border-color .3s, background-color .3s;outline:none;`;
   const form = mkEl('form', `padding:36px;border-radius:22px;display:flex;flex-direction:column;gap:16px;`);
   form.className = 'glass-card';
 
   [['Ime i prezime','text'],['Email','email'],['Tvrtka / projekt','text']].forEach(([ph,type]) => {
     const inp = mkEl('input', inpStyle);
     inp.placeholder = ph; inp.type = type;
-    inp.onfocus = () => inp.style.borderColor = theme.colors.accentPrimary;
-    inp.onblur = () => inp.style.borderColor = 'rgba(255,255,255,.1)';
+    inp.onfocus = () => { inp.style.borderColor = theme.colors.accentPrimary; inp.style.backgroundColor = 'rgba(40,40,40,0.95)'; };
+    inp.onblur = () => { inp.style.borderColor = 'rgba(255,255,255,.1)'; inp.style.backgroundColor = 'rgba(30,30,30,0.85)'; };
     form.appendChild(inp);
   });
 
-  const sel = mkEl('select', inpStyle + `cursor:pointer;`);
+  const sel = mkEl('select', inpStyle + `cursor:pointer; background-color: rgba(30,30,30,0.85);`);
+  sel.onfocus = () => { sel.style.borderColor = theme.colors.accentPrimary; sel.style.backgroundColor = 'rgba(40,40,40,0.95)'; };
+  sel.onblur = () => { sel.style.borderColor = 'rgba(255,255,255,.1)'; sel.style.backgroundColor = 'rgba(30,30,30,0.85)'; };
+  
   [['','Što vas zanima...'],['voicebot','Voice Bot'],['chatbot','Chat Bot'],['automation','Automatizacija procesa'],['audit','AI Audit'],['hourly','Hourly konzultacija'],['other','Ostalo']].forEach(([v,t]) => {
-    const o = mkEl('option', `background:#111;`, t); o.value = v; sel.appendChild(o);
+    const o = mkEl('option', `background: #1e1e1e; color: #fff; padding: 10px;`, t); o.value = v; sel.appendChild(o);
   });
   form.appendChild(sel);
 
   const ta = mkEl('textarea', inpStyle);
   ta.placeholder = 'Opišite vaš slučaj i što biste htjeli automatizirati...';
   ta.rows = 4;
-  ta.onfocus = () => ta.style.borderColor = theme.colors.accentPrimary;
-  ta.onblur = () => ta.style.borderColor = 'rgba(255,255,255,.1)';
+  ta.onfocus = () => { ta.style.borderColor = theme.colors.accentPrimary; ta.style.backgroundColor = 'rgba(40,40,40,0.95)'; };
+  ta.onblur = () => { ta.style.borderColor = 'rgba(255,255,255,.1)'; ta.style.backgroundColor = 'rgba(30,30,30,0.85)'; };
   form.appendChild(ta);
 
   const btn = mkEl('button', `width:100%;margin-top:6px;`, 'Pošalji upit →');
