@@ -8,7 +8,7 @@ export function Hero() {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 100px 0;
+    padding: 160px 0 100px 0; /* Extra top padding for fixed header */
   `;
 
   const container = document.createElement('div');

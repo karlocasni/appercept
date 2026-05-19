@@ -5,8 +5,10 @@ export function Header() {
   const header = document.createElement('header');
 
   const style = `
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     width: 100%;
     padding: 20px 0;
