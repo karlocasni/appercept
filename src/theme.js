@@ -357,20 +357,20 @@ export const injectGlobalStyles = () => {
     }
     
     .card-3d-left {
-      transform: rotateY(16deg) rotateX(2deg) translateZ(0);
+      transform: perspective(1500px) rotateY(22deg) rotateX(2deg) translateZ(0);
     }
     
     .card-3d-center {
-      transform: rotateX(4deg) translateZ(0);
+      transform: perspective(1500px) rotateX(4deg) translateZ(0);
     }
     
     .card-3d-right {
-      transform: rotateY(-16deg) rotateX(2deg) translateZ(0);
+      transform: perspective(1500px) rotateY(-22deg) rotateX(2deg) translateZ(0);
     }
     
     /* 3D translation on hover */
     .card-3d:hover {
-      transform: rotateY(0deg) rotateX(0deg) translateZ(35px) translateY(-10px) !important;
+      transform: perspective(1500px) rotateY(0deg) rotateX(0deg) translateZ(50px) translateY(-12px) !important;
       box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
       border-color: rgba(255, 255, 255, 0.25) !important;
     }

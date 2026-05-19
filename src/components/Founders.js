@@ -86,18 +86,20 @@ export function Founders() {
   const styleTag = document.createElement('style');
   styleTag.innerHTML = `
     @keyframes founderFloatUp {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      0%, 100% { top: 0; }
+      50% { top: -12px; }
     }
     @keyframes founderFloatDown {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(12px); }
+      0%, 100% { top: 0; }
+      50% { top: 12px; }
     }
     
     .founder-float-up {
+      position: relative;
       animation: founderFloatUp 6s ease-in-out infinite;
     }
     .founder-float-down {
+      position: relative;
       animation: founderFloatDown 6s ease-in-out infinite;
     }
     
