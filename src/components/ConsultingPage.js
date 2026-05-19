@@ -184,7 +184,7 @@ function ConsultingServices() {
   const grid = mkEl('div', `display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;`);
   items.forEach(s => {
     const card = mkEl('div', `padding:36px;border-radius:20px;transition:transform .3s,box-shadow .3s;cursor:default;`);
-    card.className = 'glass-card';
+    card.className = 'glass-card animate-on-scroll';
     card.appendChild(mkEl('div', `margin-bottom:16px; display:flex; align-items:center; height:36px;`, s.icon));
     card.appendChild(mkEl('h3', `font-size:1.2rem;margin-bottom:10px;`, s.title));
     card.appendChild(mkEl('p', `font-size:.92rem;color:rgba(255,255,255,.62);line-height:1.72;`, s.desc));
@@ -203,6 +203,7 @@ function ConsultingNiches() {
 
   const niches = ['Healthcare AI','Finance & Banking','Voice & Chat automatizacija','Legal & Compliance AI','Retail & E-commerce','Manufacturing / Ops','HR & Talent automatizacija','SME digitalna transformacija'];
   const wrap = mkEl('div', `display:flex;flex-wrap:wrap;gap:14px;justify-content:center;`);
+  wrap.className = 'animate-on-scroll';
   niches.forEach(n => {
     const tag = mkEl('div', `padding:12px 22px;border-radius:50px;background:rgba(28,117,188,.12);border:1px solid rgba(28,117,188,.25);font-size:.9rem;color:rgba(255,255,255,.8);transition:all .3s;cursor:default;`);
     tag.textContent = n;
@@ -257,6 +258,7 @@ function ConsultingPricing() {
   plans.forEach(p => {
     const card = mkEl('div', `padding:36px;border-radius:22px;position:relative;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;
       ${p.highlight ? `background:linear-gradient(135deg,rgba(28,117,188,.22),rgba(43,57,144,.22));border:1px solid rgba(28,117,188,.5);` : `background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);`}`);
+    card.className = 'animate-on-scroll';
 
     if (p.badge) {
       const b = mkEl('div', `position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});color:white;padding:5px 18px;border-radius:50px;font-size:.75rem;font-weight:700;white-space:nowrap;`, p.badge);
@@ -306,6 +308,7 @@ function ConsultingContact() {
   grid.className = 'responsive-grid';
 
   const info = mkEl('div');
+  info.className = 'animate-on-scroll';
   info.appendChild(mkEl('h2', `font-size:3rem;margin-bottom:0;`, 'Dogovorite konzultaciju'));
   info.appendChild(Divider('left'));
   info.appendChild(mkEl('p', `font-size:1.05rem;opacity:.7;margin-bottom:36px;line-height:1.75;`, 'Počnite s besplatnim 30-minutnim discovery pozivom. Analiziramo vaše poslovanje i predlažemo gdje AI može napraviti razliku odmah.'));
@@ -344,7 +347,7 @@ function ConsultingContact() {
 
   const inpStyle = `width:100%;padding:14px;background:rgba(30,30,30,0.85);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:white;font-size:.97rem;font-family:${theme.fonts.primary};transition:border-color .3s, background-color .3s;outline:none;`;
   const form = mkEl('form', `padding:36px;border-radius:22px;display:flex;flex-direction:column;gap:16px;`);
-  form.className = 'glass-card';
+  form.className = 'glass-card animate-on-scroll';
 
   [['Ime i prezime','text'],['Email','email'],['Tvrtka / projekt','text']].forEach(([ph,type]) => {
     const inp = mkEl('input', inpStyle);
