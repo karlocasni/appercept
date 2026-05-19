@@ -331,4 +331,4 @@
       left: ${t.left};
       animation: float 25s infinite ease-in-out; /* Slower float for larger mass */
       animation-delay: ${t.delay};
-    `,i%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let n=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,n=!1};return window.addEventListener("scroll",()=>{n||(window.requestAnimationFrame(e),n=!0)}),r}const c=()=>localStorage.getItem("language")||"hr",m=()=>{const r=c()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},f=(r,a)=>c()==="hr"?r:a;export{d as B,f as a,m as b,c as g,p as i,o as t};
+    `,i%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let n=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,n=!1};return window.addEventListener("scroll",()=>{n||(window.requestAnimationFrame(e),n=!0)}),r}const c=()=>localStorage.getItem("language")||"en",m=()=>{const r=c()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},f=(r,a)=>c()==="hr"?r:a;export{d as B,f as a,m as b,c as g,p as i,o as t};
