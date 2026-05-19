@@ -12,7 +12,7 @@ export const mockProducts = [
     {
         id: 1,
         title: "ClubCrowd",
-        description: t("Sveobuhvatna platforma za ugostiteljstvo i AI automatizaciju. Kliknite na gumb ispod za posjet službenoj stranici projekta.", "A comprehensive platform for hospitality management and AI automation. Click the details button below to explore the project on its official website."),
+        description: t("Sveobuhvatna platforma za ugostiteljstvo i AI automatizaciju. Kliknite na gumb <span class=\"text-gradient\">Više informacija</span> ispod za posjet službenoj stranici projekta.", "A comprehensive platform for hospitality management and AI automation. Click the <span class=\"text-gradient\">More Information</span> button below to explore the project on its official website."),
         price: t("Na upit", "On Request"),
         image: "/clubcrowd_logo.png",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`

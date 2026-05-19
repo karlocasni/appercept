@@ -98,6 +98,14 @@ export const injectGlobalStyles = () => {
       border-radius: 24px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #1c75bc, #56b3fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline;
+      font-weight: 600;
+    }
     
     .glass-card:hover {
       transform: translateY(-5px);

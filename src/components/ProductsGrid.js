@@ -86,7 +86,7 @@ const ProductCard = (product) => {
   title.style.cssText = `font-size: 1.4rem; margin-bottom: 10px;`;
 
   const desc = document.createElement('p');
-  desc.textContent = product.description;
+  desc.innerHTML = product.description;
   desc.style.cssText = `
     font-size: 0.95rem; 
     color: rgba(255,255,255,0.7); 
