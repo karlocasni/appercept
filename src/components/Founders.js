@@ -162,15 +162,15 @@ export function Founders() {
       box-shadow: 0 8px 24px rgba(28, 117, 188, 0.3);
     `;
 
-    const initialsSpan = document.createElement('span');
-    initialsSpan.textContent = founder.initials;
-    initialsSpan.style.cssText = `
-      font-size: 2rem;
-      font-weight: 700;
-      color: white;
-      letter-spacing: 1px;
+    const placeholderSvg = document.createElement('div');
+    placeholderSvg.style.cssText = `display: flex; align-items: center; justify-content: center;`;
+    placeholderSvg.innerHTML = `
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.9;">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
     `;
-    avatar.appendChild(initialsSpan);
+    avatar.appendChild(placeholderSvg);
 
     // Name
     const nameEl = document.createElement('h3');
