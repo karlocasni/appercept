@@ -4,6 +4,7 @@ import { Background } from './components/Background.js';
 import { Header } from './components/Header.js';
 import { Hero } from './components/Hero.js';
 import { About } from './components/About.js';
+import { ConsultingIntro } from './components/ConsultingIntro.js';
 import { ProductsGrid } from './components/ProductsGrid.js';
 import { OtherServices } from './components/OtherServices.js';
 import { Contact, Footer } from './components/Contact.js';
@@ -21,6 +22,7 @@ export function App() {
     app.appendChild(Header());
     app.appendChild(Hero());
     app.appendChild(About());
+    app.appendChild(ConsultingIntro());
     app.appendChild(ProductsGrid());
     app.appendChild(OtherServices());
     app.appendChild(Contact());
