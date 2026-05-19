@@ -189,17 +189,20 @@ function ConsultingServices() {
     }
   ];
 
-  const grid = mkEl('div', `display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;`);
-  grid.className = 'perspective-group';
+  const grid = mkEl('div', `display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;`);
+  grid.className = 'book-shelf';
   items.forEach((s, index) => {
-    const card = mkEl('div', `padding:36px;border-radius:20px;cursor:default;`);
-    const tiltClass = index % 3 === 0 ? 'card-3d-left' : index % 3 === 1 ? 'card-3d-center' : 'card-3d-right';
-    card.className = `glass-card card-3d ${tiltClass} animate-on-scroll`;
+    const card = mkEl('div', `cursor:default;`);
+    card.className = `book-card animate-on-scroll`;
+    
+    const pages = mkEl('div');
+    pages.className = 'book-card-pages';
+    card.appendChild(pages);
     
     const iconContainer = mkEl('div', `margin-bottom:16px; display:flex; align-items:center; height:36px;`, s.icon);
     iconContainer.className = 'pop-3d-icon';
     
-    const h3Title = mkEl('h3', `font-size:1.2rem;margin-bottom:10px;`, s.title);
+    const h3Title = mkEl('h3', `font-size:1.25rem;margin-bottom:10px;font-weight:700;`, s.title);
     h3Title.className = 'pop-3d-text';
     
     const pDesc = mkEl('p', `font-size:.92rem;color:rgba(255,255,255,.62);line-height:1.72;`, s.desc);
