@@ -103,18 +103,29 @@ const ProductCard = (product) => {
   price.style.cssText = `font-size: 1.2rem; font-weight: 700; color: ${theme.colors.accentPrimary};`;
 
   const btn = document.createElement('button');
-  btn.textContent = t('Detalji', 'Details');
+  btn.textContent = t('Detalji →', 'Details →');
   btn.style.cssText = `
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
+    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
+    border: none;
     color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(28, 117, 188, 0.4);
   `;
-  btn.onmouseenter = () => { btn.style.background = 'rgba(255,255,255,0.1)'; };
-  btn.onmouseleave = () => { btn.style.background = 'transparent'; };
+  btn.onmouseenter = () => {
+    btn.style.transform = 'translateY(-2px) scale(1.05)';
+    btn.style.boxShadow = '0 6px 20px rgba(43, 57, 144, 0.6)';
+    btn.style.filter = 'brightness(1.15)';
+  };
+  btn.onmouseleave = () => {
+    btn.style.transform = 'translateY(0) scale(1)';
+    btn.style.boxShadow = '0 4px 15px rgba(28, 117, 188, 0.4)';
+    btn.style.filter = 'brightness(1)';
+  };
   btn.onclick = () => {
     if (product.title === 'ClubCrowd') {
       window.open('https://clubcrowd.app', '_blank');
