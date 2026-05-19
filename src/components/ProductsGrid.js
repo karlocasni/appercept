@@ -99,7 +99,7 @@ const ProductCard = (product) => {
   footer.style.cssText = `display: flex; justify-content: center; align-items: center; margin-top: auto;`;
 
   const btn = document.createElement('button');
-  btn.textContent = t('Detalji →', 'Details →');
+  btn.textContent = t('Više informacija →', 'More Information →');
   btn.style.cssText = `
     background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
     border: none;
