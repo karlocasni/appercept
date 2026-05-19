@@ -71,7 +71,7 @@ function ConsultingHero() {
   const col = mkEl('div', `max-width:820px;`);
   col.className = 'fade-in-up';
 
-  col.appendChild(mkEl('div', `display:inline-flex;align-items:center;gap:8px;background:rgba(28,117,188,.15);border:1px solid rgba(28,117,188,.3);padding:8px 18px;border-radius:50px;font-size:.82rem;color:${theme.colors.accentPrimary};margin-bottom:26px;letter-spacing:.5px;`, '🤖 &nbsp; Appercept AI Consulting'));
+  col.appendChild(mkEl('div', `display:inline-flex;align-items:center;gap:8px;background:rgba(28,117,188,.15);border:1px solid rgba(28,117,188,.3);padding:8px 18px;border-radius:50px;font-size:.82rem;color:${theme.colors.accentPrimary};margin-bottom:26px;letter-spacing:.5px;`, `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:2px; vertical-align: middle;"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg> Appercept AI Consulting`));
 
   const h1 = mkEl('h1', `font-size:4.2rem;line-height:1.1;font-weight:900;margin-bottom:22px;`);
   h1.innerHTML = `AI koji radi <span style="background:linear-gradient(90deg,${theme.colors.accentPrimary},#00d2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">za vaše poslovanje</span>`;
@@ -112,19 +112,43 @@ function ConsultingServices() {
   ctr.appendChild(sectionHeader('Naše AI usluge', 'Specijaliziramo se za praktičnu primjenu AI-a — od automatizacije rutinskih zadataka do inteligentnih botova koji rade 24/7.'));
 
   const items = [
-    { icon: '🎙️', title: 'Voice Botovi', desc: 'Glasovni AI asistenti koji primaju pozive, odgovaraju na upite i zakažu termine — bez čekanja i bez potrebe za živim operaterom.' },
-    { icon: '💬', title: 'Chat Botovi', desc: 'Pametan chatbot za vašu web stranicu ili WhatsApp koji kvalificira leadove, odgovara na FAQ i pretvara posjetitelje u klijente.' },
-    { icon: '⚡', title: 'Automatizacija procesa', desc: 'Eliminiramo ručni rad: automatski emailovi, generiranje dokumenata, CRM unosi, izvještaji — sve radi samo.' },
-    { icon: '🔗', title: 'AI Integracije', desc: 'Spajamo OpenAI, Anthropic, n8n i Make s vašim sustavima. Workflow automatizacija prilagođena vašem poslovnom modelu.' },
-    { icon: '📊', title: 'AI Audit', desc: 'Analiziramo vaše poslovanje i identificiramo top 3-5 mjesta gdje AI može odmah uštedjeti novac ili povećati prihod.' },
-    { icon: '🎓', title: 'AI Edukacija & Radionice', desc: 'Obučavamo vaš tim kako koristiti AI alate. Hands-on radionice prilagođene vašoj industriji i razini znanja.' },
+    {
+      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`,
+      title: 'Voice Botovi',
+      desc: 'Glasovni AI asistenti koji primaju pozive, odgovaraju na upite i zakažu termine — bez čekanja i bez potrebe za živim operaterom.'
+    },
+    {
+      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
+      title: 'Chat Botovi',
+      desc: 'Pametan chatbot za vašu web stranicu ili WhatsApp koji kvalificira leadove, odgovara na FAQ i pretvara posjetitelje u klijente.'
+    },
+    {
+      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+      title: 'Automatizacija procesa',
+      desc: 'Eliminiramo ručni rad: automatski emailovi, generiranje dokumenata, CRM unosi, izvještaji — sve radi samo.'
+    },
+    {
+      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`,
+      title: 'AI Integracije',
+      desc: 'Spajamo OpenAI, Anthropic, n8n i Make s vašim sustavima. Workflow automatizacija prilagođena vašem poslovnom modelu.'
+    },
+    {
+      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
+      title: 'AI Audit',
+      desc: 'Analiziramo vaše poslovanje i identificiramo top 3-5 mjesta gdje AI može odmah uštedjeti novac ili povećati prihod.'
+    },
+    {
+      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>`,
+      title: 'AI Edukacija & Radionice',
+      desc: 'Obučavamo vaš tim kako koristiti AI alate. Hands-on radionice prilagođene vašoj industriji i razini znanja.'
+    }
   ];
 
   const grid = mkEl('div', `display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;`);
   items.forEach(s => {
     const card = mkEl('div', `padding:36px;border-radius:20px;transition:transform .3s,box-shadow .3s;cursor:default;`);
     card.className = 'glass-card';
-    card.appendChild(mkEl('div', `font-size:2.4rem;margin-bottom:16px;`, s.icon));
+    card.appendChild(mkEl('div', `margin-bottom:16px; display:flex; align-items:center; height:36px;`, s.icon));
     card.appendChild(mkEl('h3', `font-size:1.2rem;margin-bottom:10px;`, s.title));
     card.appendChild(mkEl('p', `font-size:.92rem;color:rgba(255,255,255,.62);line-height:1.72;`, s.desc));
     grid.appendChild(card);
@@ -163,25 +187,29 @@ function ConsultingPricing() {
 
   const plans = [
     {
-      icon: '⏱️', name: 'Hourly', price: '€100 – €350', unit: '/sat',
+      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`,
+      name: 'Hourly', price: '€100 – €350', unit: '/sat',
       badge: '', highlight: false,
       desc: 'Idealno za scoping, savjete i kratke projekte.',
       features: ['Junior konzultant od €100/h', 'Mid-level od €200/h', 'Senior AI arhitekt od €350/h', 'Minimum 2 sata po sesiji', 'Idealno za inicijalne konzultacije'],
     },
     {
-      icon: '🔄', name: 'Retainer', price: '€3K – €15K', unit: '/mjesec',
+      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>`,
+      name: 'Retainer', price: '€3K – €15K', unit: '/mjesec',
       badge: '⭐ PREPORUČENO', highlight: true,
       desc: 'Kontinuirana podrška, implementacija i razvoj.',
       features: ['Neograničene konzultacije', 'Advisory + implementacija', 'Roadmap ownership', 'Tjedni check-in pozivi', 'Prioritetna podrška', 'Mjerna izvješća (KPI)'],
     },
     {
-      icon: '📦', name: 'Fixed Project', price: '€10K – €150K+', unit: '/projekt',
+      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>`,
+      name: 'Fixed Project', price: '€10K – €150K+', unit: '/projekt',
       badge: '', highlight: false,
       desc: 'Definirani projekti s jasnim deliverables.',
       features: ['AI audit (€2K–5K)', 'Implementacija (€15K–80K)', 'Custom AI rješenje', 'Jasni acceptance criteria', 'Timeline i milestones'],
     },
     {
-      icon: '📈', name: 'Value-Based', price: '5–20%', unit: 'od ROI',
+      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>`,
+      name: 'Value-Based', price: '5–20%', unit: 'od ROI',
       badge: '', highlight: false,
       desc: 'Premium model — plaćate samo za dokazane rezultate.',
       features: ['Za dokazane klijente', 'Naknada vezana za ROI', 'Zajednički interesi', 'Highest accountability', 'Mjerljivi poslovni impact'],
@@ -198,10 +226,10 @@ function ConsultingPricing() {
       card.appendChild(b);
     }
 
-    card.appendChild(mkEl('div', `font-size:2rem;margin-bottom:12px;`, p.icon));
+    card.appendChild(mkEl('div', `margin-bottom:12px; display:flex; align-items:center; height:36px;`, p.icon));
     card.appendChild(mkEl('h3', `font-size:1.3rem;margin-bottom:8px;`, p.name));
     card.appendChild(mkEl('p', `font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:20px;`, p.desc));
-
+    
     const priceBox = mkEl('div', `margin-bottom:24px;`);
     priceBox.appendChild(mkEl('span', `font-size:1.8rem;font-weight:800;color:${p.highlight ? theme.colors.accentPrimary : 'white'};`, p.price));
     priceBox.appendChild(mkEl('span', `font-size:.85rem;color:rgba(255,255,255,.4);margin-left:6px;`, p.unit));
@@ -245,13 +273,31 @@ function ConsultingContact() {
   info.appendChild(Divider('left'));
   info.appendChild(mkEl('p', `font-size:1.05rem;opacity:.7;margin-bottom:36px;line-height:1.75;`, 'Počnite s besplatnim 30-minutnim discovery pozivom. Analiziramo vaše poslovanje i predlažemo gdje AI može napraviti razliku odmah.'));
 
-  [['✉️','kontakt@appercept.net','mailto:kontakt@appercept.net'],
-   ['📍','Ul. Roberta F. Mihanovića 9, Zagreb','#'],
-   ['📞','+385 91 9545 128','tel:+38591954512']].forEach(([icon,text,href]) => {
+  const details = [
+    {
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="${theme.colors.accentPrimary}" stroke="none"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>`,
+      text: 'kontakt@appercept.net',
+      href: 'mailto:kontakt@appercept.net'
+    },
+    {
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="${theme.colors.accentPrimary}" stroke="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>`,
+      text: 'Ul. Roberta F. Mihanovića 9, Zagreb',
+      href: 'https://www.google.com/maps/search/?api=1&query=Ul.%20Roberta%20F.%20Mihanovi%C4%87a%209%2C%20Zagreb'
+    },
+    {
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="${theme.colors.accentPrimary}" stroke="none"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.44-5.15-3.75-6.59-6.59l1.97-1.57c.26-.26.35-.63.24-1.01-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3.3 3 4.24 3 5.37c0 8.07 6.53 14.6 14.6 14.6 1.13 0 2.07-.65 2.07-1.19v-3.81c0-.55-.45-1-.99-1H20.01z"></path></svg>`,
+      text: '+385 91 9545 128',
+      href: 'tel:+385919545128'
+    }
+  ];
+
+  details.forEach(d => {
     const row = mkEl('div', `display:flex;align-items:center;gap:14px;margin-bottom:18px;font-size:.98rem;`);
-    row.appendChild(mkEl('span', `font-size:1.1rem;`, icon));
-    const a = mkEl('a', `color:rgba(255,255,255,.75);transition:color .3s;`, text);
-    a.href = href;
+    const iconSpan = mkEl('span', `display:inline-flex;align-items:center;`);
+    iconSpan.innerHTML = d.icon;
+    row.appendChild(iconSpan);
+    const a = mkEl('a', `color:rgba(255,255,255,.75);transition:color .3s;`, d.text);
+    a.href = d.href;
     a.onmouseenter = () => a.style.color = theme.colors.accentPrimary;
     a.onmouseleave = () => a.style.color = 'rgba(255,255,255,.75)';
     row.appendChild(a);
