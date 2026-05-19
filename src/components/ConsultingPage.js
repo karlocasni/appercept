@@ -195,8 +195,11 @@ function ConsultingServices() {
   const grid = mkEl('div', `display:flex;justify-content:center;flex-wrap:wrap;`);
   grid.className = 'file-stack';
   items.forEach((s, index) => {
+    const slot = mkEl('div');
+    slot.className = 'cabinet-slot';
+
     const card = mkEl('div');
-    card.className = `file-folder file-folder-${index}`;
+    card.className = `file-folder`;
     card.setAttribute('data-index', `0${index + 1}`);
     
     const iconContainer = mkEl('div', `margin-bottom:20px; display:flex; align-items:center; height:36px;`, s.icon);
@@ -211,7 +214,8 @@ function ConsultingServices() {
     card.appendChild(iconContainer);
     card.appendChild(h3Title);
     card.appendChild(pDesc);
-    grid.appendChild(card);
+    slot.appendChild(card);
+    grid.appendChild(slot);
   });
 
   const handle = mkEl('div');

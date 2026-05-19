@@ -400,14 +400,14 @@ export const injectGlobalStyles = () => {
     /* 3D Stacked File Folders & Cabinet Design */
     .cabinet-drawer {
       position: relative;
-      background: rgba(10, 15, 30, 0.45);
-      border: 2px solid rgba(255, 255, 255, 0.05);
-      border-radius: 28px;
+      background: rgba(10, 15, 30, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 32px;
       padding: 60px 40px 30px 40px;
       margin-top: 50px;
-      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.9), 0 30px 60px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.8), 0 20px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       overflow: visible;
     }
     
@@ -443,77 +443,89 @@ export const injectGlobalStyles = () => {
       padding: 20px 0;
     }
     
-    .file-folder {
+    /* Cabinet compartments / box frame around each card */
+    .cabinet-slot {
       position: relative;
       flex: 1;
       min-width: 250px;
       max-width: 280px;
-      height: 380px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0 20px 20px 20px; /* Top left sharp for the tab */
-      padding: 40px 24px 24px 24px;
+      height: 410px;
+      background: rgba(5, 8, 18, 0.7);
+      border: 2px solid rgba(255, 255, 255, 0.04);
+      border-radius: 20px;
+      box-shadow: inset 0 15px 35px rgba(0, 0, 0, 0.95), 0 5px 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: flex-end;
+      overflow: visible;
+      perspective: 1500px;
+      transform-style: preserve-3d;
+    }
+    
+    .file-folder {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      top: 40px; /* Sinks folder inside slot leaving tab exposed */
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 0 16px 16px 16px;
+      padding: 28px 20px 20px 20px;
       transform-style: preserve-3d;
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 50px 0 rgba(28, 117, 188, 0.05);
-      z-index: 1;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
       cursor: default;
       display: flex;
       flex-direction: column;
+      z-index: 2;
     }
-    
-    /* Subtle natural cabinet rotations */
-    .file-folder-0 { transform: perspective(1500px) rotateZ(-1.5deg) translateY(0); }
-    .file-folder-1 { transform: perspective(1500px) rotateZ(1deg) translateY(4px); }
-    .file-folder-2 { transform: perspective(1500px) rotateZ(-0.5deg) translateY(-2px); }
-    .file-folder-3 { transform: perspective(1500px) rotateZ(1.5deg) translateY(2px); }
     
     /* Folder Index Tab */
     .file-folder::before {
       content: attr(data-index);
       position: absolute;
-      top: -26px;
+      top: -24px;
       left: -1px;
-      height: 26px;
-      width: 90px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      height: 24px;
+      width: 80px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-bottom: none;
-      border-radius: 8px 12px 0 0;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.75rem;
+      border-radius: 8px 10px 0 0;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.7rem;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       font-family: monospace;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
     
-    /* Hover state: pop out of stack and scale up to read */
-    .file-folder:hover {
-      transform: perspective(1500px) translateY(-75px) scale(1.15) rotate(0deg) !important;
+    /* Hover slot trigger: pop file out of slot box and enlarge to read */
+    .cabinet-slot:hover .file-folder {
+      transform: translateY(-90px) scale(1.15) translateZ(50px) !important;
       z-index: 100 !important;
-      box-shadow: 0 45px 85px -10px rgba(0, 0, 0, 0.85), 0 0 60px 0 rgba(28, 117, 188, 0.2) !important;
+      box-shadow: 0 40px 80px -10px rgba(0, 0, 0, 0.95), 0 0 50px 0 rgba(28, 117, 188, 0.25) !important;
       border-color: rgba(255, 255, 255, 0.25) !important;
-      background: rgba(255, 255, 255, 0.05) !important;
+      background: rgba(255, 255, 255, 0.065) !important;
     }
     
-    .file-folder:hover::before {
+    .cabinet-slot:hover .file-folder::before {
       background: linear-gradient(135deg, #1c75bc, #2b3990);
       color: white;
       border-color: transparent;
     }
     
     /* Pop inner parts */
-    .file-folder:hover .pop-3d-icon {
-      transform: translateZ(40px) scale(1.05);
+    .cabinet-slot:hover .pop-3d-icon {
+      transform: translateZ(35px) scale(1.05);
     }
-    .file-folder:hover .pop-3d-text {
-      transform: translateZ(25px);
+    .cabinet-slot:hover .pop-3d-text {
+      transform: translateZ(20px);
     }
 
     @media (max-width: 968px) {
@@ -525,14 +537,27 @@ export const injectGlobalStyles = () => {
         align-items: center;
         gap: 50px;
       }
-      .file-folder {
+      .cabinet-slot {
         max-width: 100%;
         width: 100%;
-        transform: none !important;
+        height: auto;
+        min-height: 380px;
+        display: block;
+        position: relative;
       }
-      .file-folder:hover {
-        transform: translateY(-10px) scale(1.05) !important;
+      .file-folder {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 35px;
+        height: auto;
       }
+      .cabinet-slot:hover .file-folder {
+        transform: translateY(-15px) scale(1.05) !important;
+      }
+    }
     }
   `;
     document.head.appendChild(style);
