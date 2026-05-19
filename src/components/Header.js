@@ -10,16 +10,29 @@ export function Header() {
     z-index: 1000;
     width: 100%;
     padding: 20px 0;
-    transition: all 0.3s ease;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
   `;
 
   header.style.cssText = style;
 
-  // Glass background for header (we apply it to a container inside or the header itself on scroll)
-  // For now, let's make the whole header glassy
-  header.style.background = 'rgba(17, 17, 17, 0.7)';
-  header.style.backdropFilter = 'blur(12px)';
-  header.style.borderBottom = `1px solid ${theme.colors.glassBorder}`;
+  // Solid at top, glassy on scroll
+  header.style.background = 'rgba(17, 17, 17, 1)';
+  header.style.backdropFilter = 'none';
+  header.style.borderBottom = `1px solid transparent`;
+
+  // Scroll listener to toggle glass effect
+  const onScroll = () => {
+    if (window.scrollY > 40) {
+      header.style.background = 'rgba(17, 17, 17, 0.45)';
+      header.style.backdropFilter = 'blur(18px)';
+      header.style.borderBottom = `1px solid ${theme.colors.glassBorder}`;
+    } else {
+      header.style.background = 'rgba(17, 17, 17, 1)';
+      header.style.backdropFilter = 'none';
+      header.style.borderBottom = `1px solid transparent`;
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   const container = document.createElement('div');
   container.style.cssText = `
