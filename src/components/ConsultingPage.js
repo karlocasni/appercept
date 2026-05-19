@@ -352,24 +352,163 @@ function ConsultingContact() {
 
 /* ── FOOTER ─────────────────────────────────────────── */
 function ConsultingFooter() {
-  const footer = mkEl('footer', `padding:50px 0 30px;background:rgba(0,0,0,.4);border-top:1px solid rgba(255,255,255,.05);`);
-  const ctr = mkEl('div', theme.styles.container);
-  const row = mkEl('div', `display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;margin-bottom:28px;`);
+  const footer = document.createElement('footer');
+  footer.style.cssText = `
+        background: #090909;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        padding: 80px 0 40px 0;
+        margin-top: auto;
+    `;
 
-  const brand = mkEl('div');
-  brand.appendChild(mkEl('div', `font-size:1.05rem;font-weight:700;`, 'Appercept AI Consulting'));
-  brand.appendChild(mkEl('div', `font-size:.82rem;color:rgba(255,255,255,.35);margin-top:4px;`, 'Voice Bots · Chat Bots · Automatizacija'));
-  row.appendChild(brand);
+  const container = document.createElement('div');
+  container.style.cssText = theme.styles.container;
 
-  const back = mkEl('a', `color:${theme.colors.accentPrimary};font-size:.9rem;transition:opacity .3s;`, '← Appercept.net');
-  back.href = '/';
-  back.onmouseenter = () => back.style.opacity = '.7';
-  back.onmouseleave = () => back.style.opacity = '1';
-  row.appendChild(back);
+  const grid = document.createElement('div');
+  grid.style.cssText = `
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+        align-items: center;
+        justify-content: center;
+    `;
 
-  ctr.appendChild(row);
-  ctr.appendChild(mkEl('div', `border-top:1px solid rgba(255,255,255,.07);padding-top:18px;text-align:center;color:rgba(255,255,255,.28);font-size:.8rem;`, `© ${new Date().getFullYear()} Appercept Consulting. Sva prava pridržana.`));
-  footer.appendChild(ctr);
+  // 1. Navigation
+  const navCol = document.createElement('div');
+  navCol.style.cssText = `display: flex; flex-direction: column; align-items: center;`;
+  const navTitle = document.createElement('h4');
+  navTitle.textContent = 'Navigacija';
+  navTitle.style.cssText = `color: white; margin-bottom: 20px; font-size: 1.1rem;`;
+  const navUl = document.createElement('ul');
+  navUl.style.cssText = `list-style: none; padding: 0; text-align: center;`;
+
+  [
+    { name: 'O nama', href: '/#about' },
+    { name: 'Projekti', href: '/#products' },
+    { name: 'Kontakt', href: '/#contact' },
+    { name: 'Consulting', href: '/consulting.html' }
+  ].forEach(link => {
+    const li = document.createElement('li');
+    li.style.marginBottom = '10px';
+    const a = document.createElement('a');
+    a.href = link.href;
+    a.textContent = link.name;
+    a.style.cssText = `color: rgba(255,255,255,0.6); font-size: 0.95rem; text-decoration: none; transition: color 0.3s;`;
+    a.onmouseenter = () => a.style.color = 'white';
+    a.onmouseleave = () => a.style.color = 'rgba(255,255,255,0.6)';
+    li.appendChild(a);
+    navUl.appendChild(li);
+  });
+  navCol.appendChild(navTitle);
+  navCol.appendChild(navUl);
+
+  // 2. Personal Contacts
+  const contactsCol = document.createElement('div');
+  contactsCol.style.cssText = `display: flex; flex-direction: column; align-items: center;`;
+  const contactsTitle = document.createElement('h4');
+  contactsTitle.textContent = 'Naš tim';
+  contactsTitle.style.cssText = `color: white; margin-bottom: 20px; font-size: 1.1rem;`;
+
+  const contacts = [
+    { name: 'Gašpar Bodulica', num: '+385 99 3553 000' },
+    { name: 'Karlo Časni', num: '+385 91 9545 128' },
+    { name: 'Bruno Vujčec', num: '+385 97 6635 960' }
+  ];
+
+  contacts.forEach(c => {
+    const div = document.createElement('div');
+    div.style.marginBottom = '15px';
+    div.style.textAlign = 'center';
+
+    const nameDiv = document.createElement('div');
+    nameDiv.textContent = c.name;
+    nameDiv.style.cssText = `color: white; font-weight: 500;`;
+
+    const numLink = document.createElement('a');
+    numLink.textContent = c.num;
+    numLink.href = `tel:${c.num.replace(/\s/g, '')}`;
+    numLink.style.cssText = `color: rgba(255,255,255,0.6); font-size: 0.9rem; transition: color 0.3s; text-decoration: none;`;
+
+    numLink.onmouseenter = () => numLink.style.color = theme.colors.accentPrimary;
+    numLink.onmouseleave = () => numLink.style.color = 'rgba(255,255,255,0.6)';
+
+    div.appendChild(nameDiv);
+    div.appendChild(numLink);
+    contactsCol.appendChild(div);
+  });
+
+  // 3. Socials
+  const socialCol = document.createElement('div');
+  socialCol.style.cssText = `display: flex; flex-direction: column; align-items: center;`;
+  const socialTitle = document.createElement('h4');
+  socialTitle.textContent = 'Social';
+  socialTitle.style.cssText = `color: white; margin-bottom: 20px; font-size: 1.1rem;`;
+  const socialRow = document.createElement('div');
+  socialRow.style.cssText = `display: flex; gap: 15px; justify-content: center;`;
+
+  ['LinkedIn', 'Instagram'].forEach(net => {
+    const link = document.createElement('a');
+    link.href = net === 'LinkedIn' ? 'https://www.linkedin.com/company/appercept-net/?viewAsMember=true' : 'https://www.instagram.com/appercept_net/';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.title = net;
+
+    let svgPath = '';
+    if (net === 'LinkedIn') svgPath = '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>';
+    if (net === 'Instagram') svgPath = '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>';
+
+    link.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${svgPath}</svg>`;
+
+    link.style.cssText = `
+        ${theme.styles.glass}
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        width: 40px; 
+        height: 40px; 
+        border-radius: 50%; 
+        color: white; 
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.03); 
+    `;
+
+    link.onmouseenter = () => {
+      link.style.background = `linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary})`;
+      link.style.transform = 'translateY(-3px)';
+      link.style.borderColor = 'transparent';
+    };
+    link.onmouseleave = () => {
+      link.style.background = 'rgba(255, 255, 255, 0.03)';
+      link.style.transform = 'translateY(0)';
+      link.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+    };
+
+    socialRow.appendChild(link);
+  });
+
+  socialCol.appendChild(socialTitle);
+  socialCol.appendChild(socialRow);
+
+  // Append Columns
+  grid.appendChild(navCol);
+  grid.appendChild(contactsCol);
+  grid.appendChild(socialCol);
+
+  // Copyright
+  const copy = document.createElement('div');
+  copy.style.cssText = `
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 20px;
+        text-align: center;
+        color: rgba(255,255,255,0.4);
+        font-size: 0.85rem;
+    `;
+  copy.innerHTML = `&copy; ${new Date().getFullYear()} Appercept. Sva prava pridržana.`;
+
+  container.appendChild(grid);
+  container.appendChild(copy);
+  footer.appendChild(container);
+
   return footer;
 }
 
