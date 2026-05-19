@@ -194,9 +194,9 @@ function ConsultingPricing() {
       features: ['Junior konzultant od €100/h', 'Mid-level od €200/h', 'Senior AI arhitekt od €350/h', 'Minimum 2 sata po sesiji', 'Idealno za inicijalne konzultacije'],
     },
     {
-      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>`,
+      icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>`,
       name: 'Retainer', price: '€3K – €15K', unit: '/mjesec',
-      badge: '⭐ PREPORUČENO', highlight: true,
+      badge: 'PREPORUČENO', highlight: true,
       desc: 'Kontinuirana podrška, implementacija i razvoj.',
       features: ['Neograničene konzultacije', 'Advisory + implementacija', 'Roadmap ownership', 'Tjedni check-in pozivi', 'Prioritetna podrška', 'Mjerna izvješća (KPI)'],
     },
