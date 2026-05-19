@@ -21,10 +21,10 @@ export function App() {
     app.appendChild(Background());
     app.appendChild(Header());
     app.appendChild(Hero());
-    app.appendChild(About());
     app.appendChild(ConsultingIntro());
     app.appendChild(ProductsGrid());
     app.appendChild(OtherServices());
+    app.appendChild(About());
     app.appendChild(Contact());
     app.appendChild(Footer());
 
