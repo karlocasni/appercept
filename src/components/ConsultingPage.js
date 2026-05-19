@@ -197,22 +197,46 @@ function ConsultingServices() {
 
 /* ── NICHES ─────────────────────────────────────────── */
 function ConsultingNiches() {
-  const sec = mkEl('section', `padding:60px 0;`);
-  const ctr = mkEl('div', theme.styles.container);
-  ctr.appendChild(sectionHeader('Industrije koje servisiramo', 'Visoko traženi niches u 2025 godini prema Gartner, Deloitte i McKinsey istraživanjima.'));
+  const sec = mkEl('section', `padding:60px 0; overflow:hidden; width:100%;`);
+  
+  const headerCtr = mkEl('div', theme.styles.container);
+  headerCtr.appendChild(sectionHeader('Industrije koje servisiramo', 'Visoko traženi niches u 2025 godini prema Gartner, Deloitte i McKinsey istraživanjima.'));
+  sec.appendChild(headerCtr);
 
   const niches = ['Healthcare AI','Finance & Banking','Voice & Chat automatizacija','Legal & Compliance AI','Retail & E-commerce','Manufacturing / Ops','HR & Talent automatizacija','SME digitalna transformacija'];
-  const wrap = mkEl('div', `display:flex;flex-wrap:wrap;gap:14px;justify-content:center;`);
-  wrap.className = 'animate-on-scroll';
-  niches.forEach(n => {
-    const tag = mkEl('div', `padding:12px 22px;border-radius:50px;background:rgba(28,117,188,.12);border:1px solid rgba(28,117,188,.25);font-size:.9rem;color:rgba(255,255,255,.8);transition:all .3s;cursor:default;`);
-    tag.textContent = n;
-    tag.onmouseenter = () => { tag.style.background = 'rgba(28,117,188,.25)'; tag.style.borderColor = `${theme.colors.accentPrimary}`; };
-    tag.onmouseleave = () => { tag.style.background = 'rgba(28,117,188,.12)'; tag.style.borderColor = 'rgba(28,117,188,.25)'; };
-    wrap.appendChild(tag);
+
+  const marqueeContainer = mkEl('div');
+  marqueeContainer.className = 'marquee-container animate-on-scroll';
+  marqueeContainer.style.cssText += `; padding: 20px 0;`;
+
+  const track = mkEl('div');
+  track.className = 'marquee-track';
+
+  const createTag = (name) => {
+    const tag = mkEl('div', `padding:14px 28px;border-radius:50px;background:rgba(28,117,188,.12);border:1px solid rgba(28,117,188,.25);font-size:.95rem;color:rgba(255,255,255,.9);transition:all .3s;cursor:default;white-space:nowrap;display:inline-block;`);
+    tag.textContent = name;
+    tag.onmouseenter = () => { 
+      tag.style.background = 'rgba(28,117,188,.25)'; 
+      tag.style.borderColor = `${theme.colors.accentPrimary}`; 
+      tag.style.transform = 'translateY(-2px)';
+    };
+    tag.onmouseleave = () => { 
+      tag.style.background = 'rgba(28,117,188,.12)'; 
+      tag.style.borderColor = 'rgba(28,117,188,.25)'; 
+      tag.style.transform = 'translateY(0)';
+    };
+    return tag;
+  };
+
+  // Duplicate list to make it infinitely scrolling
+  const doubleNiches = [...niches, ...niches];
+  doubleNiches.forEach(n => {
+    track.appendChild(createTag(n));
   });
-  ctr.appendChild(wrap);
-  sec.appendChild(ctr);
+
+  marqueeContainer.appendChild(track);
+  sec.appendChild(marqueeContainer);
+  
   return sec;
 }
 

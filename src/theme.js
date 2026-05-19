@@ -313,6 +313,30 @@ export const injectGlobalStyles = () => {
     .subtle-jump-animation {
       animation: subtle-jump 2.5s ease-in-out infinite;
     }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .marquee-container {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      display: flex;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
   `;
     document.head.appendChild(style);
 };
