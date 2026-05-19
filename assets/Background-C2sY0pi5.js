@@ -257,7 +257,13 @@
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .animate-on-scroll.scroll-down {
+      transform: translateY(30px);
+    }
+    .animate-on-scroll.scroll-up {
+      transform: translateY(-30px);
     }
     .animate-on-scroll.is-visible {
       opacity: 1;
