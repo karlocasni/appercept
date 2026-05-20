@@ -199,7 +199,7 @@ export function Footer() {
   [
     { name: t('O nama', 'About us'), href: '#about' },
     { name: t('Projekti', 'Projects'), href: '#products' },
-    { name: t('Konzultacije', 'Consulting'), href: '/consulting.html' },
+    { name: t('Konzultacije', 'Consulting'), href: '/consulting' },
     { name: t('Kontakt', 'Contact'), href: '#contact' }
   ].forEach(link => {
     const li = document.createElement('li');

@@ -6,7 +6,18 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [
+      {
+        "source": "/consulting.html",
+        "destination": "/consulting",
+        "type": 301
+      }
+    ],
     "rewrites": [
+      {
+        "source": "/consulting",
+        "destination": "/consulting.html"
+      },
       {
         "source": "**",
         "destination": "/index.html"

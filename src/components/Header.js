@@ -153,7 +153,7 @@ export function Header() {
   // Consulting link (separate page)
   const consultingLink = document.createElement('a');
   consultingLink.textContent = 'Consulting';
-  consultingLink.href = '/consulting.html';
+  consultingLink.href = '/consulting';
   consultingLink.style.cssText = `
     font-size: 0.9rem; font-weight: 600; opacity: 1;
     transition: all 0.3s ease;

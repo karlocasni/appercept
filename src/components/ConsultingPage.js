@@ -45,43 +45,127 @@ function ConsultingHeader() {
   }, { passive: true });
 
   const ctr = mkEl('div', `${theme.styles.container}display:flex;justify-content:space-between;align-items:center;`);
-  const logo = mkEl('a', `display:block;height:50px;overflow:hidden;`);
-  logo.href = '/';
+
+  // Logo wrapper (column flex so sub-label sits below)
+  const logoWrap = mkEl('a', `display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;`);
+  logoWrap.href = '/';
+  const logoInner = mkEl('div', `display:block;height:50px;overflow:hidden;`);
   const img = mkEl('img', `height:110px;width:auto;display:block;margin-top:-28px;`);
   img.src = '/logo_wide.png'; img.alt = 'Appercept';
-  logo.appendChild(img);
+  logoInner.appendChild(img);
+  const consultingLabel = mkEl('span', `font-size:0.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding-left:0;margin-top:2px;background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});-webkit-background-clip:text;-webkit-text-fill-color:transparent;`);
+  consultingLabel.className = 'consulting-logo-label';
+  consultingLabel.textContent = 'Consulting';
+  logoWrap.appendChild(logoInner);
+  logoWrap.appendChild(consultingLabel);
+  const logo = logoWrap;
 
-  const nav = mkEl('nav', `display:flex;gap:24px;align-items:center;list-style:none;`);
-  [[t('Usluge','Services'),'services'],[t('Pricing','Pricing'),'pricing'],[t('Kontakt','Contact'),'contact']].forEach(([name, id]) => {
+  // Hamburger Button
+  const hamburger = document.createElement('button');
+  hamburger.className = 'hamburger-btn';
+  hamburger.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  `;
+  hamburger.style.cssText = `background:transparent;border:none;cursor:pointer;display:none;z-index:1001;`;
+
+  // Backdrop
+  const backdrop = document.createElement('div');
+  backdrop.style.cssText = `
+    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998;
+    display:none;opacity:0;transition:opacity 0.3s;backdrop-filter:blur(4px);
+  `;
+  document.body.appendChild(backdrop);
+
+  // Nav
+  const nav = mkEl('nav', `display:flex;gap:24px;align-items:center;`);
+  nav.className = 'header-nav';
+
+  // Toggle logic
+  const toggleMenu = (forceClose = false) => {
+    const isOpening = !nav.classList.contains('open') && !forceClose;
+    if (isOpening) {
+      nav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      backdrop.style.display = 'block';
+      setTimeout(() => backdrop.style.opacity = '1', 10);
+      hamburger.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>`;
+    } else {
+      nav.classList.remove('open');
+      document.body.style.overflow = '';
+      backdrop.style.opacity = '0';
+      setTimeout(() => backdrop.style.display = 'none', 300);
+      hamburger.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>`;
+    }
+  };
+
+  hamburger.onclick = () => toggleMenu();
+  backdrop.onclick = () => toggleMenu(true);
+
+  // Nav ul
+  const ul = document.createElement('ul');
+  ul.style.cssText = `list-style:none;padding:0;display:flex;gap:30px;`;
+
+  // Section scroll links
+  [[t('Usluge', 'Services'), 'services'], [t('Pricing', 'Pricing'), 'pricing'], [t('Kontakt', 'Contact'), 'contact']].forEach(([name, id]) => {
+    const li = document.createElement('li');
     const a = mkEl('a', `font-size:.9rem;font-weight:500;opacity:.8;cursor:pointer;transition:all .3s;`, name);
     a.onmouseenter = () => { a.style.opacity = '1'; a.style.color = theme.colors.accentPrimary; };
     a.onmouseleave = () => { a.style.opacity = '.8'; a.style.color = 'inherit'; };
     a.onclick = e => {
       e.preventDefault();
+      if (window.innerWidth <= 768) toggleMenu(true);
       const el = document.getElementById(id);
       if (!el) return;
       const s0 = window.scrollY, s1 = el.getBoundingClientRect().top + s0 - 90, d = s1 - s0, dur = 1100;
       let t0;
-      const go = t => { if (!t0) t0 = t; const p = Math.min((t-t0)/dur,1); window.scrollTo(0, s0+d*(1-Math.pow(1-p,4))); if(p<1) requestAnimationFrame(go); };
+      const go = ts => { if (!t0) t0 = ts; const p = Math.min((ts - t0) / dur, 1); window.scrollTo(0, s0 + d * (1 - Math.pow(1 - p, 4))); if (p < 1) requestAnimationFrame(go); };
       requestAnimationFrame(go);
     };
-    nav.appendChild(a);
+    li.appendChild(a);
+    ul.appendChild(li);
   });
 
-  const back = mkEl('a', `background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});color:white;padding:9px 20px;border-radius:50px;font-size:.85rem;font-weight:600;transition:all .3s;margin-left:12px;`, t('← Natrag', '← Back'));
+  // Back link — styled like the Consulting gradient link on the main page
+  const backLi = document.createElement('li');
+  const back = mkEl('a', `font-size:.9rem;font-weight:600;opacity:1;transition:all .3s;background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});-webkit-background-clip:text;-webkit-text-fill-color:transparent;`, t('← Natrag', '← Back'));
   back.href = '/';
-  back.onmouseenter = () => { back.style.filter = 'brightness(1.15)'; back.style.transform = 'translateY(-2px)'; };
-  back.onmouseleave = () => { back.style.filter = ''; back.style.transform = ''; };
-  nav.appendChild(back);
+  backLi.appendChild(back);
+  ul.appendChild(backLi);
 
-  // Language button
-  const langBtn = mkEl('button', `background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:white;padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.3s;margin-left:12px;font-family:inherit;letter-spacing:0.5px;`, getLanguage() === 'hr' ? 'EN' : 'HR');
+  // Language button — inside ul so it slides in with the mobile menu
+  const langLi = document.createElement('li');
+  langLi.style.cssText = `display:flex;align-items:center;justify-content:center;`;
+  const langBtn = document.createElement('button');
+  langBtn.textContent = getLanguage() === 'hr' ? 'EN' : 'HR';
+  langBtn.style.cssText = `
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);
+    color:white;padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:700;
+    cursor:pointer;transition:all 0.3s;align-self:center;font-family:inherit;letter-spacing:0.5px;
+  `;
   langBtn.onmouseenter = () => { langBtn.style.background = 'rgba(255,255,255,0.15)'; langBtn.style.borderColor = theme.colors.accentPrimary; };
   langBtn.onmouseleave = () => { langBtn.style.background = 'rgba(255,255,255,0.06)'; langBtn.style.borderColor = 'rgba(255,255,255,0.18)'; };
-  langBtn.onclick = () => { toggleLanguage(); };
-  nav.appendChild(langBtn);
+  langBtn.onclick = () => toggleLanguage();
+  langLi.appendChild(langBtn);
+  ul.appendChild(langLi);
 
-  ctr.appendChild(logo); ctr.appendChild(nav);
+  nav.appendChild(ul);
+
+  ctr.appendChild(logo);
+  ctr.appendChild(hamburger);
+  ctr.appendChild(nav);
   header.appendChild(ctr);
   return header;
 }
@@ -89,6 +173,7 @@ function ConsultingHeader() {
 /* ── HERO ────────────────────────────────────────────── */
 function ConsultingHero() {
   const sec = mkEl('section', `min-height:90vh;display:flex;align-items:center;padding:160px 0 100px;position:relative;`);
+  sec.className = 'consulting-hero';
   const ctr = mkEl('div', theme.styles.container);
   const col = mkEl('div', `max-width:820px;`);
   col.className = 'fade-in-up';
@@ -535,7 +620,7 @@ function ConsultingFooter() {
     { name: t('O nama', 'About us'), href: '/#about' },
     { name: t('Projekti', 'Projects'), href: '/#products' },
     { name: t('Kontakt', 'Contact'), href: '/#contact' },
-    { name: t('Consulting', 'Consulting'), href: '/consulting.html' }
+    { name: t('Consulting', 'Consulting'), href: '/consulting' }
   ].forEach(link => {
     const li = document.createElement('li');
     li.style.marginBottom = '10px';

@@ -206,6 +206,11 @@ export const injectGlobalStyles = () => {
           flex-wrap: nowrap !important; /* Prevent wrapping for stats */
       }
       
+      /* Hide Consulting sub-label on desktop, show only on mobile */
+      .consulting-logo-label {
+        display: none;
+      }
+
       /* Mobile Nav Overlay (Side Menu) */
       .header-nav {
         display: flex !important;
@@ -281,6 +286,16 @@ export const injectGlobalStyles = () => {
           align-items: center;
       }
       
+      /* Consulting logo sub-label */
+      .consulting-logo-label {
+        display: block !important;
+      }
+
+      /* Consulting hero: push content below the fixed header on mobile */
+      .consulting-hero {
+        padding-top: 110px !important;
+      }
+
       /* Hide/Adjust bg logo on mobile */
       .bg-logo-hero {
         opacity: 0.02 !important;

@@ -94,7 +94,7 @@ export function ConsultingIntro() {
   `;
 
   const ctaBtn = document.createElement('a');
-  ctaBtn.href = '/consulting.html';
+  ctaBtn.href = '/consulting';
   ctaBtn.textContent = t('Saznajte više o konzultacijama →', 'Learn More About Consulting →');
   ctaBtn.style.cssText = `
     background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
