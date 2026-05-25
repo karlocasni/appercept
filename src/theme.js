@@ -47,7 +47,6 @@ export const injectGlobalStyles = () => {
     }
 
     html {
-      overflow-x: hidden;
       width: 100%;
     }
 
@@ -55,7 +54,6 @@ export const injectGlobalStyles = () => {
       background-color: ${theme.colors.background};
       color: ${theme.colors.text};
       font-family: ${theme.fonts.primary};
-      overflow-x: hidden;
       width: 100%;
       -webkit-font-smoothing: antialiased;
     }
@@ -154,7 +152,7 @@ export const injectGlobalStyles = () => {
       
       section { 
           padding: 60px 0 !important; 
-          overflow-x: hidden; /* Fix horizontal overflow */
+          overflow-x: clip; /* Fix horizontal overflow */
       }
       
       /* Force vertical stack for grids on mobile */

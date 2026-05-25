@@ -234,78 +234,286 @@ function ConsultingHero() {
   return sec;
 }
 
-/* ── SERVICES ─────────────────────────────────────────── */
+/* ── SERVICES (Egzosfera-style) ────────────────────────── */
 function ConsultingServices() {
-  const sec = mkEl('section', `padding:100px 0;`);
-  sec.id = 'services';
-  const ctr = mkEl('div', theme.styles.container);
-  ctr.appendChild(sectionHeader(t('Naše AI usluge', 'Our AI Services'), t('Specijaliziramo se za praktičnu primjenu AI-a — od automatizacije rutinskih zadataka do inteligentnih botova koji rade 24/7.', 'We specialize in practical AI applications — from automating routine tasks to intelligent bots working 24/7.')));
-
   const items = [
     {
-      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`,
+      icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`,
       title: t('Voice Botovi', 'Voice Bots'),
+      short: t('Voice Bot', 'Voice Bot'),
       desc: t('Glasovni AI asistenti koji primaju pozive, odgovaraju na upite i zakažu termine — bez čekanja i bez potrebe za živim operaterom.', 'Voice AI assistants that handle calls, answer queries, and schedule appointments — with no waiting times and no live operator needed.')
     },
     {
-      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
+      icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
       title: t('Chat Botovi', 'Chat Bots'),
+      short: t('Chat Bot', 'Chat Bot'),
       desc: t('Pametan chatbot za vašu web stranicu ili WhatsApp koji kvalificira leadove, odgovara na FAQ i pretvara posjetitelje u klijente.', 'Smart chatbot for your website or WhatsApp that qualifies leads, answers FAQs, and converts visitors into clients.')
     },
     {
-      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+      icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
       title: t('Automatizacija procesa', 'Process Automation'),
+      short: t('Automatizacija', 'Automation'),
       desc: t('Eliminiramo ručni rad: automatski emailovi, generiranje dokumenata, CRM unosi, izvještaji — sve radi samo.', 'Eliminating manual work: automated emails, document generation, CRM data entry, reports — all running on autopilot.')
     },
     {
-      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`,
+      icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>`,
       title: t('AI Integracije', 'AI Integrations'),
+      short: t('Integracije', 'Integrations'),
       desc: t('Spajamo OpenAI, Anthropic, n8n i Make s vašim sustavima. Workflow automatizacija prilagođena vašem poslovnom modelu.', 'Connecting OpenAI, Anthropic, n8n, and Make with your systems. Custom workflow automation tailored to your business model.')
     },
     {
-      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
+      icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
       title: t('AI Audit', 'AI Audit'),
+      short: t('AI Audit', 'AI Audit'),
       desc: t('Analiziramo vaše poslovanje i identificiramo top 3-5 mjesta gdje AI može odmah uštedjeti novac ili povećati prihod.', 'Analyzing your operations and identifying the top 3-5 areas where AI can immediately save money or boost revenue.')
     },
     {
-      icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>`,
+      icon: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>`,
       title: t('AI Edukacija & Radionice', 'AI Education & Workshops'),
+      short: t('Edukacija', 'Education'),
       desc: t('Obučavamo vaš tim kako koristiti AI alate. Hands-on radionice prilagođene vašoj industriji i razini znanja.', 'Training your team to use AI tools. Hands-on workshops tailored to your industry and skill level.')
     }
   ];
 
-  const drawer = mkEl('div');
-  drawer.className = 'cabinet-drawer animate-on-scroll';
+  const N = items.length;
 
-  const grid = mkEl('div');
-  grid.className = 'file-stack';
-  items.forEach((s, index) => {
-    const card = mkEl('div');
-    card.className = `file-folder file-folder-${index}`;
-    card.setAttribute('data-index', `0${index + 1}`);
+  // Tall outer section gives scroll room
+  const sec = document.createElement('section');
+  sec.id = 'services';
+  sec.style.cssText = 'position:relative; height:' + (N * 100) + 'vh; width:100%;';
+
+  // Sticky viewport container
+  const sticky = document.createElement('div');
+  sticky.style.cssText = 'position:sticky; top:0; height:100vh; width:100%; display:flex; flex-direction:column; overflow:hidden;';
+  sec.appendChild(sticky);
+
+  // Header
+  const headerWrap = document.createElement('div');
+  headerWrap.style.cssText = 'max-width:1200px; margin:0 auto; padding:0 20px; width:100%; padding-top:110px; flex-shrink:0;';
+  headerWrap.appendChild(sectionHeader(t('Naše AI usluge', 'Our AI Services'), t('Specijaliziramo se za praktičnu primjenu AI-a — od automatizacije do inteligentnih botova.', 'We specialize in practical AI — from automation to intelligent bots.')));
+  sticky.appendChild(headerWrap);
+
+  // Nav tabs
+  const nav = document.createElement('div');
+  nav.style.cssText = 'display:flex; justify-content:center; gap:0; flex-wrap:wrap; max-width:1000px; margin:-10px auto 0; padding:0 20px; width:100%; flex-shrink:0;';
+  sticky.appendChild(nav);
+
+  var navItems = [];
+  for (var ni = 0; ni < N; ni++) {
+    var btn = document.createElement('button');
+    btn.style.cssText = 'background:transparent; border:none; border-bottom:2px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.4); font-size:0.9rem; font-weight:600; cursor:pointer; padding:10px 16px; position:relative; transition:color 0.3s, border-color 0.3s; text-transform:uppercase; letter-spacing:1px; flex:1; min-width:80px; font-family:inherit;';
+    btn.textContent = items[ni].short;
+    btn.setAttribute('data-idx', ni);
+    btn.addEventListener('click', function() {
+      scrollToService(parseInt(this.getAttribute('data-idx')));
+    });
+    nav.appendChild(btn);
+    navItems.push(btn);
+  }
+
+  // Slides container
+  var slideWrap = document.createElement('div');
+  slideWrap.style.cssText = 'flex:1; position:relative; width:100%;';
+  sticky.appendChild(slideWrap);
+
+  // Build slides
+  var slides = [];
+  for (var si = 0; si < N; si++) {
+    var slide = document.createElement('div');
+    slide.style.cssText = 'position:absolute; inset:0; display:' + (si === 0 ? 'flex' : 'none') + '; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; opacity:' + (si === 0 ? '1' : '0') + '; transition:opacity 0.4s ease;';
+
+    var iconWrap = document.createElement('div');
+    iconWrap.style.cssText = 'margin-bottom:28px; display:flex; justify-content:center; align-items:center; width:110px; height:110px; border-radius:50%; background:rgba(28,117,188,.08); border:1px solid rgba(28,117,188,.25); box-shadow:0 0 40px rgba(28,117,188,.2);';
+    iconWrap.innerHTML = items[si].icon;
+    slide.appendChild(iconWrap);
+
+    var h3El = document.createElement('h3');
+    h3El.style.cssText = 'font-size:3rem; margin-bottom:20px; font-weight:800; background:linear-gradient(90deg,#fff,rgba(255,255,255,0.7)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;';
+    h3El.textContent = items[si].title;
+    slide.appendChild(h3El);
+
+    var pEl = document.createElement('p');
+    pEl.style.cssText = 'font-size:1.2rem; color:rgba(255,255,255,0.7); max-width:640px; line-height:1.75; font-weight:300; margin:0 auto;';
+    pEl.textContent = items[si].desc;
+    slide.appendChild(pEl);
+
+    var ctaEl = document.createElement('button');
+    ctaEl.style.cssText = 'margin-top:44px; background:linear-gradient(135deg,' + theme.colors.accentPrimary + ',' + theme.colors.accentSecondary + '); color:white; padding:16px 42px; border-radius:50px; font-size:1rem; font-weight:600; cursor:pointer; border:none; transition:all 0.3s; box-shadow:0 10px 20px -5px rgba(28,117,188,0.4); font-family:inherit;';
+    ctaEl.textContent = t('Kontaktirajte nas', 'Contact Us');
+    ctaEl.addEventListener('mouseenter', function() { this.style.transform = 'translateY(-3px)'; this.style.boxShadow = '0 15px 28px -5px rgba(28,117,188,0.5)'; });
+    ctaEl.addEventListener('mouseleave', function() { this.style.transform = ''; this.style.boxShadow = '0 10px 20px -5px rgba(28,117,188,0.4)'; });
+    ctaEl.addEventListener('click', function() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); });
+    slide.appendChild(ctaEl);
+
+    slideWrap.appendChild(slide);
+    slides.push(slide);
+  }
+
+  // State
+  var currentIdx = 0;
+  var isTransitioning = false;
+
+  function updateNav(idx) {
+    for (var i = 0; i < navItems.length; i++) {
+      if (i === idx) {
+        navItems[i].style.color = 'white';
+        navItems[i].style.borderBottomColor = theme.colors.accentPrimary;
+      } else {
+        navItems[i].style.color = 'rgba(255,255,255,0.4)';
+        navItems[i].style.borderBottomColor = 'rgba(255,255,255,0.1)';
+      }
+    }
+  }
+
+  function transitionTo(idx) {
+    if (isTransitioning || idx === currentIdx) return;
+    isTransitioning = true;
+
+    var outSlide = slides[currentIdx];
+    outSlide.style.opacity = '0';
+
+    setTimeout(function() {
+      outSlide.style.display = 'none';
+      currentIdx = idx;
+      updateNav(idx);
+
+      var inSlide = slides[idx];
+      inSlide.style.display = 'flex';
+      inSlide.style.opacity = '0';
+      // Force reflow
+      void inSlide.offsetHeight;
+      inSlide.style.opacity = '1';
+
+      setTimeout(function() { isTransitioning = false; }, 50);
+    }, 350);
+  }
+
+  function scrollToService(idx) {
+    var sectionTop = sec.offsetTop;
+    var sectionH = sec.offsetHeight;
+    var vpH = window.innerHeight;
+    var target = sectionTop + (idx / N) * (sectionH - vpH);
+    window.scrollTo({ top: target, behavior: 'smooth' });
+  }
+
+  function handleScroll() {
+    var sectionTop = sec.offsetTop;
+    var sectionH = sec.offsetHeight;
+    var vpH = window.innerHeight;
+    var scrollProgress = (window.scrollY - sectionTop) / (sectionH - vpH);
+    var progress = Math.max(0, Math.min(1, scrollProgress));
+    var idx = Math.min(N - 1, Math.floor(progress * N));
+    if (idx !== currentIdx) transitionTo(idx);
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  updateNav(0);
+
+  return sec;
+}
+
+
+
+  
+  items.forEach((item, i) => {
+    const btn = mkEl('button', `background:transparent; border:none; color:rgba(255,255,255,0.4); font-size:1.05rem; font-weight:600; cursor:pointer; padding:10px 0; position:relative; transition:color 0.4s ease; text-transform:uppercase; letter-spacing:1px; flex: 1; min-width: 120px; text-align: center;`);
+    btn.textContent = item.short;
     
-    const iconContainer = mkEl('div', `margin-bottom:20px; display:flex; align-items:center; height:36px;`, s.icon);
-    iconContainer.className = 'pop-3d-icon';
+    const lineWrap = mkEl('div', `position:absolute; bottom:0; left:0; width:100%; height:2px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;`);
+    const line = mkEl('div', `position:absolute; top:0; left:0; height:100%; width:0%; background:linear-gradient(90deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary}); transition:width 0.1s linear;`);
+    lineWrap.appendChild(line);
+    btn.appendChild(lineWrap);
     
-    const h3Title = mkEl('h3', `font-size:1.2rem;margin-bottom:12px;font-weight:700;color:white;`, s.title);
-    h3Title.className = 'pop-3d-text';
+    btn.onclick = () => {
+      // Calculate scroll position accurately based on index
+      const rect = sec.getBoundingClientRect();
+      const scrollableDistance = sec.scrollHeight - window.innerHeight;
+      const targetScroll = window.scrollY + rect.top + (i / items.length) * scrollableDistance;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    };
     
-    const pDesc = mkEl('p', `font-size:.9rem;color:rgba(255,255,255,.6);line-height:1.7;margin:0;`, s.desc);
-    pDesc.className = 'pop-3d-text';
-    
-    card.appendChild(iconContainer);
-    card.appendChild(h3Title);
-    card.appendChild(pDesc);
-    grid.appendChild(card);
+    navBtns.push({ btn, line });
+    navCtr.appendChild(btn);
   });
+  
+  stickyWrap.appendChild(navCtr);
 
-  const handle = mkEl('div');
-  handle.className = 'cabinet-handle';
+  const contentWrap = mkEl('div', `flex:1; display:flex; align-items:center; justify-content:center; position:relative; width:100%; pointer-events:none;`);
+  
+  const slides = [];
+  
+  items.forEach((item, i) => {
+    const slide = mkEl('div', `position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:${i === 0 ? 1 : 0}; pointer-events:${i === 0 ? 'auto' : 'none'}; transition:all 0.6s cubic-bezier(0.4, 0, 0.2, 1); text-align:center; padding:0 20px; transform:${i === 0 ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)'};`);
+    
+    const iconWrap = mkEl('div', `margin-bottom:30px; display:flex; justify-content:center; align-items:center; width:120px; height:120px; border-radius:50%; background:rgba(28,117,188,.08); border:1px solid rgba(28,117,188,.2); box-shadow:0 0 30px rgba(28,117,188,.15);`);
+    iconWrap.innerHTML = item.icon;
+    slide.appendChild(iconWrap);
+    
+    const title = mkEl('h3', `font-size:3.5rem; margin-bottom:24px; font-weight:800; background:linear-gradient(90deg, #fff, rgba(255,255,255,0.7)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;`);
+    title.textContent = item.title;
+    slide.appendChild(title);
+    
+    const desc = mkEl('p', `font-size:1.3rem; color:rgba(255,255,255,0.7); max-width:680px; line-height:1.7; font-weight:300; margin:0 auto;`);
+    desc.textContent = item.desc;
+    slide.appendChild(desc);
+    
+    const ctaWrap = mkEl('div', `margin-top:50px; pointer-events:auto;`);
+    const cta = mkEl('button', `background:linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary}); color:white; padding:16px 42px; border-radius:50px; font-size:1.1rem; font-weight:600; cursor:pointer; border:none; transition:all 0.3s ease; box-shadow:0 10px 20px -5px rgba(28,117,188,0.4);`, t('Saznajte više', 'Learn More'));
+    cta.onmouseenter = () => { cta.style.transform = 'translateY(-3px)'; cta.style.boxShadow = '0 15px 25px -5px rgba(28,117,188,0.5)'; };
+    cta.onmouseleave = () => { cta.style.transform = 'translateY(0)'; cta.style.boxShadow = '0 10px 20px -5px rgba(28,117,188,0.4)'; };
+    cta.onclick = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    ctaWrap.appendChild(cta);
+    slide.appendChild(ctaWrap);
+    
+    contentWrap.appendChild(slide);
+    slides.push(slide);
+  });
+  
+  stickyWrap.appendChild(contentWrap);
+  sec.appendChild(stickyWrap);
 
-  drawer.appendChild(grid);
-  drawer.appendChild(handle);
-  ctr.appendChild(drawer);
-  sec.appendChild(ctr);
+  window.addEventListener('scroll', () => {
+    const rect = sec.getBoundingClientRect();
+    const scrollableDistance = rect.height - window.innerHeight;
+    
+    if (scrollableDistance <= 0) return;
+    
+    let progress = -rect.top / scrollableDistance;
+    progress = Math.max(0, Math.min(1, progress));
+    
+    let activeIndex = Math.floor(progress * items.length);
+    if (activeIndex >= items.length) activeIndex = items.length - 1;
+    
+    const slideProgress = (progress * items.length) - activeIndex;
+    
+    slides.forEach((slide, i) => {
+      if (i === activeIndex) {
+        slide.style.opacity = '1';
+        slide.style.pointerEvents = 'auto';
+        slide.style.transform = 'translateY(0) scale(1)';
+      } else {
+        slide.style.opacity = '0';
+        slide.style.pointerEvents = 'none';
+        slide.style.transform = i < activeIndex ? 'translateY(-40px) scale(0.95)' : 'translateY(40px) scale(0.95)';
+      }
+    });
+    
+    navBtns.forEach((nav, i) => {
+      if (i === activeIndex) {
+        nav.btn.style.color = 'white';
+        nav.line.style.width = `${slideProgress * 100}%`;
+      } else if (i < activeIndex) {
+        nav.btn.style.color = 'rgba(255,255,255,0.8)';
+        nav.line.style.width = '100%';
+      } else {
+        nav.btn.style.color = 'rgba(255,255,255,0.4)';
+        nav.line.style.width = '0%';
+      }
+    });
+  }, { passive: true });
+
+  setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
+
   return sec;
 }
 
