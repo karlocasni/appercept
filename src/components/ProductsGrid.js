@@ -12,6 +12,7 @@ const ProductCard = (product) => {
     overflow: hidden;
     width: 520px;
     height: 440px;
+    flex-shrink: 0;
     ${theme.styles.glass}
     border-radius: 20px;
   `;
@@ -125,6 +126,10 @@ const ProductCard = (product) => {
   btn.onclick = () => {
     if (product.title === 'ClubCrowd') {
       window.open('https://clubcrowd.app', '_blank');
+    } else if (product.title === 'NemaNeide') {
+      window.open('https://nemaneide.com', '_blank');
+    } else if (product.title === 'Projekt90') {
+      window.open('https://projekt90.nemaneide.com', '_blank');
     }
   };
 
@@ -178,58 +183,121 @@ export function ProductsGrid() {
   header.appendChild(createDivider()); // Add Divider
   header.appendChild(p);
 
-  const grid = document.createElement('div');
-  grid.id = 'product-grid';
-  grid.style.cssText = `
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
+  const carouselWrap = document.createElement('div');
+  carouselWrap.style.cssText = `
+    position: relative;
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 40px;
   `;
+
+  const track = document.createElement('div');
+  track.style.cssText = `
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease-in-out;
+  `;
+  carouselWrap.appendChild(track);
+
+  // Arrows
+  const arrowStyle = `
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+  `;
+  const leftArrow = document.createElement('button');
+  leftArrow.innerHTML = '&#10094;';
+  leftArrow.style.cssText = arrowStyle + 'left: 0;';
+  leftArrow.onmouseenter = () => leftArrow.style.background = 'rgba(255,255,255,0.15)';
+  leftArrow.onmouseleave = () => leftArrow.style.background = 'rgba(255,255,255,0.05)';
+
+  const rightArrow = document.createElement('button');
+  rightArrow.innerHTML = '&#10095;';
+  rightArrow.style.cssText = arrowStyle + 'right: 0;';
+  rightArrow.onmouseenter = () => rightArrow.style.background = 'rgba(255,255,255,0.15)';
+  rightArrow.onmouseleave = () => rightArrow.style.background = 'rgba(255,255,255,0.05)';
+
+  carouselWrap.appendChild(leftArrow);
+  carouselWrap.appendChild(rightArrow);
+
+  let currentIndex = 0;
+  let autoPlayInterval;
+  let itemsCount = 0;
+
+  function updateCarousel() {
+    if (itemsCount === 0) return;
+    const cardWidth = 520 + 30; // card + gap
+    const maxIndex = Math.max(0, itemsCount - 2); // 2 cards visible
+    if (currentIndex > maxIndex) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = maxIndex;
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  }
+
+  rightArrow.onclick = () => { currentIndex++; updateCarousel(); };
+  leftArrow.onclick = () => { currentIndex--; updateCarousel(); };
+
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+      currentIndex++;
+      updateCarousel();
+    }, 4000);
+  }
+
+  function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+  }
+
+  carouselWrap.addEventListener('mouseenter', stopAutoPlay);
+  carouselWrap.addEventListener('mouseleave', startAutoPlay);
 
   // Fetch logic
   const loadProducts = async () => {
     try {
       const { data, error } = await supabase.from('products').select('*');
-
       const productsToRender = (data && data.length > 0) ? data : mockProducts;
+      if (error && !data) console.warn("Supabase fetch error:", error);
 
-      if (error && !data) console.warn("Supabase fetch error (expected if no creds):", error);
-
-      grid.innerHTML = ''; // Clear loading state
+      track.innerHTML = '';
+      itemsCount = productsToRender.length;
       productsToRender.forEach((item, index) => {
         const card = ProductCard(item);
-        grid.appendChild(card);
-
-        // Staggered fade-in animation without observer (more robust for dynamic content)
-        setTimeout(() => {
-          card.classList.add('is-visible');
-        }, 100 + (index * 150));
+        track.appendChild(card);
+        setTimeout(() => { card.classList.add('is-visible'); }, 100 + (index * 150));
       });
+      startAutoPlay();
     } catch (err) {
       console.error("Error loading products:", err);
-      // Fallback to mocks
-      grid.innerHTML = '';
+      track.innerHTML = '';
+      itemsCount = mockProducts.length;
       mockProducts.forEach((item, index) => {
         const card = ProductCard(item);
-        grid.appendChild(card);
-
-        // Staggered fade-in
-        setTimeout(() => {
-          card.classList.add('is-visible');
-        }, 100 + (index * 150));
+        track.appendChild(card);
+        setTimeout(() => { card.classList.add('is-visible'); }, 100 + (index * 150));
       });
+      startAutoPlay();
     }
   };
 
-  // Initial loading state
-  grid.innerHTML = `<p style="text-align:center; color: #666;">${t('Učitavanje projekata...', 'Loading projects...')}</p>`;
-
-  // Trigger load
+  track.innerHTML = `<p style="text-align:center; color: #666; width:100%;">${t('Učitavanje projekata...', 'Loading projects...')}</p>`;
   loadProducts();
 
   container.appendChild(header);
-  container.appendChild(grid);
+  container.appendChild(carouselWrap);
   section.appendChild(container);
 
   return section;

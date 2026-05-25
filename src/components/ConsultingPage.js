@@ -282,33 +282,49 @@ function ConsultingServices() {
   sec.id = 'services';
   sec.style.cssText = 'position:relative; height:' + (N * 100) + 'vh; width:100%;';
 
+  // Header (Scrolls normally)
+  const headerWrap = document.createElement('div');
+  headerWrap.style.cssText = 'max-width:1200px; margin:0 auto; padding:0 20px; width:100%; padding-top:110px; padding-bottom:40px;';
+  headerWrap.appendChild(sectionHeader(t('Naše AI usluge', 'Our AI Services'), t('Specijaliziramo se za praktičnu primjenu AI-a — od automatizacije do inteligentnih botova.', 'We specialize in practical AI — from automation to intelligent bots.')));
+  sec.appendChild(headerWrap);
+
   // Sticky viewport container
   const sticky = document.createElement('div');
-  sticky.style.cssText = 'position:sticky; top:0; height:100vh; width:100%; display:flex; flex-direction:column; overflow:hidden;';
+  sticky.style.cssText = 'position:sticky; top:100px; height:calc(100vh - 100px); width:100%; display:flex; flex-direction:column; overflow:hidden; padding-top:20px;';
   sec.appendChild(sticky);
 
-  // Header
-  const headerWrap = document.createElement('div');
-  headerWrap.style.cssText = 'max-width:1200px; margin:0 auto; padding:0 20px; width:100%; padding-top:110px; flex-shrink:0;';
-  headerWrap.appendChild(sectionHeader(t('Naše AI usluge', 'Our AI Services'), t('Specijaliziramo se za praktičnu primjenu AI-a — od automatizacije do inteligentnih botova.', 'We specialize in practical AI — from automation to intelligent bots.')));
-  sticky.appendChild(headerWrap);
-
-  // Nav tabs
+  // Nav tabs & Global Progress Bar
+  const navWrap = document.createElement('div');
+  navWrap.style.cssText = 'max-width:1000px; margin:0 auto; padding:0 20px; width:100%; flex-shrink:0; position:relative; z-index:10; padding-bottom:12px;';
+  
   const nav = document.createElement('div');
-  nav.style.cssText = 'display:flex; justify-content:center; gap:0; flex-wrap:wrap; max-width:1000px; margin:-10px auto 0; padding:0 20px; width:100%; flex-shrink:0;';
-  sticky.appendChild(nav);
+  nav.style.cssText = 'display:flex; justify-content:center; gap:0; flex-wrap:wrap; width:100%; position:relative;';
+  navWrap.appendChild(nav);
+
+  // Single global progress bar underneath all tabs
+  var globalLineWrap = document.createElement('div');
+  globalLineWrap.style.cssText = 'position:absolute; bottom:0; left:20px; right:20px; height:3px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;';
+  
+  var globalLine = document.createElement('div');
+  globalLine.style.cssText = 'position:absolute; top:0; left:0; height:100%; width:0%; background:linear-gradient(90deg, ' + theme.colors.accentPrimary + ', ' + theme.colors.accentSecondary + '); transition:width 0.1s linear;';
+  globalLineWrap.appendChild(globalLine);
+  navWrap.appendChild(globalLineWrap);
+  
+  sticky.appendChild(navWrap);
 
   var navItems = [];
   for (var ni = 0; ni < N; ni++) {
     var btn = document.createElement('button');
-    btn.style.cssText = 'background:transparent; border:none; border-bottom:2px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.4); font-size:0.9rem; font-weight:600; cursor:pointer; padding:10px 16px; position:relative; transition:color 0.3s, border-color 0.3s; text-transform:uppercase; letter-spacing:1px; flex:1; min-width:80px; font-family:inherit;';
+    btn.style.cssText = 'background:transparent; border:none; color:rgba(255,255,255,0.4); font-size:1.05rem; font-weight:600; cursor:pointer; padding:10px 0; transition:color 0.4s ease; text-transform:uppercase; letter-spacing:1px; flex:1; min-width:120px; text-align:center; font-family:inherit;';
     btn.textContent = items[ni].short;
+    
     btn.setAttribute('data-idx', ni);
     btn.addEventListener('click', function() {
       scrollToService(parseInt(this.getAttribute('data-idx')));
     });
+    
     nav.appendChild(btn);
-    navItems.push(btn);
+    navItems.push({ btn: btn });
   }
 
   // Slides container
@@ -320,30 +336,42 @@ function ConsultingServices() {
   var slides = [];
   for (var si = 0; si < N; si++) {
     var slide = document.createElement('div');
-    slide.style.cssText = 'position:absolute; inset:0; display:' + (si === 0 ? 'flex' : 'none') + '; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; opacity:' + (si === 0 ? '1' : '0') + '; transition:opacity 0.4s ease;';
+    slide.style.cssText = 'position:absolute; inset:0; display:' + (si === 0 ? 'flex' : 'none') + '; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; opacity:' + (si === 0 ? '1' : '0') + '; transition:opacity 0.4s ease; overflow:hidden;';
 
-    var iconWrap = document.createElement('div');
-    iconWrap.style.cssText = 'margin-bottom:28px; display:flex; justify-content:center; align-items:center; width:110px; height:110px; border-radius:50%; background:rgba(28,117,188,.08); border:1px solid rgba(28,117,188,.25); box-shadow:0 0 40px rgba(28,117,188,.2);';
-    iconWrap.innerHTML = items[si].icon;
-    slide.appendChild(iconWrap);
+    // Background Icon (sized to fit inside the grid nicely)
+    var bgWrap = document.createElement('div');
+    bgWrap.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:40vw; height:40vw; max-width:500px; max-height:500px; z-index:0; display:flex; justify-content:center; align-items:center; pointer-events:none; opacity:0.06;';
+    
+    // Extract icon and modify its properties to make it huge and white
+    let svgStr = items[si].icon;
+    svgStr = svgStr.replace(/width="\d+"/, 'width="100%"').replace(/height="\d+"/, 'height="100%"');
+    svgStr = svgStr.replace(/stroke="[^"]+"/, 'stroke="#ffffff"'); 
+    bgWrap.innerHTML = svgStr;
+    slide.appendChild(bgWrap);
+
+    // Content container (above the icon)
+    var contentWrap = document.createElement('div');
+    contentWrap.style.cssText = 'position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; padding: 40px;';
 
     var h3El = document.createElement('h3');
-    h3El.style.cssText = 'font-size:3rem; margin-bottom:20px; font-weight:800; background:linear-gradient(90deg,#fff,rgba(255,255,255,0.7)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;';
+    h3El.style.cssText = 'font-size:4rem; margin-bottom:24px; font-weight:800; background:linear-gradient(90deg,#fff,rgba(255,255,255,0.8)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;';
     h3El.textContent = items[si].title;
-    slide.appendChild(h3El);
+    contentWrap.appendChild(h3El);
 
     var pEl = document.createElement('p');
-    pEl.style.cssText = 'font-size:1.2rem; color:rgba(255,255,255,0.7); max-width:640px; line-height:1.75; font-weight:300; margin:0 auto;';
+    pEl.style.cssText = 'font-size:1.3rem; color:rgba(255,255,255,0.7); max-width:700px; line-height:1.75; font-weight:300; margin:0 auto;';
     pEl.textContent = items[si].desc;
-    slide.appendChild(pEl);
+    contentWrap.appendChild(pEl);
 
     var ctaEl = document.createElement('button');
-    ctaEl.style.cssText = 'margin-top:44px; background:linear-gradient(135deg,' + theme.colors.accentPrimary + ',' + theme.colors.accentSecondary + '); color:white; padding:16px 42px; border-radius:50px; font-size:1rem; font-weight:600; cursor:pointer; border:none; transition:all 0.3s; box-shadow:0 10px 20px -5px rgba(28,117,188,0.4); font-family:inherit;';
+    ctaEl.style.cssText = 'margin-top:44px; background:linear-gradient(135deg,' + theme.colors.accentPrimary + ',' + theme.colors.accentSecondary + '); color:white; padding:16px 42px; border-radius:50px; font-size:1.1rem; font-weight:600; cursor:pointer; border:none; transition:all 0.3s; box-shadow:0 10px 20px -5px rgba(28,117,188,0.4); font-family:inherit;';
     ctaEl.textContent = t('Kontaktirajte nas', 'Contact Us');
     ctaEl.addEventListener('mouseenter', function() { this.style.transform = 'translateY(-3px)'; this.style.boxShadow = '0 15px 28px -5px rgba(28,117,188,0.5)'; });
     ctaEl.addEventListener('mouseleave', function() { this.style.transform = ''; this.style.boxShadow = '0 10px 20px -5px rgba(28,117,188,0.4)'; });
     ctaEl.addEventListener('click', function() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); });
-    slide.appendChild(ctaEl);
+    contentWrap.appendChild(ctaEl);
+
+    slide.appendChild(contentWrap);
 
     slideWrap.appendChild(slide);
     slides.push(slide);
@@ -356,11 +384,11 @@ function ConsultingServices() {
   function updateNav(idx) {
     for (var i = 0; i < navItems.length; i++) {
       if (i === idx) {
-        navItems[i].style.color = 'white';
-        navItems[i].style.borderBottomColor = theme.colors.accentPrimary;
+        navItems[i].btn.style.color = 'white';
+      } else if (i < idx) {
+        navItems[i].btn.style.color = 'rgba(255,255,255,0.8)';
       } else {
-        navItems[i].style.color = 'rgba(255,255,255,0.4)';
-        navItems[i].style.borderBottomColor = 'rgba(255,255,255,0.1)';
+        navItems[i].btn.style.color = 'rgba(255,255,255,0.4)';
       }
     }
   }
@@ -389,21 +417,30 @@ function ConsultingServices() {
   }
 
   function scrollToService(idx) {
-    var sectionTop = sec.offsetTop;
-    var sectionH = sec.offsetHeight;
-    var vpH = window.innerHeight;
-    var target = sectionTop + (idx / N) * (sectionH - vpH);
+    var rect = sec.getBoundingClientRect();
+    var headerH = headerWrap.offsetHeight || 150; // fallback if 0
+    var scrollableDistance = rect.height - window.innerHeight - headerH;
+    var target = window.scrollY + rect.top + headerH + (idx / N) * scrollableDistance;
     window.scrollTo({ top: target, behavior: 'smooth' });
   }
 
   function handleScroll() {
-    var sectionTop = sec.offsetTop;
-    var sectionH = sec.offsetHeight;
-    var vpH = window.innerHeight;
-    var scrollProgress = (window.scrollY - sectionTop) / (sectionH - vpH);
+    var rect = sec.getBoundingClientRect();
+    var headerH = headerWrap.offsetHeight || 150;
+    var scrollableDistance = rect.height - window.innerHeight - headerH;
+    
+    // -rect.top is how far the top of sec is ABOVE the viewport top.
+    // We want 0 progress when the sticky element hits the top (i.e. when -rect.top == headerH)
+    var scrolledPastSticky = -rect.top - headerH;
+    var scrollProgress = scrollableDistance > 0 ? (scrolledPastSticky / scrollableDistance) : 0;
+    
     var progress = Math.max(0, Math.min(1, scrollProgress));
     var idx = Math.min(N - 1, Math.floor(progress * N));
+    
     if (idx !== currentIdx) transitionTo(idx);
+
+    // Continuous progress bar update for the single global line
+    globalLine.style.width = (progress * 100) + '%';
   }
 
   window.addEventListener('scroll', handleScroll, { passive: true });
@@ -413,109 +450,6 @@ function ConsultingServices() {
 }
 
 
-
-  
-  items.forEach((item, i) => {
-    const btn = mkEl('button', `background:transparent; border:none; color:rgba(255,255,255,0.4); font-size:1.05rem; font-weight:600; cursor:pointer; padding:10px 0; position:relative; transition:color 0.4s ease; text-transform:uppercase; letter-spacing:1px; flex: 1; min-width: 120px; text-align: center;`);
-    btn.textContent = item.short;
-    
-    const lineWrap = mkEl('div', `position:absolute; bottom:0; left:0; width:100%; height:2px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;`);
-    const line = mkEl('div', `position:absolute; top:0; left:0; height:100%; width:0%; background:linear-gradient(90deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary}); transition:width 0.1s linear;`);
-    lineWrap.appendChild(line);
-    btn.appendChild(lineWrap);
-    
-    btn.onclick = () => {
-      // Calculate scroll position accurately based on index
-      const rect = sec.getBoundingClientRect();
-      const scrollableDistance = sec.scrollHeight - window.innerHeight;
-      const targetScroll = window.scrollY + rect.top + (i / items.length) * scrollableDistance;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    };
-    
-    navBtns.push({ btn, line });
-    navCtr.appendChild(btn);
-  });
-  
-  stickyWrap.appendChild(navCtr);
-
-  const contentWrap = mkEl('div', `flex:1; display:flex; align-items:center; justify-content:center; position:relative; width:100%; pointer-events:none;`);
-  
-  const slides = [];
-  
-  items.forEach((item, i) => {
-    const slide = mkEl('div', `position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:${i === 0 ? 1 : 0}; pointer-events:${i === 0 ? 'auto' : 'none'}; transition:all 0.6s cubic-bezier(0.4, 0, 0.2, 1); text-align:center; padding:0 20px; transform:${i === 0 ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)'};`);
-    
-    const iconWrap = mkEl('div', `margin-bottom:30px; display:flex; justify-content:center; align-items:center; width:120px; height:120px; border-radius:50%; background:rgba(28,117,188,.08); border:1px solid rgba(28,117,188,.2); box-shadow:0 0 30px rgba(28,117,188,.15);`);
-    iconWrap.innerHTML = item.icon;
-    slide.appendChild(iconWrap);
-    
-    const title = mkEl('h3', `font-size:3.5rem; margin-bottom:24px; font-weight:800; background:linear-gradient(90deg, #fff, rgba(255,255,255,0.7)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;`);
-    title.textContent = item.title;
-    slide.appendChild(title);
-    
-    const desc = mkEl('p', `font-size:1.3rem; color:rgba(255,255,255,0.7); max-width:680px; line-height:1.7; font-weight:300; margin:0 auto;`);
-    desc.textContent = item.desc;
-    slide.appendChild(desc);
-    
-    const ctaWrap = mkEl('div', `margin-top:50px; pointer-events:auto;`);
-    const cta = mkEl('button', `background:linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary}); color:white; padding:16px 42px; border-radius:50px; font-size:1.1rem; font-weight:600; cursor:pointer; border:none; transition:all 0.3s ease; box-shadow:0 10px 20px -5px rgba(28,117,188,0.4);`, t('Saznajte više', 'Learn More'));
-    cta.onmouseenter = () => { cta.style.transform = 'translateY(-3px)'; cta.style.boxShadow = '0 15px 25px -5px rgba(28,117,188,0.5)'; };
-    cta.onmouseleave = () => { cta.style.transform = 'translateY(0)'; cta.style.boxShadow = '0 10px 20px -5px rgba(28,117,188,0.4)'; };
-    cta.onclick = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    ctaWrap.appendChild(cta);
-    slide.appendChild(ctaWrap);
-    
-    contentWrap.appendChild(slide);
-    slides.push(slide);
-  });
-  
-  stickyWrap.appendChild(contentWrap);
-  sec.appendChild(stickyWrap);
-
-  window.addEventListener('scroll', () => {
-    const rect = sec.getBoundingClientRect();
-    const scrollableDistance = rect.height - window.innerHeight;
-    
-    if (scrollableDistance <= 0) return;
-    
-    let progress = -rect.top / scrollableDistance;
-    progress = Math.max(0, Math.min(1, progress));
-    
-    let activeIndex = Math.floor(progress * items.length);
-    if (activeIndex >= items.length) activeIndex = items.length - 1;
-    
-    const slideProgress = (progress * items.length) - activeIndex;
-    
-    slides.forEach((slide, i) => {
-      if (i === activeIndex) {
-        slide.style.opacity = '1';
-        slide.style.pointerEvents = 'auto';
-        slide.style.transform = 'translateY(0) scale(1)';
-      } else {
-        slide.style.opacity = '0';
-        slide.style.pointerEvents = 'none';
-        slide.style.transform = i < activeIndex ? 'translateY(-40px) scale(0.95)' : 'translateY(40px) scale(0.95)';
-      }
-    });
-    
-    navBtns.forEach((nav, i) => {
-      if (i === activeIndex) {
-        nav.btn.style.color = 'white';
-        nav.line.style.width = `${slideProgress * 100}%`;
-      } else if (i < activeIndex) {
-        nav.btn.style.color = 'rgba(255,255,255,0.8)';
-        nav.line.style.width = '100%';
-      } else {
-        nav.btn.style.color = 'rgba(255,255,255,0.4)';
-        nav.line.style.width = '0%';
-      }
-    });
-  }, { passive: true });
-
-  setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
-
-  return sec;
-}
 
 /* ── NICHES ─────────────────────────────────────────── */
 function ConsultingNiches() {
@@ -796,7 +730,7 @@ function ConsultingContact() {
 function ConsultingFooter() {
   const footer = document.createElement('footer');
   footer.style.cssText = `
-        background: #090909;
+        background: rgba(0,0,0,0.4);
         border-top: 1px solid rgba(255,255,255,0.05);
         padding: 80px 0 40px 0;
         margin-top: auto;
