@@ -19,7 +19,6 @@
     }
 
     html {
-      overflow-x: hidden;
       width: 100%;
     }
 
@@ -27,7 +26,6 @@
       background-color: ${o.colors.background};
       color: ${o.colors.text};
       font-family: ${o.fonts.primary};
-      overflow-x: hidden;
       width: 100%;
       -webkit-font-smoothing: antialiased;
     }
@@ -126,7 +124,7 @@
       
       section { 
           padding: 60px 0 !important; 
-          overflow-x: hidden; /* Fix horizontal overflow */
+          overflow-x: clip; /* Fix horizontal overflow */
       }
       
       /* Force vertical stack for grids on mobile */
@@ -178,6 +176,11 @@
           flex-wrap: nowrap !important; /* Prevent wrapping for stats */
       }
       
+      /* Hide Consulting sub-label on desktop, show only on mobile */
+      .consulting-logo-label {
+        display: none;
+      }
+
       /* Mobile Nav Overlay (Side Menu) */
       .header-nav {
         display: flex !important;
@@ -253,6 +256,16 @@
           align-items: center;
       }
       
+      /* Consulting logo sub-label */
+      .consulting-logo-label {
+        display: block !important;
+      }
+
+      /* Consulting hero: push content below the fixed header on mobile */
+      .consulting-hero {
+        padding-top: 110px !important;
+      }
+
       /* Hide/Adjust bg logo on mobile */
       .bg-logo-hero {
         opacity: 0.02 !important;
