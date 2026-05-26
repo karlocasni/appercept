@@ -296,9 +296,11 @@ function ConsultingServices() {
 
   // Nav tabs & Global Progress Bar
   const navWrap = document.createElement('div');
+  navWrap.className = 'services-nav-wrap';
   navWrap.style.cssText = 'max-width:1000px; margin:0 auto; padding:0 20px; width:100%; flex-shrink:0; position:relative; z-index:10; padding-bottom:12px;';
   
   const nav = document.createElement('div');
+  nav.className = 'services-nav';
   nav.style.cssText = 'display:flex; justify-content:center; gap:0; flex-wrap:wrap; width:100%; position:relative;';
   navWrap.appendChild(nav);
 

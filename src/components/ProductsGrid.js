@@ -216,13 +216,22 @@ export function ProductsGrid() {
     const firstCard = track.firstElementChild;
     if (!firstCard) return;
     const cardWidth = firstCard.getBoundingClientRect().width + 30; // card width + gap
-    
+
     const isMobile = window.innerWidth <= 768;
     const maxIndex = Math.max(0, itemsCount - (isMobile ? 1 : 2));
-    
+
     if (currentIndex > maxIndex) currentIndex = 0;
     if (currentIndex < 0) currentIndex = maxIndex;
-    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
+    if (isMobile) {
+      // Center the active card within the carousel container
+      const containerWidth = carouselInner.getBoundingClientRect().width;
+      const cardOnlyWidth = firstCard.getBoundingClientRect().width;
+      const centerOffset = (containerWidth - cardOnlyWidth) / 2;
+      track.style.transform = `translateX(${centerOffset - currentIndex * cardWidth}px)`;
+    } else {
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
   }
 
   window.addEventListener('resize', updateCarousel);

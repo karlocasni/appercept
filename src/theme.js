@@ -255,8 +255,15 @@ export const injectGlobalStyles = () => {
         align-items: center !important; /* Ensure content centered */
       }
       
-      .responsive-grid > div {
+      .responsive-grid > div,
+      .responsive-grid > form {
         width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Reduce contact form internal padding on mobile */
+      .glass-card {
+        padding: 24px !important;
       }
 
       /* Mobile Stats Scaling */
@@ -391,6 +398,35 @@ export const injectGlobalStyles = () => {
         opacity: 0.02 !important;
         width: 120% !important;
         right: -10% !important;
+      }
+
+      /* Services nav tabs — horizontally scrollable on mobile */
+      .services-nav-wrap {
+        padding: 0 0 12px 0 !important;
+        overflow: hidden !important;
+      }
+      .services-nav {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        padding: 0 16px !important;
+        gap: 0 !important;
+      }
+      .services-nav::-webkit-scrollbar {
+        display: none !important;
+      }
+      .services-nav button {
+        font-size: 0.72rem !important;
+        min-width: 90px !important;
+        padding: 8px 6px !important;
+        letter-spacing: 0.5px !important;
+        flex-shrink: 0 !important;
+        flex: 0 0 auto !important;
+      }
+      .services-nav button:last-child {
+        margin-right: 16px !important;
       }
     }
 
