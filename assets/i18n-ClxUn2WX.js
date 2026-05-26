@@ -1,4 +1,4 @@
-(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const o={colors:{background:"#111111",accentPrimary:"#1c75bc",accentSecondary:"#2b3990",text:"#ffffff",glassBorder:"rgba(255, 255, 255, 0.1)"},fonts:{primary:'"Inter", "Helvetica Neue", sans-serif',heading:'"Outfit", sans-serif'},styles:{glass:`
+(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&i(n)}).observe(document,{childList:!0,subtree:!0});function l(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function i(e){if(e.ep)return;e.ep=!0;const t=l(e);fetch(e.href,t)}})();const o={colors:{background:"#111111",accentPrimary:"#1c75bc",accentSecondary:"#2b3990",text:"#ffffff",glassBorder:"rgba(255, 255, 255, 0.1)"},fonts:{primary:'"Inter", "Helvetica Neue", sans-serif',heading:'"Outfit", sans-serif'},styles:{glass:`
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -227,8 +227,15 @@
         align-items: center !important; /* Ensure content centered */
       }
       
-      .responsive-grid > div {
+      .responsive-grid > div,
+      .responsive-grid > form {
         width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Reduce contact form internal padding on mobile */
+      .glass-card {
+        padding: 24px !important;
       }
 
       /* Mobile Stats Scaling */
@@ -363,6 +370,35 @@
         opacity: 0.02 !important;
         width: 120% !important;
         right: -10% !important;
+      }
+
+      /* Services nav tabs — horizontally scrollable on mobile */
+      .services-nav-wrap {
+        padding: 0 0 12px 0 !important;
+        overflow: hidden !important;
+      }
+      .services-nav {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        padding: 0 16px !important;
+        gap: 0 !important;
+      }
+      .services-nav::-webkit-scrollbar {
+        display: none !important;
+      }
+      .services-nav button {
+        font-size: 0.72rem !important;
+        min-width: 90px !important;
+        padding: 8px 6px !important;
+        letter-spacing: 0.5px !important;
+        flex-shrink: 0 !important;
+        flex: 0 0 auto !important;
+      }
+      .services-nav button:last-child {
+        margin-right: 16px !important;
       }
     }
 
@@ -648,7 +684,7 @@
     overflow: hidden;
     pointer-events: none;
     background: ${o.colors.background};
-  `;r.style.cssText=a,[{color:"#1c75bc",size:"900px",top:"-10%",left:"-10%",delay:"0s"},{color:"#2b3990",size:"800px",top:"40%",left:"30%",delay:"-5s"},{color:"#00d2ff",size:"1000px",top:"60%",left:"70%",delay:"-10s"},{color:"#1c75bc",size:"700px",top:"10%",left:"80%",delay:"-2s"},{color:"#2b3990",size:"900px",top:"85%",left:"10%",delay:"-7s"},{color:"#00d2ff",size:"800px",top:"110%",left:"60%",delay:"-3s"},{color:"#1c75bc",size:"1000px",top:"130%",left:"20%",delay:"-5s"},{color:"#2b3990",size:"600px",top:"160%",left:"70%",delay:"-8s"},{color:"#00d2ff",size:"500px",top:"190%",left:"10%",delay:"-2s"},{color:"#1c75bc",size:"800px",top:"220%",left:"50%",delay:"-5s"},{color:"#2b3990",size:"700px",top:"260%",left:"20%",delay:"-9s"}].forEach((t,n)=>{const l=document.createElement("div");l.style.cssText=`
+  `;r.style.cssText=a,[{color:"#1c75bc",size:"900px",top:"-10%",left:"-10%",delay:"0s"},{color:"#2b3990",size:"800px",top:"40%",left:"30%",delay:"-5s"},{color:"#00d2ff",size:"1000px",top:"60%",left:"70%",delay:"-10s"},{color:"#1c75bc",size:"700px",top:"10%",left:"80%",delay:"-2s"},{color:"#2b3990",size:"900px",top:"85%",left:"10%",delay:"-7s"},{color:"#00d2ff",size:"800px",top:"110%",left:"60%",delay:"-3s"},{color:"#1c75bc",size:"1000px",top:"130%",left:"20%",delay:"-5s"},{color:"#2b3990",size:"600px",top:"160%",left:"70%",delay:"-8s"},{color:"#00d2ff",size:"500px",top:"190%",left:"10%",delay:"-2s"},{color:"#1c75bc",size:"800px",top:"220%",left:"50%",delay:"-5s"},{color:"#2b3990",size:"700px",top:"260%",left:"20%",delay:"-9s"}].forEach((t,n)=>{const s=document.createElement("div");s.style.cssText=`
       position: absolute;
       width: ${t.size};
       height: ${t.size};
@@ -660,4 +696,4 @@
       left: ${t.left};
       animation: float 25s infinite ease-in-out; /* Slower float for larger mass */
       animation-delay: ${t.delay};
-    `,n%2===0&&(l.style.animationDuration="25s"),r.appendChild(l)});let i=!1;const e=()=>{const l=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${l}px, 0)`,i=!1};return window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(e),i=!0)}),r}const p=()=>localStorage.getItem("language")||"en",b=()=>{const r=p()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},x=(r,a)=>p()==="hr"?r:a;export{c as B,x as a,b,p as g,d as i,o as t};
+    `,n%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let i=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,i=!1};return window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(e),i=!0)}),r}const p=()=>localStorage.getItem("language")||"en",m=()=>{const r=p()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},b=(r,a)=>p()==="hr"?r:a;export{c as B,b as a,m as b,p as g,d as i,o as t};
