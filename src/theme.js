@@ -97,6 +97,72 @@ export const injectGlobalStyles = () => {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
+    .carousel-inner {
+      overflow: hidden;
+      width: calc(100% - 140px);
+      margin: 0 auto;
+      padding: 20px 0;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 120px, black calc(100% - 120px), transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 120px, black calc(100% - 120px), transparent 100%);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+    
+    .carousel-arrow:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-50%) scale(1.05);
+    }
+    
+    .carousel-arrow.left {
+      left: 10px;
+    }
+    
+    .carousel-arrow.right {
+      right: 10px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      width: 520px;
+      height: 440px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 24px;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(28, 117, 188, 0.15);
+    }
+
     .text-gradient {
       background: linear-gradient(135deg, #1c75bc, #56b3fa);
       -webkit-background-clip: text;
@@ -149,6 +215,32 @@ export const injectGlobalStyles = () => {
     @media (max-width: 768px) {
       h1 { font-size: 3rem !important; }
       h2 { font-size: 2.2rem !important; }
+      
+      .carousel-inner {
+        width: 100% !important;
+        padding: 20px 0 !important;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30px, black calc(100% - 30px), transparent 100%) !important;
+        mask-image: linear-gradient(to right, transparent 0%, black 30px, black calc(100% - 30px), transparent 100%) !important;
+      }
+      .carousel-arrow {
+        top: auto !important;
+        bottom: -50px !important;
+        transform: none !important;
+      }
+      .carousel-arrow:hover {
+        transform: scale(1.05) !important;
+      }
+      .carousel-arrow.left {
+        left: calc(50% - 54px) !important;
+      }
+      .carousel-arrow.right {
+        right: calc(50% - 54px) !important;
+      }
+      .project-card {
+        width: 80vw !important;
+        height: auto !important;
+        min-height: 420px !important;
+      }
       
       section { 
           padding: 60px 0 !important; 

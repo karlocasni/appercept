@@ -36,11 +36,12 @@ function sectionHeader(title, subtitle, align = 'center') {
 
 /* ── HEADER ─────────────────────────────────────────── */
 function ConsultingHeader() {
-  const header = mkEl('header', `position:fixed;top:0;left:0;right:0;z-index:1000;width:100%;padding:18px 0;background:rgba(17,17,17,1);border-bottom:1px solid transparent;transition:background .4s,backdrop-filter .4s,border-color .4s;`);
+  const header = mkEl('header', `position:fixed;top:0;left:0;right:0;z-index:1000;width:100%;padding:18px 0;background:rgba(17,17,17,1);border-bottom:1px solid transparent;transition:background .4s,backdrop-filter .4s,-webkit-backdrop-filter .4s,border-color .4s;`);
   window.addEventListener('scroll', () => {
     const s = window.scrollY > 40;
-    header.style.background = s ? 'rgba(17,17,17,0.5)' : 'rgba(17,17,17,1)';
-    header.style.backdropFilter = s ? 'blur(18px)' : 'none';
+    header.style.background = s ? 'rgba(17,17,17,0.60)' : 'rgba(17,17,17,1)';
+    header.style.backdropFilter = s ? 'blur(12px)' : 'none';
+    header.style.webkitBackdropFilter = s ? 'blur(12px)' : 'none';
     header.style.borderBottom = s ? `1px solid ${theme.colors.glassBorder}` : '1px solid transparent';
   }, { passive: true });
 

@@ -21,17 +21,20 @@ export function Header() {
   // Solid at top, glassy on scroll
   header.style.background = 'rgba(17, 17, 17, 1)';
   header.style.backdropFilter = 'none';
+  header.style.webkitBackdropFilter = 'none';
   header.style.borderBottom = `1px solid transparent`;
 
-  // Scroll listener to toggle glass effect
+  // Scroll listener: 75% opacity + blur when scrolled
   const onScroll = () => {
     if (window.scrollY > 40) {
-      header.style.background = 'rgba(17, 17, 17, 0.45)';
-      header.style.backdropFilter = 'blur(18px)';
+      header.style.background = 'rgba(17, 17, 17, 0.60)';
+      header.style.backdropFilter = 'blur(12px)';
+      header.style.webkitBackdropFilter = 'blur(12px)';
       header.style.borderBottom = `1px solid ${theme.colors.glassBorder}`;
     } else {
       header.style.background = 'rgba(17, 17, 17, 1)';
       header.style.backdropFilter = 'none';
+      header.style.webkitBackdropFilter = 'none';
       header.style.borderBottom = `1px solid transparent`;
     }
   };

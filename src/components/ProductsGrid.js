@@ -5,17 +5,8 @@ import { t } from '../lib/i18n.js';
 
 const ProductCard = (product) => {
   const card = document.createElement('div');
-  card.className = 'glass-card animate-on-scroll';
-  card.style.cssText = `
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    width: 520px;
-    height: 440px;
-    flex-shrink: 0;
-    ${theme.styles.glass}
-    border-radius: 20px;
-  `;
+  card.className = 'project-card animate-on-scroll';
+  card.style.cssText = ``;
 
   // Icon Area
   const imgContainer = document.createElement('div');
@@ -23,8 +14,8 @@ const ProductCard = (product) => {
   imgContainer.style.display = 'flex';
   imgContainer.style.alignItems = 'center';
   imgContainer.style.justifyContent = 'center';
-  imgContainer.style.background = 'rgba(255,255,255,0.02)';
-  imgContainer.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+  imgContainer.style.background = 'transparent';
+  imgContainer.style.borderBottom = 'none';
 
   if (product.image) {
     const imgWrapper = document.createElement('div');
@@ -84,7 +75,7 @@ const ProductCard = (product) => {
 
   const title = document.createElement('h3');
   title.textContent = product.title;
-  title.style.cssText = `font-size: 1.4rem; margin-bottom: 10px;`;
+  title.style.cssText = `font-size: 1.4rem; margin-bottom: 10px; text-align: center;`;
 
   const desc = document.createElement('p');
   desc.innerHTML = product.description;
@@ -94,6 +85,7 @@ const ProductCard = (product) => {
     line-height: 1.6; 
     margin-bottom: 20px;
     flex: 1;
+    text-align: center;
   `;
 
   const footer = document.createElement('div');
@@ -187,11 +179,13 @@ export function ProductsGrid() {
   carouselWrap.style.cssText = `
     position: relative;
     width: 100%;
-    max-width: 1150px;
+    max-width: 1210px;
     margin: 0 auto;
-    overflow: hidden;
-    padding: 20px 40px;
   `;
+
+  const carouselInner = document.createElement('div');
+  carouselInner.className = 'carousel-inner';
+  carouselWrap.appendChild(carouselInner);
 
   const track = document.createElement('div');
   track.style.cssText = `
@@ -199,38 +193,16 @@ export function ProductsGrid() {
     gap: 30px;
     transition: transform 0.5s ease-in-out;
   `;
-  carouselWrap.appendChild(track);
+  carouselInner.appendChild(track);
 
   // Arrows
-  const arrowStyle = `
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.05);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.1);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-  `;
   const leftArrow = document.createElement('button');
+  leftArrow.className = 'carousel-arrow left';
   leftArrow.innerHTML = '&#10094;';
-  leftArrow.style.cssText = arrowStyle + 'left: 0;';
-  leftArrow.onmouseenter = () => leftArrow.style.background = 'rgba(255,255,255,0.15)';
-  leftArrow.onmouseleave = () => leftArrow.style.background = 'rgba(255,255,255,0.05)';
 
   const rightArrow = document.createElement('button');
+  rightArrow.className = 'carousel-arrow right';
   rightArrow.innerHTML = '&#10095;';
-  rightArrow.style.cssText = arrowStyle + 'right: 0;';
-  rightArrow.onmouseenter = () => rightArrow.style.background = 'rgba(255,255,255,0.15)';
-  rightArrow.onmouseleave = () => rightArrow.style.background = 'rgba(255,255,255,0.05)';
 
   carouselWrap.appendChild(leftArrow);
   carouselWrap.appendChild(rightArrow);
@@ -241,12 +213,19 @@ export function ProductsGrid() {
 
   function updateCarousel() {
     if (itemsCount === 0) return;
-    const cardWidth = 520 + 30; // card + gap
-    const maxIndex = Math.max(0, itemsCount - 2); // 2 cards visible
+    const firstCard = track.firstElementChild;
+    if (!firstCard) return;
+    const cardWidth = firstCard.getBoundingClientRect().width + 30; // card width + gap
+    
+    const isMobile = window.innerWidth <= 768;
+    const maxIndex = Math.max(0, itemsCount - (isMobile ? 1 : 2));
+    
     if (currentIndex > maxIndex) currentIndex = 0;
     if (currentIndex < 0) currentIndex = maxIndex;
     track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   }
+
+  window.addEventListener('resize', updateCarousel);
 
   rightArrow.onclick = () => { currentIndex++; updateCarousel(); };
   leftArrow.onclick = () => { currentIndex--; updateCarousel(); };
