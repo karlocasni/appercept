@@ -188,6 +188,7 @@ export function ProductsGrid() {
   carouselWrap.appendChild(carouselInner);
 
   const track = document.createElement('div');
+  track.className = 'carousel-track';
   track.style.cssText = `
     display: flex;
     gap: 30px;
@@ -223,15 +224,7 @@ export function ProductsGrid() {
     if (currentIndex > maxIndex) currentIndex = 0;
     if (currentIndex < 0) currentIndex = maxIndex;
 
-    if (isMobile) {
-      // Center the active card within the carousel container
-      const containerWidth = carouselInner.getBoundingClientRect().width;
-      const cardOnlyWidth = firstCard.getBoundingClientRect().width;
-      const centerOffset = (containerWidth - cardOnlyWidth) / 2;
-      track.style.transform = `translateX(${centerOffset - currentIndex * cardWidth}px)`;
-    } else {
-      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-    }
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
   }
 
   window.addEventListener('resize', updateCarousel);

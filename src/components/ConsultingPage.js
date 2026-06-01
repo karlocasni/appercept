@@ -173,13 +173,13 @@ function ConsultingHeader() {
 
 /* ── HERO ────────────────────────────────────────────── */
 function ConsultingHero() {
-  const sec = mkEl('section', `min-height:90vh;display:flex;align-items:center;padding:160px 0 100px;position:relative;`);
+  const sec = mkEl('section', `min-height:90vh;display:flex;align-items:center;padding:140px 0 100px;position:relative;`);
   sec.className = 'consulting-hero';
   const ctr = mkEl('div', theme.styles.container);
   const col = mkEl('div', `max-width:820px;`);
   col.className = 'fade-in-up';
 
-  const h1 = mkEl('h1', `font-size:4.2rem;line-height:1.1;font-weight:900;margin-bottom:22px;`);
+  const h1 = mkEl('h1', `font-size:4.2rem;line-height:1.1;font-weight:900;margin-bottom:22px;margin-top:80px;`);
   h1.innerHTML = t(`AI koji radi <span style="background:linear-gradient(90deg,${theme.colors.accentPrimary},#00d2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">za vaše poslovanje</span>`, `AI that works <span style="background:linear-gradient(90deg,${theme.colors.accentPrimary},#00d2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">for your business</span>`);
   col.appendChild(h1);
   col.appendChild(mkEl('p', `font-size:1.35rem;color:rgba(255,255,255,.7);margin-bottom:40px;max-width:600px;line-height:1.65;font-weight:300;`, t('Voice botovi, chat botovi i automatizacija poslovnih procesa. Implementiramo AI alate koji štede sate rada dnevno i povećavaju prihod.', 'Voice bots, chatbots, and business process automation. We implement AI tools that save hours of work daily and increase revenue.')));
