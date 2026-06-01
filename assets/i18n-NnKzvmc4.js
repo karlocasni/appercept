@@ -208,6 +208,9 @@
       .carousel-arrow.right {
         right: calc(50% - 54px) !important;
       }
+      .carousel-track {
+        padding: 0 calc(10vw - 20px) !important;
+      }
       .project-card {
         width: 80vw !important;
         height: auto !important;
@@ -362,7 +365,7 @@
 
       /* Consulting hero: push content below the fixed header on mobile */
       .consulting-hero {
-        padding-top: 110px !important;
+        padding-top: 120px !important;
       }
 
       /* Hide/Adjust bg logo on mobile */
@@ -372,33 +375,29 @@
         right: -10% !important;
       }
 
-      /* Services nav tabs — horizontally scrollable on mobile */
+      /* Services nav tabs — fit on one line so progress bar aligns */
       .services-nav-wrap {
         padding: 0 0 12px 0 !important;
         overflow: hidden !important;
       }
       .services-nav {
         flex-wrap: nowrap !important;
-        justify-content: flex-start !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
-        padding: 0 16px !important;
-        gap: 0 !important;
-      }
-      .services-nav::-webkit-scrollbar {
-        display: none !important;
+        justify-content: space-between !important;
+        overflow-x: hidden !important;
+        padding: 0 20px !important;
+        gap: 2px !important;
+        width: 100% !important;
       }
       .services-nav button {
-        font-size: 0.72rem !important;
-        min-width: 90px !important;
-        padding: 8px 6px !important;
-        letter-spacing: 0.5px !important;
-        flex-shrink: 0 !important;
-        flex: 0 0 auto !important;
+        font-size: clamp(8px, 2.2vw, 12px) !important;
+        min-width: 0 !important;
+        padding: 8px 0 !important;
+        letter-spacing: 0px !important;
+        flex: 0 1 auto !important;
+        text-align: center !important;
       }
       .services-nav button:last-child {
-        margin-right: 16px !important;
+        margin-right: 0 !important;
       }
     }
 
@@ -696,4 +695,4 @@
       left: ${t.left};
       animation: float 25s infinite ease-in-out; /* Slower float for larger mass */
       animation-delay: ${t.delay};
-    `,n%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let i=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,i=!1};return window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(e),i=!0)}),r}const p=()=>localStorage.getItem("language")||"en",m=()=>{const r=p()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},b=(r,a)=>p()==="hr"?r:a;export{c as B,b as a,m as b,p as g,d as i,o as t};
+    `,n%2===0&&(s.style.animationDuration="25s"),r.appendChild(s)});let i=!1;const e=()=>{const s=-(window.scrollY*.15);r.style.transform=`translate3d(0, ${s}px, 0)`,i=!1};return window.addEventListener("scroll",()=>{i||(window.requestAnimationFrame(e),i=!0)}),r}const p=()=>localStorage.getItem("language")||"en",m=()=>{const r=p()==="hr"?"en":"hr";localStorage.setItem("language",r),window.location.reload()},x=(r,a)=>p()==="hr"?r:a;export{c as B,x as a,m as b,p as g,d as i,o as t};
