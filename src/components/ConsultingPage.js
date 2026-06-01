@@ -281,7 +281,7 @@ function ConsultingServices() {
   // Tall outer section gives scroll room
   const sec = document.createElement('section');
   sec.id = 'services';
-  sec.style.cssText = 'position:relative; height:' + (N * 100) + 'vh; width:100%;';
+  sec.style.cssText = 'position:relative; height:' + (N * 100) + 'vh; height:' + (N * 100) + 'dvh; width:100%;';
 
   // Header (Scrolls normally)
   const headerWrap = document.createElement('div');
@@ -291,7 +291,7 @@ function ConsultingServices() {
 
   // Sticky viewport container
   const sticky = document.createElement('div');
-  sticky.style.cssText = 'position:sticky; top:100px; height:calc(100vh - 100px); width:100%; display:flex; flex-direction:column; overflow:hidden; padding-top:20px;';
+  sticky.style.cssText = 'position:sticky; top:100px; height:calc(100vh - 100px); height:calc(100dvh - 100px); width:100%; display:flex; flex-direction:column; overflow:hidden; padding-top:20px;';
   sec.appendChild(sticky);
 
   // Nav tabs & Global Progress Bar
@@ -428,14 +428,14 @@ function ConsultingServices() {
   }
 
   function handleScroll() {
-    var rect = sec.getBoundingClientRect();
+    var secRect = sec.getBoundingClientRect();
+    var stickyRect = sticky.getBoundingClientRect();
     var headerH = headerWrap.offsetHeight || 150;
-    var scrollableDistance = rect.height - window.innerHeight - headerH;
     
-    // -rect.top is how far the top of sec is ABOVE the viewport top.
-    // We want 0 progress when the sticky element hits the top (i.e. when -rect.top == headerH)
-    var scrolledPastSticky = -rect.top - headerH;
-    var scrollProgress = scrollableDistance > 0 ? (scrolledPastSticky / scrollableDistance) : 0;
+    var currentOffset = (stickyRect.top - secRect.top) - headerH;
+    var maxOffset = sec.offsetHeight - headerH - sticky.offsetHeight;
+    
+    var scrollProgress = maxOffset > 0 ? (currentOffset / maxOffset) : 0;
     
     var progress = Math.max(0, Math.min(1, scrollProgress));
     var idx = Math.min(N - 1, Math.floor(progress * N));
