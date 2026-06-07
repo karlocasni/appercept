@@ -229,6 +229,57 @@ export function Header() {
   consultingLi.appendChild(consultingLink);
   ul.appendChild(consultingLi);
 
+  // ── Account dropdown → Appercept Space (app.appercept.net) ──────────────────
+  const APP_URL = 'https://app.appercept.net';
+  const accountLi = document.createElement('li');
+  accountLi.style.cssText = 'position: relative; display: flex; align-items: center;';
+
+  const accountBtn = document.createElement('button');
+  accountBtn.innerHTML = `${t('Prijava', 'Sign in')} <span style="font-size:0.7rem;">▾</span>`;
+  accountBtn.style.cssText = `
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
+    border: none; color: #fff; padding: 7px 16px; border-radius: 7px;
+    font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  `;
+  accountBtn.onmouseenter = () => { accountBtn.style.transform = 'translateY(-1px)'; accountBtn.style.boxShadow = `0 4px 16px ${theme.colors.accentPrimary}55`; };
+  accountBtn.onmouseleave = () => { accountBtn.style.transform = 'translateY(0)'; accountBtn.style.boxShadow = 'none'; };
+
+  const dropdown = document.createElement('div');
+  dropdown.style.cssText = `
+    position: absolute; top: calc(100% + 10px); right: 0; min-width: 190px;
+    background: rgba(20,20,20,0.96); backdrop-filter: blur(14px);
+    border: 1px solid ${theme.colors.glassBorder}; border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5); overflow: hidden;
+    display: none; flex-direction: column; z-index: 1002;
+  `;
+
+  const mkItem = (label, sublabel, href) => {
+    const a = document.createElement('a');
+    a.href = href;
+    a.style.cssText = 'display:block; padding: 11px 16px; text-decoration:none; color:#fff; transition: background 0.15s ease; border:none;';
+    a.innerHTML = `<div style="font-size:0.88rem; font-weight:600;">${label}</div><div style="font-size:0.72rem; opacity:0.55; margin-top:2px;">${sublabel}</div>`;
+    a.onmouseenter = () => { a.style.background = 'rgba(255,255,255,0.07)'; };
+    a.onmouseleave = () => { a.style.background = 'transparent'; };
+    return a;
+  };
+
+  dropdown.appendChild(mkItem(t('Prijava', 'Sign in'), t('Pristupite svom prostoru', 'Access your workspace'), APP_URL));
+  const sep = document.createElement('div'); sep.style.cssText = `height:1px; background:${theme.colors.glassBorder};`; dropdown.appendChild(sep);
+  dropdown.appendChild(mkItem(t('Otvori račun', 'Create account'), t('Zatražite pristup', 'Request access'), `${APP_URL}/?signup=1`));
+
+  let dropOpen = false;
+  const setDrop = (open) => { dropOpen = open; dropdown.style.display = open ? 'flex' : 'none'; };
+  accountBtn.onclick = (e) => { e.stopPropagation(); setDrop(!dropOpen); };
+  accountLi.onmouseenter = () => setDrop(true);
+  accountLi.onmouseleave = () => setDrop(false);
+  document.addEventListener('click', () => setDrop(false));
+
+  accountLi.appendChild(accountBtn);
+  accountLi.appendChild(dropdown);
+  ul.appendChild(accountLi);
+
   // Language button
   const langBtn = document.createElement('button');
   langBtn.textContent = getLanguage() === 'hr' ? 'EN' : 'HR';
