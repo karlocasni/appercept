@@ -33,7 +33,7 @@ import{t as x,a as b,g as ir,b as ar,i as or,B as lr}from"./i18n-NnKzvmc4.js";fu
     cursor: pointer;
     display: none; /* Hidden by default */
     z-index: 1001;
-  `;const o=document.createElement("nav");o.className="header-nav",o.style.cssText="display: flex; gap: 30px;";const l=document.createElement("ul");l.style.cssText="list-style: none; padding: 0; display: flex; gap: 30px;";const c=document.createElement("div");c.style.cssText=`
+  `;const o=document.createElement("nav");o.className="header-nav",o.style.cssText="display: flex; gap: 30px;";const l=document.createElement("ul");l.style.cssText="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 30px;";const c=document.createElement("div");c.style.cssText=`
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.5); /* darkened backdrop */
