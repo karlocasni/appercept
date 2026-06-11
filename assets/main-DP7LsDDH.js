@@ -87,7 +87,7 @@ import{t as x,a as b,g as ir,b as ar,i as or,B as lr}from"./i18n-NnKzvmc4.js";fu
         from { transform: scale(0.6); opacity: 0; }
         to   { transform: scale(1);   opacity: 1; }
       }
-    `,M.appendChild(Oe),M.appendChild(Z),M.appendChild(ee),M.appendChild(ge),M.appendChild(te),document.body.appendChild(M),requestAnimationFrame(()=>{M.style.opacity="1",requestAnimationFrame(()=>{me.style.width="100%"})}),setTimeout(()=>{window.location.href=S},3e3)},y=document.createElement("li");y.style.cssText="display: flex; align-items: center;";const k=document.createElement("a");k.href=g,k.textContent=b("Prijava","Log in"),k.style.cssText=`
+    `,M.appendChild(Oe),M.appendChild(Z),M.appendChild(ee),M.appendChild(ge),M.appendChild(te),document.body.appendChild(M),requestAnimationFrame(()=>{M.style.opacity="1",requestAnimationFrame(()=>{me.style.width="100%"})}),setTimeout(()=>{window.location.href=S},3e3)},y=document.createElement("li");y.style.cssText="display: flex; align-items: center;";const k=document.createElement("a");k.href=g,k.textContent=b("Admin prijava","Admin Login"),k.style.cssText=`
     display: inline-flex; align-items: center;
     background: transparent;
     border: 1px solid rgba(255,255,255,0.25);
