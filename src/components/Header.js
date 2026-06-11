@@ -230,7 +230,16 @@ export function Header() {
   ul.appendChild(consultingLi);
 
   // ── Account dropdown → Appercept Space (app.appercept.net) ──────────────────
-  const APP_URL = 'https://app.appercept.net';
+  const getAppUrl = () => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:3000';
+      }
+    }
+    return 'https://app.appercept.net';
+  };
+  const APP_URL = getAppUrl();
   const accountLi = document.createElement('li');
   accountLi.style.cssText = 'position: relative; display: flex; align-items: center;';
 
