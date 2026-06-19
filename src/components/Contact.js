@@ -301,8 +301,31 @@ export function Footer() {
     socialRow.appendChild(link);
   });
 
+  const getAppUrl = () => {
+    if (typeof window !== 'undefined') {
+      const h = window.location.hostname;
+      if (h === 'localhost' || h === '127.0.0.1') return 'http://localhost:3000';
+    }
+    return 'https://app.appercept.net';
+  };
+
+  const adminBtn = document.createElement('a');
+  adminBtn.href = getAppUrl();
+  adminBtn.textContent = t('Admin prijava', 'Admin Login');
+  adminBtn.style.cssText = `
+    display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+    background:transparent;border:1px solid rgba(255,255,255,0.2);
+    color:rgba(255,255,255,0.6);padding:8px 18px;border-radius:8px;
+    font-size:0.82rem;font-weight:600;cursor:pointer;font-family:inherit;
+    text-decoration:none;transition:all 0.3s;
+  `;
+  adminBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>${t('Admin prijava', 'Admin Login')}`;
+  adminBtn.onmouseenter = () => { adminBtn.style.borderColor = theme.colors.accentPrimary; adminBtn.style.color = 'white'; };
+  adminBtn.onmouseleave = () => { adminBtn.style.borderColor = 'rgba(255,255,255,0.2)'; adminBtn.style.color = 'rgba(255,255,255,0.6)'; };
+
   socialCol.appendChild(socialTitle);
   socialCol.appendChild(socialRow);
+  socialCol.appendChild(adminBtn);
 
   // Append Cols
   grid.appendChild(navCol);

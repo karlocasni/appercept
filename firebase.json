@@ -23,6 +23,14 @@
         "destination": "/marketing.html"
       },
       {
+        "source": "/ai-bots",
+        "destination": "/ai-bots.html"
+      },
+      {
+        "source": "/web",
+        "destination": "/web.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

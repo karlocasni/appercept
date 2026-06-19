@@ -12,6 +12,8 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 consulting: resolve(__dirname, 'consulting.html'),
                 marketing: resolve(__dirname, 'marketing.html'),
+                aibots: resolve(__dirname, 'ai-bots.html'),
+                web: resolve(__dirname, 'web.html'),
             }
         }
     }

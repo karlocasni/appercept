@@ -153,17 +153,6 @@ export function Header() {
     { name: t('Kontakt', 'Contact'), href: '#contact' }
   ];
 
-  // Consulting link (separate page)
-  const consultingLink = document.createElement('a');
-  consultingLink.textContent = 'Consulting';
-  consultingLink.href = '/consulting';
-  consultingLink.style.cssText = `
-    font-size: 0.9rem; font-weight: 600; opacity: 1;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  `;
-
   links.forEach(link => {
     const li = document.createElement('li');
     const a = document.createElement('a');
@@ -224,149 +213,127 @@ export function Header() {
     ul.appendChild(li);
   });
 
-  // Add consulting link as a list item
-  const consultingLi = document.createElement('li');
-  consultingLi.appendChild(consultingLink);
-  ul.appendChild(consultingLi);
-
-  // Marketing & Media link (separate page)
-  const marketingLink = document.createElement('a');
-  marketingLink.textContent = t('Marketing & Media', 'Marketing & Media');
-  marketingLink.href = '/marketing';
-  marketingLink.style.cssText = `
-    font-size: 0.9rem; font-weight: 600; opacity: 1;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  `;
-  const marketingLi = document.createElement('li');
-  marketingLi.appendChild(marketingLink);
-  ul.appendChild(marketingLi);
-
-  // ── Two auth buttons → Appercept Space dashboard ─────────────────────────────
-  const getAppUrl = () => {
-    if (typeof window !== 'undefined') {
-      const hostname = window.location.hostname;
-      if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        return 'http://localhost:3000';
-      }
-    }
-    return 'https://app.appercept.net';
-  };
-  const APP_URL = getAppUrl();
-
-  // ── Launch overlay: shown for 3 s before redirecting to the app ─────────────
-  const getFirstName = () => {
-    const match = document.cookie.split('; ').find(c => c.startsWith('appercept_fn='));
-    return match ? decodeURIComponent(match.split('=')[1]) : null;
-  };
-
-  const QUOTES = [
-    'Perceive beyond the obvious.',
-    'Great things are built one focused day at a time.',
-    'Today is a canvas — make something remarkable.',
-    'Small steps, compounding into momentum.',
-    'Clarity comes from action, not waiting.',
-    'Build what you wish existed.',
-    'Progress over perfection, always.',
-    'The best work feels like play. Enjoy today.',
-    'Focus is the new superpower — use yours well.',
-    'Done is better than perfect. Ship it.',
-    'Every expert was once a beginner who kept going.',
-    'Calm mind, sharp focus, bold moves.',
-    'Make it work, make it right, make it beautiful.',
+  // ── Services dropdown ────────────────────────────────────────────────────────
+  const servicesItems = [
+    {
+      label: 'Consulting',
+      sub: t('AI strategija i digitalna transformacija', 'AI strategy & digital transformation'),
+      href: '/consulting',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>`
+    },
+    {
+      label: t('Marketing & Media', 'Marketing & Media'),
+      sub: t('Video, foto, podcast i social media', 'Video, photo, podcast & social media'),
+      href: '/marketing',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2"></rect></svg>`
+    },
+    {
+      label: t('AI Botovi', 'AI Bots'),
+      sub: t('Voice botovi, chat botovi i automatizacija', 'Voice bots, chat bots & automation'),
+      href: '/ai-bots',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`
+    },
+    {
+      label: t('Web & Aplikacije', 'Web & Apps'),
+      sub: t('Web stranice, e-commerce i web aplikacije', 'Websites, e-commerce & web apps'),
+      href: '/web',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`
+    },
   ];
 
-  const showLaunchOverlay = (destination) => {
-    const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
-    const firstName = getFirstName();
+  const servicesLi = document.createElement('li');
+  servicesLi.style.cssText = `position:relative;`;
 
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 22px; padding: 24px;
-      background:
-        radial-gradient(ellipse 85% 55% at 15% -5%, rgba(40,130,210,0.40) 0%, transparent 62%),
-        radial-gradient(ellipse 65% 45% at 88% 12%, rgba(0,210,255,0.28) 0%, transparent 58%),
-        linear-gradient(135deg, #0c2148 0%, #16386e 100%);
-      opacity: 0; transition: opacity 300ms ease;
+  const servicesTrigger = document.createElement('button');
+  servicesTrigger.style.cssText = `
+    background:transparent;border:none;cursor:pointer;font-family:inherit;
+    display:flex;align-items:center;gap:6px;
+    font-size:0.9rem;font-weight:600;
+    background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    padding:0;
+  `;
+  servicesTrigger.innerHTML = `
+    <span>${t('Usluge', 'Services')}</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="${theme.colors.accentPrimary}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;transition:transform .3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  `;
+
+  const dropdown = document.createElement('div');
+  dropdown.style.cssText = `
+    position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);
+    background:rgba(17,17,17,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.1);border-radius:16px;
+    padding:8px;min-width:300px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(28,117,188,0.15);
+    opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-8px);
+    transition:opacity .2s ease,transform .2s ease;
+  `;
+
+  servicesItems.forEach(item => {
+    const row = document.createElement('a');
+    row.href = item.href;
+    row.style.cssText = `
+      display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:10px;
+      text-decoration:none;color:white;transition:background .2s;cursor:pointer;
     `;
+    row.onmouseenter = () => row.style.background = 'rgba(28,117,188,0.15)';
+    row.onmouseleave = () => row.style.background = 'transparent';
 
-    const logo = document.createElement('img');
-    logo.src = '/logo.png';
-    logo.alt = 'Appercept';
-    logo.style.cssText = `
-      width: 72px; height: 72px; border-radius: 18px; object-fit: contain;
-      padding: 10px;
-      box-shadow: 0 8px 30px rgba(0,210,255,0.4);
-      animation: apLaunchPop 600ms cubic-bezier(0.34,1.56,0.64,1) forwards;
+    const iconWrap = document.createElement('div');
+    iconWrap.style.cssText = `
+      width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+      background:rgba(28,117,188,0.15);border:1px solid rgba(28,117,188,0.25);
+      color:${theme.colors.accentPrimary};flex-shrink:0;
     `;
+    iconWrap.innerHTML = item.icon;
 
-    const text = document.createElement('div');
-    text.style.cssText = 'text-align: center; max-width: 460px;';
-    text.innerHTML = `
-      <div style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.01em;">
-        ${firstName ? `Welcome, ${firstName}` : 'Welcome to Appercept Space'}
-      </div>
-      <div style="font-size: 1rem; color: rgba(232,240,248,0.78); line-height: 1.5; font-style: italic;">
-        &ldquo;${quote}&rdquo;
-      </div>
-    `;
+    const textWrap = document.createElement('div');
+    const labelEl = document.createElement('div');
+    labelEl.textContent = item.label;
+    labelEl.style.cssText = `font-size:.9rem;font-weight:600;`;
+    const subEl = document.createElement('div');
+    subEl.textContent = item.sub;
+    subEl.style.cssText = `font-size:.75rem;color:rgba(255,255,255,.45);margin-top:2px;`;
+    textWrap.appendChild(labelEl);
+    textWrap.appendChild(subEl);
 
-    const barWrap = document.createElement('div');
-    barWrap.style.cssText = 'width: 200px; height: 4px; border-radius: 9999px; background: rgba(255,255,255,0.12); overflow: hidden; margin-top: 6px;';
-    const bar = document.createElement('div');
-    bar.style.cssText = 'height: 100%; border-radius: 9999px; background: linear-gradient(90deg,#1c75bc,#00d2ff); width: 0%; transition: width 3s linear;';
-    barWrap.appendChild(bar);
+    row.appendChild(iconWrap);
+    row.appendChild(textWrap);
+    dropdown.appendChild(row);
+  });
 
-    const label = document.createElement('div');
-    label.style.cssText = 'font-size: 0.75rem; color: rgba(232,240,248,0.5);';
-    label.textContent = 'Entering Appercept Space…';
-
-    const styleTag = document.createElement('style');
-    styleTag.textContent = `
-      @keyframes apLaunchPop {
-        from { transform: scale(0.6); opacity: 0; }
-        to   { transform: scale(1);   opacity: 1; }
-      }
-    `;
-
-    overlay.appendChild(styleTag);
-    overlay.appendChild(logo);
-    overlay.appendChild(text);
-    overlay.appendChild(barWrap);
-    overlay.appendChild(label);
-    document.body.appendChild(overlay);
-
-    requestAnimationFrame(() => {
-      overlay.style.opacity = '1';
-      requestAnimationFrame(() => { bar.style.width = '100%'; });
-    });
-
-    setTimeout(() => { window.location.href = destination; }, 3000);
+  // Show/hide logic — hover on the li keeps it open
+  let hideTimer;
+  const showDropdown = () => {
+    clearTimeout(hideTimer);
+    dropdown.style.opacity = '1';
+    dropdown.style.pointerEvents = 'auto';
+    dropdown.style.transform = 'translateX(-50%) translateY(0)';
+    servicesTrigger.querySelector('svg').style.transform = 'rotate(180deg)';
+  };
+  const hideDropdown = () => {
+    hideTimer = setTimeout(() => {
+      dropdown.style.opacity = '0';
+      dropdown.style.pointerEvents = 'none';
+      dropdown.style.transform = 'translateX(-50%) translateY(-8px)';
+      servicesTrigger.querySelector('svg').style.transform = 'rotate(0deg)';
+    }, 120);
   };
 
-  // ── Log In button (ghost/outline style) ─────────────────────────────────────
-  const loginLi = document.createElement('li');
-  loginLi.style.cssText = 'display: flex; align-items: center;';
-  const loginBtn = document.createElement('a');
-  loginBtn.href = APP_URL;
-  loginBtn.textContent = t('Admin prijava', 'Admin Login');
-  loginBtn.style.cssText = `
-    display: inline-flex; align-items: center;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.25);
-    color: #fff; padding: 7px 16px; border-radius: 7px;
-    font-size: 0.85rem; font-weight: 600; cursor: pointer;
-    font-family: inherit; text-decoration: none;
-    transition: border-color 0.2s ease, background 0.2s ease;
-  `;
-  loginBtn.onmouseenter = () => { loginBtn.style.borderColor = theme.colors.accentPrimary; loginBtn.style.background = 'rgba(255,255,255,0.06)'; };
-  loginBtn.onmouseleave = () => { loginBtn.style.borderColor = 'rgba(255,255,255,0.25)'; loginBtn.style.background = 'transparent'; };
-  loginBtn.addEventListener('click', (e) => { e.preventDefault(); showLaunchOverlay(APP_URL); });
-  loginLi.appendChild(loginBtn);
-  ul.appendChild(loginLi);
+  servicesLi.onmouseenter = showDropdown;
+  servicesLi.onmouseleave = hideDropdown;
+
+  // Mobile: toggle on tap
+  servicesTrigger.onclick = (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.style.opacity === '1';
+    isOpen ? hideDropdown() : showDropdown();
+  };
+
+  servicesLi.appendChild(servicesTrigger);
+  servicesLi.appendChild(dropdown);
+  ul.appendChild(servicesLi);
+
 
 
   // Language button
