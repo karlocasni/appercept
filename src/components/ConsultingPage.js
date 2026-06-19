@@ -117,7 +117,7 @@ function ConsultingHeader() {
 
   // Nav ul
   const ul = document.createElement('ul');
-  ul.style.cssText = `list-style:none;padding:0;display:flex;gap:30px;`;
+  ul.style.cssText = `list-style:none;padding:0;margin:0;display:flex;align-items:center;gap:30px;`;
 
   // Section scroll links
   [[t('Usluge', 'Services'), 'services'], [t('Pricing', 'Pricing'), 'pricing'], [t('Kontakt', 'Contact'), 'contact']].forEach(([name, id]) => {
@@ -473,9 +473,8 @@ function ConsultingNiches() {
     t('SME digitalna transformacija', 'SME Digital Transformation')
   ];
 
-  const marqueeContainer = mkEl('div');
-  marqueeContainer.className = 'marquee-container animate-on-scroll';
-  marqueeContainer.style.cssText += `; padding: 20px 0;`;
+  const marqueeWrap = mkEl('div', `width:100%;overflow:hidden;padding:28px 0;position:relative;`);
+  marqueeWrap.style.cssText += `;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);`;
 
   const track = mkEl('div');
   track.className = 'marquee-track';
@@ -483,28 +482,15 @@ function ConsultingNiches() {
   const createTag = (name) => {
     const tag = mkEl('div', `padding:14px 28px;border-radius:50px;background:rgba(28,117,188,.12);border:1px solid rgba(28,117,188,.25);font-size:.95rem;color:rgba(255,255,255,.9);transition:all .3s;cursor:default;white-space:nowrap;display:inline-block;`);
     tag.textContent = name;
-    tag.onmouseenter = () => { 
-      tag.style.background = 'rgba(28,117,188,.25)'; 
-      tag.style.borderColor = `${theme.colors.accentPrimary}`; 
-      tag.style.transform = 'translateY(-2px)';
-    };
-    tag.onmouseleave = () => { 
-      tag.style.background = 'rgba(28,117,188,.12)'; 
-      tag.style.borderColor = 'rgba(28,117,188,.25)'; 
-      tag.style.transform = 'translateY(0)';
-    };
+    tag.onmouseenter = () => { tag.style.background = 'rgba(28,117,188,.25)'; tag.style.borderColor = theme.colors.accentPrimary; tag.style.transform = 'translateY(-2px)'; };
+    tag.onmouseleave = () => { tag.style.background = 'rgba(28,117,188,.12)'; tag.style.borderColor = 'rgba(28,117,188,.25)'; tag.style.transform = 'translateY(0)'; };
     return tag;
   };
 
-  // Duplicate list to make it infinitely scrolling
-  const doubleNiches = [...niches, ...niches];
-  doubleNiches.forEach(n => {
-    track.appendChild(createTag(n));
-  });
+  [...niches, ...niches].forEach(n => track.appendChild(createTag(n)));
+  marqueeWrap.appendChild(track);
+  sec.appendChild(marqueeWrap);
 
-  marqueeContainer.appendChild(track);
-  sec.appendChild(marqueeContainer);
-  
   return sec;
 }
 

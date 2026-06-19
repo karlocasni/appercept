@@ -92,7 +92,7 @@ export function Header() {
   nav.style.cssText = `display: flex; gap: 30px;`;
 
   const ul = document.createElement('ul');
-  ul.style.cssText = `list-style: none; padding: 0; display: flex; gap: 30px;`;
+  ul.style.cssText = `list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 30px;`;
 
   // Backdrop for mobile menu
   const backdrop = document.createElement('div');
@@ -229,6 +229,20 @@ export function Header() {
   consultingLi.appendChild(consultingLink);
   ul.appendChild(consultingLi);
 
+  // Marketing & Media link (separate page)
+  const marketingLink = document.createElement('a');
+  marketingLink.textContent = t('Marketing & Media', 'Marketing & Media');
+  marketingLink.href = '/marketing';
+  marketingLink.style.cssText = `
+    font-size: 0.9rem; font-weight: 600; opacity: 1;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  `;
+  const marketingLi = document.createElement('li');
+  marketingLi.appendChild(marketingLink);
+  ul.appendChild(marketingLi);
+
   // ── Two auth buttons → Appercept Space dashboard ─────────────────────────────
   const getAppUrl = () => {
     if (typeof window !== 'undefined') {
@@ -241,12 +255,104 @@ export function Header() {
   };
   const APP_URL = getAppUrl();
 
+  // ── Launch overlay: shown for 3 s before redirecting to the app ─────────────
+  const getFirstName = () => {
+    const match = document.cookie.split('; ').find(c => c.startsWith('appercept_fn='));
+    return match ? decodeURIComponent(match.split('=')[1]) : null;
+  };
+
+  const QUOTES = [
+    'Perceive beyond the obvious.',
+    'Great things are built one focused day at a time.',
+    'Today is a canvas — make something remarkable.',
+    'Small steps, compounding into momentum.',
+    'Clarity comes from action, not waiting.',
+    'Build what you wish existed.',
+    'Progress over perfection, always.',
+    'The best work feels like play. Enjoy today.',
+    'Focus is the new superpower — use yours well.',
+    'Done is better than perfect. Ship it.',
+    'Every expert was once a beginner who kept going.',
+    'Calm mind, sharp focus, bold moves.',
+    'Make it work, make it right, make it beautiful.',
+  ];
+
+  const showLaunchOverlay = (destination) => {
+    const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    const firstName = getFirstName();
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 22px; padding: 24px;
+      background:
+        radial-gradient(ellipse 85% 55% at 15% -5%, rgba(40,130,210,0.40) 0%, transparent 62%),
+        radial-gradient(ellipse 65% 45% at 88% 12%, rgba(0,210,255,0.28) 0%, transparent 58%),
+        linear-gradient(135deg, #0c2148 0%, #16386e 100%);
+      opacity: 0; transition: opacity 300ms ease;
+    `;
+
+    const logo = document.createElement('img');
+    logo.src = '/logo.png';
+    logo.alt = 'Appercept';
+    logo.style.cssText = `
+      width: 72px; height: 72px; border-radius: 18px; object-fit: contain;
+      padding: 10px;
+      box-shadow: 0 8px 30px rgba(0,210,255,0.4);
+      animation: apLaunchPop 600ms cubic-bezier(0.34,1.56,0.64,1) forwards;
+    `;
+
+    const text = document.createElement('div');
+    text.style.cssText = 'text-align: center; max-width: 460px;';
+    text.innerHTML = `
+      <div style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.01em;">
+        ${firstName ? `Welcome, ${firstName}` : 'Welcome to Appercept Space'}
+      </div>
+      <div style="font-size: 1rem; color: rgba(232,240,248,0.78); line-height: 1.5; font-style: italic;">
+        &ldquo;${quote}&rdquo;
+      </div>
+    `;
+
+    const barWrap = document.createElement('div');
+    barWrap.style.cssText = 'width: 200px; height: 4px; border-radius: 9999px; background: rgba(255,255,255,0.12); overflow: hidden; margin-top: 6px;';
+    const bar = document.createElement('div');
+    bar.style.cssText = 'height: 100%; border-radius: 9999px; background: linear-gradient(90deg,#1c75bc,#00d2ff); width: 0%; transition: width 3s linear;';
+    barWrap.appendChild(bar);
+
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size: 0.75rem; color: rgba(232,240,248,0.5);';
+    label.textContent = 'Entering Appercept Space…';
+
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `
+      @keyframes apLaunchPop {
+        from { transform: scale(0.6); opacity: 0; }
+        to   { transform: scale(1);   opacity: 1; }
+      }
+    `;
+
+    overlay.appendChild(styleTag);
+    overlay.appendChild(logo);
+    overlay.appendChild(text);
+    overlay.appendChild(barWrap);
+    overlay.appendChild(label);
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '1';
+      requestAnimationFrame(() => { bar.style.width = '100%'; });
+    });
+
+    setTimeout(() => { window.location.href = destination; }, 3000);
+  };
+
   // ── Log In button (ghost/outline style) ─────────────────────────────────────
   const loginLi = document.createElement('li');
   loginLi.style.cssText = 'display: flex; align-items: center;';
   const loginBtn = document.createElement('a');
   loginBtn.href = APP_URL;
-  loginBtn.textContent = t('Prijava', 'Log in');
+  loginBtn.textContent = t('Admin prijava', 'Admin Login');
   loginBtn.style.cssText = `
     display: inline-flex; align-items: center;
     background: transparent;
@@ -258,27 +364,10 @@ export function Header() {
   `;
   loginBtn.onmouseenter = () => { loginBtn.style.borderColor = theme.colors.accentPrimary; loginBtn.style.background = 'rgba(255,255,255,0.06)'; };
   loginBtn.onmouseleave = () => { loginBtn.style.borderColor = 'rgba(255,255,255,0.25)'; loginBtn.style.background = 'transparent'; };
+  loginBtn.addEventListener('click', (e) => { e.preventDefault(); showLaunchOverlay(APP_URL); });
   loginLi.appendChild(loginBtn);
   ul.appendChild(loginLi);
 
-  // ── Sign Up button (accent gradient style) ───────────────────────────────────
-  const signupLi = document.createElement('li');
-  signupLi.style.cssText = 'display: flex; align-items: center;';
-  const signupBtn = document.createElement('a');
-  signupBtn.href = `${APP_URL}/?signup=1`;
-  signupBtn.textContent = t('Registracija', 'Sign up');
-  signupBtn.style.cssText = `
-    display: inline-flex; align-items: center;
-    background: linear-gradient(135deg, ${theme.colors.accentPrimary}, ${theme.colors.accentSecondary});
-    border: none; color: #fff; padding: 7px 16px; border-radius: 7px;
-    font-size: 0.85rem; font-weight: 700; cursor: pointer;
-    font-family: inherit; text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  `;
-  signupBtn.onmouseenter = () => { signupBtn.style.transform = 'translateY(-1px)'; signupBtn.style.boxShadow = `0 4px 16px ${theme.colors.accentPrimary}55`; };
-  signupBtn.onmouseleave = () => { signupBtn.style.transform = 'translateY(0)'; signupBtn.style.boxShadow = 'none'; };
-  signupLi.appendChild(signupBtn);
-  ul.appendChild(signupLi);
 
   // Language button
   const langBtn = document.createElement('button');

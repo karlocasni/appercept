@@ -19,6 +19,10 @@
         "destination": "/consulting.html"
       },
       {
+        "source": "/marketing",
+        "destination": "/marketing.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

@@ -11,6 +11,7 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 consulting: resolve(__dirname, 'consulting.html'),
+                marketing: resolve(__dirname, 'marketing.html'),
             }
         }
     }
