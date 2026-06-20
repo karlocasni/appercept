@@ -1,6 +1,6 @@
 
 import { theme } from '../theme.js';
-import { supabase, mockProducts } from '../lib/supabase.js';
+import { mockProducts } from '../lib/supabase.js';
 import { t } from '../lib/i18n.js';
 
 const ProductCard = (product) => {
@@ -175,110 +175,16 @@ export function ProductsGrid() {
   header.appendChild(createDivider()); // Add Divider
   header.appendChild(p);
 
-  const carouselWrap = document.createElement('div');
-  carouselWrap.style.cssText = `
-    position: relative;
-    width: 100%;
-    max-width: 1210px;
-    margin: 0 auto;
-  `;
+  const cardWrap = document.createElement('div');
+  cardWrap.style.cssText = `display:flex;justify-content:center;`;
 
-  const carouselInner = document.createElement('div');
-  carouselInner.className = 'carousel-inner';
-  carouselWrap.appendChild(carouselInner);
-
-  const track = document.createElement('div');
-  track.className = 'carousel-track';
-  track.style.cssText = `
-    display: flex;
-    gap: 30px;
-    transition: transform 0.5s ease-in-out;
-  `;
-  carouselInner.appendChild(track);
-
-  // Arrows
-  const leftArrow = document.createElement('button');
-  leftArrow.className = 'carousel-arrow left';
-  leftArrow.innerHTML = '&#10094;';
-
-  const rightArrow = document.createElement('button');
-  rightArrow.className = 'carousel-arrow right';
-  rightArrow.innerHTML = '&#10095;';
-
-  carouselWrap.appendChild(leftArrow);
-  carouselWrap.appendChild(rightArrow);
-
-  let currentIndex = 0;
-  let autoPlayInterval;
-  let itemsCount = 0;
-
-  function updateCarousel() {
-    if (itemsCount === 0) return;
-    const firstCard = track.firstElementChild;
-    if (!firstCard) return;
-    const cardWidth = firstCard.getBoundingClientRect().width + 30; // card width + gap
-
-    const isMobile = window.innerWidth <= 768;
-    const maxIndex = Math.max(0, itemsCount - (isMobile ? 1 : 2));
-
-    if (currentIndex > maxIndex) currentIndex = 0;
-    if (currentIndex < 0) currentIndex = maxIndex;
-
-    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-  }
-
-  window.addEventListener('resize', updateCarousel);
-
-  rightArrow.onclick = () => { currentIndex++; updateCarousel(); };
-  leftArrow.onclick = () => { currentIndex--; updateCarousel(); };
-
-  function startAutoPlay() {
-    autoPlayInterval = setInterval(() => {
-      currentIndex++;
-      updateCarousel();
-    }, 4000);
-  }
-
-  function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-  }
-
-  carouselWrap.addEventListener('mouseenter', stopAutoPlay);
-  carouselWrap.addEventListener('mouseleave', startAutoPlay);
-
-  // Fetch logic
-  const loadProducts = async () => {
-    try {
-      const { data, error } = await supabase.from('products').select('*');
-      const productsToRender = (data && data.length > 0) ? data : mockProducts;
-      if (error && !data) console.warn("Supabase fetch error:", error);
-
-      track.innerHTML = '';
-      itemsCount = productsToRender.length;
-      productsToRender.forEach((item, index) => {
-        const card = ProductCard(item);
-        track.appendChild(card);
-        setTimeout(() => { card.classList.add('is-visible'); }, 100 + (index * 150));
-      });
-      startAutoPlay();
-    } catch (err) {
-      console.error("Error loading products:", err);
-      track.innerHTML = '';
-      itemsCount = mockProducts.length;
-      mockProducts.forEach((item, index) => {
-        const card = ProductCard(item);
-        track.appendChild(card);
-        setTimeout(() => { card.classList.add('is-visible'); }, 100 + (index * 150));
-      });
-      startAutoPlay();
-    }
-  };
-
-  track.innerHTML = `<p style="text-align:center; color: #666; width:100%;">${t('Učitavanje projekata...', 'Loading projects...')}</p>`;
-  loadProducts();
+  const card = ProductCard(mockProducts[0]);
+  card.style.cssText += `max-width:420px;width:100%;`;
+  setTimeout(() => { card.classList.add('is-visible'); }, 100);
+  cardWrap.appendChild(card);
 
   container.appendChild(header);
-  container.appendChild(carouselWrap);
+  container.appendChild(cardWrap);
   section.appendChild(container);
 
   return section;

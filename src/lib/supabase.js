@@ -17,20 +17,6 @@ export const mockProducts = [
         image: "/clubcrowd_logo.png",
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`
     },
-    {
-        id: 2,
-        title: "NemaNeide",
-        description: t("Projekt izrađen za URSA tim, usmjeren na moderni dizajn i vrhunske performanse. Kliknite za pregled.", "A project crafted for the URSA team, focused on modern design and peak performance. Click to explore."),
-        price: t("Live", "Live"),
-        image: "/nemaneide_logo.png"
-    },
-    {
-        id: 3,
-        title: "Projekt90",
-        description: t("Složena web aplikacija i napredni portal razvijen unutar NemaNeide ekosustava.", "A complex web application and advanced portal developed within the NemaNeide ecosystem."),
-        price: t("Live", "Live"),
-        image: "/projekt90_logo.png"
-    }
 ];
 
 export const mockOffers = [

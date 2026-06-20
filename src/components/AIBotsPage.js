@@ -479,6 +479,77 @@ function AIBotsHow() {
 }
 
 /* ── PRICING CTA ─────────────────────────────────────── */
+/* ── OUR WORK ─────────────────────────────────────────── */
+function AIBotsWork() {
+  const sec = mkEl('section', `padding:100px 0;`);
+  const ctr = mkEl('div', theme.styles.container);
+
+  const hdr = mkEl('div', `text-align:center;margin-bottom:64px;`);
+  hdr.className = 'animate-on-scroll';
+  hdr.appendChild(mkEl('h2', `font-size:3rem;margin-bottom:0;`, t('Naš rad', 'Our Work')));
+  hdr.appendChild(mkEl('div', `width:80px;height:4px;background:linear-gradient(90deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});border-radius:2px;margin:20px auto 30px;`));
+  hdr.appendChild(mkEl('p', `color:rgba(255,255,255,.6);font-size:1.1rem;max-width:600px;margin:0 auto;line-height:1.7;`,
+    t('AI voice i chat botovi koje smo izgradili za naše klijente — u produkciji, 24/7.',
+      'AI voice and chat bots we built for our clients — in production, 24/7.')
+  ));
+  ctr.appendChild(hdr);
+
+  const card = mkEl('div', `
+    max-width:520px;margin:0 auto;padding:40px;border-radius:22px;
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 25px 50px -12px rgba(0,0,0,.7);
+    display:flex;flex-direction:column;gap:20px;
+    transition:transform .3s,box-shadow .3s,border-color .3s;
+  `);
+  card.className = 'animate-on-scroll';
+  card.onmouseenter = () => { card.style.transform = 'translateY(-5px)'; card.style.borderColor = `rgba(28,117,188,0.4)`; card.style.boxShadow = `0 35px 60px -10px rgba(0,0,0,.8),0 0 60px 0 rgba(28,117,188,.15)`; };
+  card.onmouseleave = () => { card.style.transform = ''; card.style.borderColor = 'rgba(255,255,255,.08)'; card.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,.7)'; };
+
+  const top = mkEl('div', `display:flex;align-items:center;gap:16px;`);
+
+  const logoWrap = mkEl('div', `width:64px;height:64px;border-radius:14px;flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;padding:6px;box-sizing:border-box;`);
+  const logoImg = mkEl('img', `width:100%;height:100%;object-fit:contain;`);
+  logoImg.src = '/medikal-lux-asistenta-logo.png';
+  logoImg.alt = 'MedikalLux';
+  logoImg.onerror = () => { logoWrap.style.display = 'none'; };
+  logoWrap.appendChild(logoImg);
+  top.appendChild(logoWrap);
+
+  const nameBlock = mkEl('div');
+  nameBlock.appendChild(mkEl('h3', `font-size:1.5rem;font-weight:700;margin:0 0 4px;`, 'MedikalLux'));
+  nameBlock.appendChild(mkEl('span', `font-size:.82rem;color:${theme.colors.accentPrimary};font-weight:600;letter-spacing:.5px;text-transform:uppercase;`, t('Voice Bot', 'Voice Bot')));
+  top.appendChild(nameBlock);
+  card.appendChild(top);
+
+  card.appendChild(mkEl('p', `font-size:.97rem;color:rgba(255,255,255,.68);line-height:1.7;margin:0;`,
+    t('AI voice bot koji automatski prima pozive, odgovara na pitanja pacijenata, zakazuje termine i preusmjerava hitne slučajeve — 24/7 bez čekanja na liniji.',
+      'AI voice bot that automatically handles inbound calls, answers patient questions, books appointments, and routes urgent cases — 24/7 with no hold time.')
+  ));
+
+  const tagsRow = mkEl('div', `display:flex;gap:8px;flex-wrap:wrap;`);
+  [t('Voice Bot', 'Voice Bot'), t('Zdravstvo', 'Healthcare'), t('Automatizacija poziva', 'Call Automation'), '24/7'].forEach(tag => {
+    tagsRow.appendChild(mkEl('span', `padding:6px 14px;border-radius:50px;background:rgba(28,117,188,.15);border:1px solid rgba(28,117,188,.3);font-size:.78rem;color:rgba(255,255,255,.85);`, tag));
+  });
+  card.appendChild(tagsRow);
+
+  const siteBtn = mkEl('a', `
+    display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;
+    color:white;text-decoration:none;padding:10px 22px;border-radius:10px;
+    background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});
+    transition:opacity .2s,transform .2s;align-self:flex-start;
+  `, `${t('Posjetite stranicu', 'Visit website')} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`);
+  siteBtn.href = 'https://medikal-lux.hr';
+  siteBtn.target = '_blank';
+  siteBtn.rel = 'noopener noreferrer';
+  siteBtn.onmouseenter = () => { siteBtn.style.opacity = '.85'; siteBtn.style.transform = 'translateY(-1px)'; };
+  siteBtn.onmouseleave = () => { siteBtn.style.opacity = '1'; siteBtn.style.transform = ''; };
+  card.appendChild(siteBtn);
+
+  ctr.appendChild(card);
+  sec.appendChild(ctr);
+  return sec;
+}
+
 function AIBotsPricing() {
   const sec = mkEl('section', `padding:100px 0;`);
   sec.id = 'pricing';
@@ -717,6 +788,7 @@ export function AIBotsPage() {
   wrap.appendChild(AIBotsHero());
   wrap.appendChild(AIBotsServices());
   wrap.appendChild(AIBotsHow());
+  wrap.appendChild(AIBotsWork());
   wrap.appendChild(AIBotsPricing());
   wrap.appendChild(AIBotsContact());
   wrap.appendChild(AIBotsFooter());

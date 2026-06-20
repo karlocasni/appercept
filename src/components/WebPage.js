@@ -478,6 +478,100 @@ function WebProcess() {
   return sec;
 }
 
+/* ── OUR WORK ────────────────────────────────────────── */
+function WebWork() {
+  const sec = mkEl('section', `padding:100px 0;`);
+  const ctr = mkEl('div', theme.styles.container);
+
+  const hdr = mkEl('div', `text-align:center;margin-bottom:64px;`);
+  hdr.className = 'animate-on-scroll';
+  hdr.appendChild(mkEl('h2', `font-size:3rem;margin-bottom:0;`, t('Naš rad', 'Our Work')));
+  hdr.appendChild(mkEl('div', `width:80px;height:4px;background:linear-gradient(90deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});border-radius:2px;margin:20px auto 30px;`));
+  hdr.appendChild(mkEl('p', `color:rgba(255,255,255,.6);font-size:1.1rem;max-width:600px;margin:0 auto;line-height:1.7;`,
+    t('Web aplikacije i mobilne aplikacije izrađene za naše klijente — od ideje do živog proizvoda.',
+      'Web and mobile applications built for our clients — from idea to live product.')
+  ));
+  ctr.appendChild(hdr);
+
+  const projects = [
+    {
+      title: 'NemaNeide',
+      logo: '/nemaneide_logo.png',
+      url: 'https://nemaneide.com',
+      type: t('Web & Mobilna aplikacija', 'Web & Mobile App'),
+      desc: t('Web stranica i mobilna aplikacija izrađena za URSA tim. Fokus na brzinu, dizajn i konverziju na svim uređajima.',
+              'Website and mobile application built for the URSA team. Focused on speed, design, and conversion across all devices.'),
+      tags: ['Web', 'Mobile App', 'UI/UX', 'SEO'],
+    },
+    {
+      title: 'Projekt90',
+      logo: '/projekt90_logo.png',
+      url: 'https://projekt90.nemaneide.com',
+      type: t('Web aplikacija', 'Web Application'),
+      desc: t('Napredni portal i web aplikacija razvijena unutar NemaNeide ekosustava za upravljanje sadržajem i korisnicima.',
+              'Advanced portal and web application developed within the NemaNeide ecosystem for content and user management.'),
+      tags: ['Web App', 'Portal', 'CMS'],
+    },
+  ];
+
+  const grid = mkEl('div', `display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:900px;margin:0 auto;`);
+
+  projects.forEach((p, i) => {
+    const card = mkEl('div', `
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;overflow:hidden;display:flex;flex-direction:column;
+      transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
+    `);
+    card.className = 'animate-on-scroll';
+    card.style.animationDelay = `${i * 0.12}s`;
+    const logoArea = mkEl('div', `height:180px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.06);`);
+    let cardImg = null;
+    if (p.logo) {
+      const img = mkEl('img', `max-width:55%;max-height:55%;object-fit:contain;transition:transform 0.3s;`);
+      img.src = p.logo; img.alt = p.title;
+      img.onerror = () => { img.style.display = 'none'; };
+      cardImg = img;
+      logoArea.appendChild(img);
+    }
+    card.onmouseenter = () => { card.style.transform = 'translateY(-6px)'; card.style.borderColor = `rgba(28,117,188,0.4)`; card.style.boxShadow = `0 20px 50px -12px rgba(0,0,0,0.7),0 0 40px 0 rgba(28,117,188,0.1)`; if (cardImg) cardImg.style.transform = 'scale(1.06)'; };
+    card.onmouseleave = () => { card.style.transform = ''; card.style.borderColor = 'rgba(255,255,255,0.08)'; card.style.boxShadow = ''; if (cardImg) cardImg.style.transform = ''; };
+    card.appendChild(logoArea);
+
+    const body = mkEl('div', `padding:28px;flex:1;display:flex;flex-direction:column;`);
+
+    const topRow = mkEl('div', `display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;`);
+    topRow.appendChild(mkEl('h3', `font-size:1.4rem;font-weight:800;margin:0;`, p.title));
+    topRow.appendChild(mkEl('span', `font-size:0.75rem;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(28,117,188,0.15);border:1px solid rgba(28,117,188,0.3);color:${theme.colors.accentPrimary};`, p.type));
+    body.appendChild(topRow);
+
+    body.appendChild(mkEl('p', `font-size:0.95rem;color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:24px;flex:1;`, p.desc));
+
+    const tagsRow = mkEl('div', `display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;`);
+    p.tags.forEach(tag => tagsRow.appendChild(mkEl('span', `font-size:0.75rem;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.55);`, tag)));
+    body.appendChild(tagsRow);
+
+    const liveBtn = mkEl('a', `
+      display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;font-weight:700;
+      color:white;text-decoration:none;padding:10px 22px;border-radius:10px;
+      background:linear-gradient(135deg,${theme.colors.accentPrimary},${theme.colors.accentSecondary});
+      transition:opacity 0.2s,transform 0.2s;align-self:flex-start;
+    `, `${t('Pogledaj projekt', 'View project')} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`);
+    liveBtn.href = p.url;
+    liveBtn.target = '_blank';
+    liveBtn.rel = 'noopener noreferrer';
+    liveBtn.onmouseenter = () => { liveBtn.style.opacity = '0.85'; liveBtn.style.transform = 'translateY(-1px)'; };
+    liveBtn.onmouseleave = () => { liveBtn.style.opacity = '1'; liveBtn.style.transform = ''; };
+    body.appendChild(liveBtn);
+
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+
+  ctr.appendChild(grid);
+  sec.appendChild(ctr);
+  return sec;
+}
+
 /* ── PRICING CTA ─────────────────────────────────────── */
 function WebPricing() {
   const sec = mkEl('section', `padding:100px 0;`);
@@ -716,6 +810,7 @@ export function WebPage() {
   wrap.appendChild(WebHero());
   wrap.appendChild(WebServices());
   wrap.appendChild(WebProcess());
+  wrap.appendChild(WebWork());
   wrap.appendChild(WebPricing());
   wrap.appendChild(WebContact());
   wrap.appendChild(WebFooter());

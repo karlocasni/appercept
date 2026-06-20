@@ -410,6 +410,7 @@ function MarketingWork() {
       logo: null,
       logoSrc: '/Logo.jpeg',
       yt: 'https://www.youtube.com/@Backstage_Beauty',
+      ig: 'https://www.instagram.com/backstagebeauty.podcast/',
     },
     {
       name: 'Financijski Klub',
@@ -419,6 +420,7 @@ function MarketingWork() {
       logo: null,
       logoSrc: '/financijskiklub_logo.png',
       yt: 'https://www.youtube.com/@FinanceHrvatska',
+      ig: 'https://www.instagram.com/financijski_klub/',
     }
   ];
 
@@ -456,16 +458,24 @@ function MarketingWork() {
     });
     card.appendChild(tagsRow);
 
+    const btnRow = mkEl('div', `display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;`);
     if (c.yt) {
-      const ytBtn = mkEl('a', `display:inline-flex;align-items:center;gap:10px;margin-top:8px;padding:11px 22px;border-radius:50px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.3);color:white;font-size:.88rem;font-weight:600;text-decoration:none;transition:all .3s;width:fit-content;`,
+      const ytBtn = mkEl('a', `display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:50px;background:rgba(255,0,0,0.12);border:1px solid rgba(255,0,0,0.3);color:white;font-size:.88rem;font-weight:600;text-decoration:none;transition:all .3s;width:fit-content;`,
         `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ff4444"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>YouTube`);
-      ytBtn.href = c.yt;
-      ytBtn.target = '_blank';
-      ytBtn.rel = 'noopener noreferrer';
+      ytBtn.href = c.yt; ytBtn.target = '_blank'; ytBtn.rel = 'noopener noreferrer';
       ytBtn.onmouseenter = () => { ytBtn.style.background = 'rgba(255,0,0,0.25)'; ytBtn.style.borderColor = '#ff4444'; ytBtn.style.transform = 'translateY(-2px)'; };
       ytBtn.onmouseleave = () => { ytBtn.style.background = 'rgba(255,0,0,0.12)'; ytBtn.style.borderColor = 'rgba(255,0,0,0.3)'; ytBtn.style.transform = ''; };
-      card.appendChild(ytBtn);
+      btnRow.appendChild(ytBtn);
     }
+    if (c.ig) {
+      const igBtn = mkEl('a', `display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:50px;background:rgba(193,53,132,0.12);border:1px solid rgba(193,53,132,0.3);color:white;font-size:.88rem;font-weight:600;text-decoration:none;transition:all .3s;width:fit-content;`,
+        `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram`);
+      igBtn.href = c.ig; igBtn.target = '_blank'; igBtn.rel = 'noopener noreferrer';
+      igBtn.onmouseenter = () => { igBtn.style.background = 'rgba(193,53,132,0.25)'; igBtn.style.borderColor = '#e1306c'; igBtn.style.transform = 'translateY(-2px)'; };
+      igBtn.onmouseleave = () => { igBtn.style.background = 'rgba(193,53,132,0.12)'; igBtn.style.borderColor = 'rgba(193,53,132,0.3)'; igBtn.style.transform = ''; };
+      btnRow.appendChild(igBtn);
+    }
+    card.appendChild(btnRow);
 
     grid.appendChild(card);
   });
