@@ -169,7 +169,6 @@ function MarketingHero() {
   const statsData = [
     { target: 6, prefix: '', suffix: '+', label: t('Godina iskustva', 'Years of experience') },
     { target: 85, prefix: '', suffix: '+', label: t('Projekata isporučeno', 'Projects delivered') },
-    { target: 2, prefix: '', suffix: '', label: t('Podcast klijenta', 'Podcast clients') },
     { target: 100, prefix: '', suffix: '%', label: t('Klijenti preporučuju', 'Clients recommend us') },
   ];
 
