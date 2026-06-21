@@ -421,6 +421,20 @@ function MarketingWork() {
       logoSrc: '/financijskiklub_logo.png',
       yt: 'https://www.youtube.com/@FinanceHrvatska',
       ig: 'https://www.instagram.com/financijski_klub/',
+    },
+    {
+      name: 'Stjepan Ursa',
+      type: t('Marketing & Social Media', 'Marketing & Social Media'),
+      desc: t('Vodimo marketing, kampanje i društvene mreže za Stjepana Ursu. YouTube produkcija, Instagram strategija i rast publike.', 'We manage marketing, campaigns, and social media for Stjepan Ursa. YouTube production, Instagram strategy, and audience growth.'),
+      tags: ['YouTube', 'Instagram', t('Kampanje', 'Campaigns'), t('Social Media', 'Social Media')],
+      logo: null,
+      logoSrc: '/nemaneide_logo.png',
+      yt: 'https://www.youtube.com/@StjepanUrsa',
+      ig: 'https://www.instagram.com/stjepanursa/',
+      stats: [
+        { icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`, label: t('Lajkova', 'Likes'), value: 284000, suffix: '' },
+        { icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`, label: t('Pregleda', 'Views'), value: 3200000, suffix: '' },
+      ],
     }
   ];
 
@@ -457,6 +471,48 @@ function MarketingWork() {
       tagsRow.appendChild(mkEl('span', `padding:6px 14px;border-radius:50px;background:rgba(28,117,188,.15);border:1px solid rgba(28,117,188,.3);font-size:.78rem;color:rgba(255,255,255,.85);`, tag));
     });
     card.appendChild(tagsRow);
+
+    if (c.stats) {
+      const statsRow = mkEl('div', `display:flex;gap:16px;flex-wrap:wrap;padding:16px 0;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);`);
+      c.stats.forEach(s => {
+        const stat = mkEl('div', `display:flex;align-items:center;gap:8px;`);
+        const iconEl = mkEl('span', `display:inline-flex;align-items:center;`);
+        iconEl.innerHTML = s.icon;
+        stat.appendChild(iconEl);
+        const numEl = mkEl('span', `font-size:1.15rem;font-weight:800;color:white;`, '0');
+        const lbl = mkEl('span', `font-size:.8rem;color:rgba(255,255,255,.5);margin-left:4px;`, s.label);
+        stat.appendChild(numEl);
+        stat.appendChild(lbl);
+        statsRow.appendChild(stat);
+
+        const formatted = s.value >= 1000000
+          ? (s.value / 1000000).toFixed(1).replace('.0', '') + 'M'
+          : s.value >= 1000
+            ? (s.value / 1000).toFixed(0) + 'K'
+            : s.value;
+
+        const obs = new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+          obs.disconnect();
+          const end = s.value >= 1000000 ? parseFloat((s.value / 1000000).toFixed(1)) : Math.round(s.value / 1000);
+          const suffix = s.value >= 1000000 ? 'M+' : 'K+';
+          let start = 0; const dur = 1600; let ts0 = null;
+          const step = (ts) => {
+            if (!ts0) ts0 = ts;
+            const p = Math.min((ts - ts0) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            const cur = s.value >= 1000000
+              ? (ease * end).toFixed(1).replace('.0', '')
+              : Math.floor(ease * end);
+            numEl.textContent = cur + (p < 1 ? '' : suffix);
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }, { threshold: 0.4 });
+        obs.observe(numEl);
+      });
+      card.appendChild(statsRow);
+    }
 
     const btnRow = mkEl('div', `display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;`);
     if (c.yt) {
