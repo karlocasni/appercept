@@ -158,14 +158,17 @@ export function ServiceIntros() {
 
     // Right col — highlight cards
     const right = document.createElement('div');
+    right.className = 'perspective-group';
     right.style.cssText = `display:flex;flex-direction:column;gap:20px;${i % 2 !== 0 ? 'order:1;' : ''}`;
 
-    svc.highlights.forEach(h => {
+    const tiltClasses = ['card-3d-left', 'card-3d-center', 'card-3d-right'];
+    svc.highlights.forEach((h, hi) => {
       const card = document.createElement('div');
-      card.className = 'glass-card animate-on-scroll';
+      card.className = `glass-card card-3d ${tiltClasses[hi]} animate-on-scroll`;
       card.style.cssText = `${theme.styles.glass}border-radius:16px;padding:24px;display:flex;gap:20px;align-items:flex-start;`;
 
       const iconBox = document.createElement('div');
+      iconBox.className = 'pop-3d-icon';
       iconBox.style.cssText = `
         background:rgba(28,117,188,.1);border:1px solid rgba(28,117,188,.25);
         border-radius:12px;padding:12px;color:${svc.accentColor};
@@ -174,6 +177,7 @@ export function ServiceIntros() {
       iconBox.innerHTML = h.icon;
 
       const info = document.createElement('div');
+      info.className = 'pop-3d-text';
       const ht = document.createElement('h3');
       ht.textContent = h.title;
       ht.style.cssText = `font-size:1.15rem;font-weight:600;margin-bottom:6px;color:white;`;
