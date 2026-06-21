@@ -5,6 +5,7 @@ import { Header } from './components/Header.js';
 import { Hero } from './components/Hero.js';
 import { About } from './components/About.js';
 import { ConsultingIntro } from './components/ConsultingIntro.js';
+import { ServiceIntros } from './components/ServiceIntros.js';
 import { ProductsGrid } from './components/ProductsGrid.js';
 import { OtherServices } from './components/OtherServices.js';
 import { Founders } from './components/Founders.js';
@@ -24,6 +25,7 @@ export function App() {
     app.appendChild(Hero());
     app.appendChild(About());
     app.appendChild(ConsultingIntro());
+    app.appendChild(ServiceIntros());
     app.appendChild(ProductsGrid());
     app.appendChild(OtherServices());
     app.appendChild(Founders());
