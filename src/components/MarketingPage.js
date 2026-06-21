@@ -429,8 +429,8 @@ function MarketingWork() {
     {
       name: 'Stjepan Ursa',
       type: t('Marketing & Social Media', 'Marketing & Social Media'),
-      desc: t('Vodimo marketing, kampanje i društvene mreže za Stjepana Ursu. YouTube produkcija, Instagram strategija i rast publike.', 'We manage marketing, campaigns, and social media for Stjepan Ursa. YouTube production, Instagram strategy, and audience growth.'),
-      tags: ['YouTube', 'Instagram', t('Kampanje', 'Campaigns'), t('Social Media', 'Social Media')],
+      desc: t('Snimamo i montiramo YouTube videe, vodimo marketing, kampanje i društvene mreže za Stjepana Ursu. Od produkcije do objave — sve na jednom mjestu.', 'We film and edit YouTube videos, manage marketing, campaigns, and social media for Stjepan Ursa. From production to publishing — all in one place.'),
+      tags: ['YouTube', 'Instagram', t('Video produkcija', 'Video Production'), t('Montaža', 'Editing'), t('Social Media', 'Social Media')],
       logo: null,
       logoSrc: '/nemaneide_logo.png',
       yt: 'https://www.youtube.com/@StjepanUrsa',
